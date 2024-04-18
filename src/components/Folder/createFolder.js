@@ -8,8 +8,8 @@ function CreateFolder() {
         <div>
             <div>
                 <button
-                    className='m-3 bg-my-purple hover:bg-purple-400 font-regular py-2 px-6 
-                    rounded-large text-base' style={{ fontSize: '16px' }}>Back</button>
+                    className='m-3 bg-my-purple hover:bg-my-purple-light font-regular py-2 px-6 
+                    rounded-large text-base active:bg-my-purple-dark' style={{ fontSize: '16px' }}>Back</button>
             </div>
             <div className='flex flex-col items-center justify-center h-screen mt-n10'>
                 <h1
@@ -19,7 +19,7 @@ function CreateFolder() {
                 <div>
                     <input
                         type="text"
-                        className='m-2 bg-my-light-grey font-regular h-10 w-72 py-2 px-4 rounded-large'
+                        className='m-2 bg-my-light-grey font-regular h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light'
                         placeholder="Title"
                         value={folderName}
                         onChange={(e) => setFolderName(e.target.value)}
@@ -28,7 +28,7 @@ function CreateFolder() {
                 </div>
                 <div>
                     <textarea
-                        className='m-4 bg-my-light-grey font-regular h-40 w-96 py-2 px-4 rounded-large resize-none'
+                        className='m-4 bg-my-light-grey font-regular h-40 w-96 py-2 px-4 rounded-large resize-none focus:outline-my-purple-light'
                         placeholder="Description"
                         value={folderDescription}
                         onChange={(e) => setFolderDescription(e.target.value)}
@@ -37,8 +37,8 @@ function CreateFolder() {
                 </div>
 
                 <button
-                    className='m-1 bg-my-purple hover:bg-purple-400 
-                    font-regular py-3 px-5 rounded-large text-base' style={{ fontSize: '24px' }}
+                    className='m-1 bg-my-purple hover:bg-my-purple-light 
+                    font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark' style={{ fontSize: '24px' }}
                 >
                     Create
                 </button>

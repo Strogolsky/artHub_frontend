@@ -12,6 +12,8 @@ module.exports = {
       },
       colors: {
         'my-purple': '#9D7CFF',
+        'my-purple-light': '#B59CFF',
+        'my-purple-dark': '#8063D3',
         'my-light-grey': '#E1E1E1',
       }
     },
