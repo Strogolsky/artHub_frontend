@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function CreateFolder() {
     const [folderName, setFolderName] = useState("");
