@@ -25,7 +25,7 @@ function EditFolder() {
                            style={{ width: '400px', height: '40px' }}/>
                 </div>
                 <div>
-                    <textarea className="m-4 bg-my-light-grey font-regular h-40 w-96 py-2 px-4 rounded-large resize-none focus:outline-my-purple-light"
+                    <textarea className="m-4 bg-my-light-grey h-40 w-96 py-2 px-4 rounded-large resize-none focus:outline-my-purple-light"
                               placeholder="Description"
                               value={folderDescription}
                               onChange={(e) => setFolderDescription(e.target.value)}
