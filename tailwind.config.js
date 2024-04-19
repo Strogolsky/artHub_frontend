@@ -15,6 +15,9 @@ module.exports = {
         'my-purple-light': '#B59CFF',
         'my-purple-dark': '#8063D3',
         'my-light-grey': '#E1E1E1',
+        'my-pink': '#ECA8F7',
+        'my-pink-dark': '#DE9AE8',
+        'my-pink-light': '#F5BAFF'
       }
     },
   },
