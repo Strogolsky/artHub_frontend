@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import CreateFolder from './components/Folder/createFolder';
+import CreateFolder from './components/Folder/CreateFolder';
 import EditFolder from './components/Folder/EditFolder';
 
 function App() {
