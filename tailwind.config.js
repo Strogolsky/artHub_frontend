@@ -6,6 +6,9 @@ module.exports = withMT({
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["Kanit", "sans-serif"],
+    },
     extend: {
       borderRadius: {
         'none': '0',
