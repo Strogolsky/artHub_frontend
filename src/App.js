@@ -5,6 +5,7 @@ import EditPost from './components/Post/EditPost';
 import CreatePost from './components/Post/CreatePost';
 import MainPage from "./components/Main/MainPage";
 import EditAccount from './components/User/EditAccount';
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -13,11 +14,12 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<MainPage />} />
-            <Route path="/user/:userId/edit" element={<EditAccount />} />
+            <Route path="user/:userId/edit" element={<EditAccount />} />
             <Route path="post/create" element={<CreatePost />} />
             <Route path="post/:postId/edit" element={<EditPost />} />
             <Route path="folder/create" element={<CreateFolder />} />
             <Route path="folder/:folderId/edit" element={<EditFolder />} />
+            <Route path="*" element={<NotFound />}/>
           </Route>
         </Routes>
       </div>
