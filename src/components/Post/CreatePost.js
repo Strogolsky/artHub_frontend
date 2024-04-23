@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ChooseTags from "./ChooseTags";
 
 function CreatePost() {
     const [postDescription, setPostDescription] = useState("");
@@ -42,12 +43,7 @@ function CreatePost() {
                             onChange={(e) => setPostDescription(e.target.value)}
                         />
                     </div>
-                    <button
-                        className="m-2 bg-my-pink hover:bg-my-pink-light active:bg-my-pink-dark font-regular py-2 px-4 rounded-large"
-                        style={{ width: '384px', height: '40px' }}
-                    >
-                        Tags
-                    </button>
+                    <ChooseTags />
                     <div>
                         <button
                             className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
