@@ -1,9 +1,19 @@
 import {useState} from "react";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 
 const MainPage = () => {
     const [searchText, setSearchText] = useState("");
-    const [isAuthorised, setIsAuthorised] = useState(true);
+    const [isAuthorised, setIsAuthorised] = useState(false);
+
+    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+    const [isSignInOpen, setIsSignInOpen] = useState(false);
+
+    const swapOpen = () => {
+        setIsSignUpOpen((curr) => !curr)
+        setIsSignInOpen((curr) => !curr)
+    }
 
     return (
         <div>
@@ -31,15 +41,13 @@ const MainPage = () => {
                         </svg>
                     </div>
                 ) : (
-                    <div className="pr-2 flex-none">
-                        <button className="m-3 bg-my-purple hover:bg-my-purple-light py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                                style={{fontSize: '16px'}}>
-                            Sign up
-                        </button>
-                        <button className="m-3 bg-my-purple hover:bg-my-purple-light py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                                style={{fontSize: '16px'}}>
-                            Sign in
-                        </button>
+                    <div className="pr-2 flex">
+
+                        <div className="mr-5">
+                            <SignUp isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} swapOpen={swapOpen} />
+                        </div>
+
+                        <SignIn isOpen={isSignInOpen} setIsOpen={setIsSignInOpen} swapOpen={swapOpen} />
                     </div>
                 )}
 

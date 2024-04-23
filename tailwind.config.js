@@ -1,9 +1,14 @@
+const withMT = require("@material-tailwind/react/utils/withMT");
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withMT({
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["Kanit", "sans-serif"],
+    },
     extend: {
       borderRadius: {
         'none': '0',
@@ -22,4 +27,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+})
