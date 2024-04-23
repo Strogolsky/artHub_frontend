@@ -40,14 +40,19 @@ const ChooseTags = () => {
                                onChange={(e) => setSearchTagText(e.target.value)}
                                style={{ width: '60%', }}/>
 
-                        <button onClick={() => handleChosenTags(searchTagText)} className="kanit-regular ml-7 bg-my-purple-light rounded-large p-2 text-black">Add tag</button>
+                        <button onClick={() => handleChosenTags(searchTagText)}
+                                className="kanit-regular ml-7 bg-my-purple-light rounded-large p-2 text-black">
+                            Add tag
+                        </button>
                     </div>
 
                     <div className="bg-my-light-grey rounded-large ml-6 mr-6" style={{height: '380px'}}>
                         <div className="rounded-large flex flex-wrap overflow-auto pb-3" style={{maxHeight: '380px'}}>
 
                             {chosenTags.map((tag, idx) =>
-                                <div key={idx} className="kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto" style={{height: 'fit-content'}}>
+                                <div key={idx}
+                                     className="kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
+                                     style={{height: 'fit-content'}}>
                                     {tag}
                                 </div>
                             )}
