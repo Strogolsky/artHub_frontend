@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {ReactComponent as AvatarIcon} from "../Icons/avatar.svg";
 
 const ViewUser = () => {
     const [searchText, setSearchText] = useState("");
