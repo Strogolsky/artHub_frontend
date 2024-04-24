@@ -15,6 +15,15 @@ const MainPage = () => {
         setIsSignInOpen((curr) => !curr)
     }
 
+    const [imageUrls, setImageUrls] = useState([
+        "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
+        "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg",
+        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&usqp=CAU",
+        "https://media.wired.com/photos/5fb70f2ce7b75db783b7012c/master/pass/Gear-Photos-597589287.jpg",
+    ])
+
     return (
         <div>
             <div className="flex justify-between items-center">
@@ -57,59 +66,17 @@ const MainPage = () => {
             <div className="mt-14 mb-10 flex justify-center">
                 <div className="text-center grid grid-cols-1 items-center justify-center md:grid-cols-2 lg:grid-cols-3">
 
-                    <div className="m-6" style={{width: '310px', height: '400px'}}>
-                        <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
-                            <img className="hover:border-my-purple hover:border-4 object-scale-down rounded-large"
-                                 alt="postImage"
-                                 src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80"/>
+                    {imageUrls.map((url, idx) => (
+                        <div className="m-6" style={{width: '310px', height: '400px'}}>
+                            <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
+                                <img key={idx}
+                                     className="hover:border-my-purple hover:border-4 object-cover rounded-large"
+                                     alt="postName"
+                                     src={url}/>
+                            </div>
+                            <p className="m-1">postName</p>
                         </div>
-                        <p className="mt-1">postName</p>
-                    </div>
-
-                    <div className="m-6" style={{width: '310px', height: '403px'}}>
-                        <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
-                            <img className="hover:border-my-purple hover:border-4 object-scale-down rounded-large"
-                                 alt="postImage"
-                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg"/>
-                        </div>
-                        <p className="mt-1">postName</p>
-                    </div>
-
-                    <div className="m-6" style={{width: '310px', height: '400px'}}>
-                        <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
-                            <img className="hover:border-my-purple hover:border-4 object-scale-down rounded-large"
-                                 alt="postImage"
-                                 src="https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"/>
-                        </div>
-                        <p className="mt-1">postName</p>
-                    </div>
-
-                    <div className="m-6" style={{width: '310px', height: '400px'}}>
-                        <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
-                            <img className="hover:border-my-purple hover:border-4 object-scale-down rounded-large"
-                                 alt="postImage"
-                                 src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"/>
-                        </div>
-                        <p className="mt-1">postName</p>
-                    </div>
-
-                    <div className="m-6" style={{width: '310px', height: '400px'}}>
-                        <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
-                            <img className="hover:border-my-purple hover:border-4 object-scale-down rounded-large"
-                                 alt="postImage"
-                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&usqp=CAU"/>
-                        </div>
-                        <p className="mt-1">postName</p>
-                    </div>
-
-                    <div className="m-6" style={{width: '310px', height: '400px'}}>
-                        <div className="rounded-large flex justify-center items-center" style={{width: '300px', height: '385px'}}>
-                            <img className="hover:border-my-purple hover:border-4 object-scale-down rounded-large"
-                                 alt="postImage"
-                                 src="https://media.wired.com/photos/5fb70f2ce7b75db783b7012c/master/pass/Gear-Photos-597589287.jpg"/>
-                        </div>
-                        <p className="mt-1">postName</p>
-                    </div>
+                    ))}
 
                 </div>
             </div>
