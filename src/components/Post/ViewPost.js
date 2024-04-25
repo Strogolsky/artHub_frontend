@@ -1,8 +1,11 @@
 import { useState } from "react";
 import SignIn from "../Main/SignIn";
 import SignUp from "../Main/SignUp";
+import { useNavigate } from "react-router-dom";
 
 const ViewPost = () => {
+    const navigate = useNavigate();
+
     const [searchText, setSearchText] = useState("");
     const [isAuthorised, setIsAuthorised] = useState(false);
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -77,6 +80,7 @@ const ViewPost = () => {
                             <button
                                 className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
                                 style={{ fontSize: '16px' }}
+                                onClick={() => navigate('edit')}
                             >
                                 Edit
                             </button>
