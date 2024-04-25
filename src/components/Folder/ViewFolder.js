@@ -45,7 +45,9 @@ const ViewFolder = () => {
                     Et vulputate in eleifend sit ut aliquam.
                 </p>
 
-                <button className="mt-5 bg-my-purple p-3 rounded-large" style={{fontSize: '16px'}}>
+                <button className="mt-5 bg-my-purple p-3 rounded-large"
+                        style={{fontSize: '16px'}}
+                        onClick={() => navigate('edit')}>
                     Edit folder
                 </button>
             </div>
