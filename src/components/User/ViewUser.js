@@ -51,7 +51,9 @@ const ViewUser = () => {
                             onClick={() => navigate('edit')}>
                         Edit profile
                     </button>
-                    <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large" style={{fontSize: '16px'}}>
+                    <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large"
+                            style={{fontSize: '16px'}}
+                            onClick={() => navigate('/post/create')}>
                         Create post
                     </button>
                 </div>
