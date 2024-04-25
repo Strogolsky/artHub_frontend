@@ -1,6 +1,9 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const ViewFolder = () => {
+    const navigate = useNavigate();
+
     const [searchText, setSearchText] = useState("");
     const [imageUrls, setImageUrls] = useState([
         "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80",
@@ -51,9 +54,11 @@ const ViewFolder = () => {
                 <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center">
 
                     <div className="m-6" style={{width: '210px', height: '200px'}}>
-                        <div className="bg-my-light-grey rounded-large flex justify-center items-center" style={{width: '200px', height: '150px'}}>
+                        <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
+                                style={{width: '200px', height: '150px'}}
+                                onClick={() => navigate('/post/create')}>
                             Add new post
-                        </div>
+                        </button>
                     </div>
 
                     {imageUrls.map((url, idx) => (
