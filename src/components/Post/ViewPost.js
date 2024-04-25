@@ -99,6 +99,7 @@ const ViewPost = () => {
                         <div className="my-4 rounded-large bg-my-light-grey" style={{ width: '380px', height: '195px' }}>
                             <p className="p-2 kanit" style={{ fontSize: '12px' }}>{imageDescription}</p>
                         </div>
+
                         <div className="my-4 rounded-large bg-my-light-grey" style={{ width: '380px', height: '195px' }}>
                             <div className="rounded-large flex flex-wrap overflow-auto pb-3" style={{ maxHeight: '380px' }}>
                                 {postTags.map((tag, idx) =>
@@ -110,6 +111,7 @@ const ViewPost = () => {
                                 )}
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
