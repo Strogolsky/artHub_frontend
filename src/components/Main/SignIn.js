@@ -1,8 +1,8 @@
-import {Button, Card, CardBody, CardFooter, Dialog, Input, Typography} from "@material-tailwind/react";
-import {useState} from "react";
+import { Button, Card, CardBody, CardFooter, Dialog, Input, Typography } from "@material-tailwind/react";
+import { useState } from "react";
 import CrossIcon from "../Icons/CrossIcon";
 
-const SignIn = ({isOpen, setIsOpen, swapOpen}) => {
+const SignIn = ({ isOpen, setIsOpen, swapOpen }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -10,7 +10,7 @@ const SignIn = ({isOpen, setIsOpen, swapOpen}) => {
 
     return (
         <div>
-            <Button className="kanit-regular bg-my-purple-dark hover:bg-my-purple-light text-black" style={{textTransform: 'initial', fontSize: '16px'}} onClick={handleIsOpen}>Sign In</Button>
+            <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black" style={{ textTransform: 'initial', fontSize: '16px' }} onClick={handleIsOpen}>Sign In</Button>
             <Dialog size="xs" open={isOpen} handler={handleIsOpen} className="bg-transparent shadow-none">
                 <Card className="flex flex-col gap-4">
                     <CardBody>
@@ -21,11 +21,11 @@ const SignIn = ({isOpen, setIsOpen, swapOpen}) => {
                             </Typography>
                         </div>
 
-                        <Input value={email} type="email" label="Email" size="lg" onChange={(e) => setEmail(e.target.value)}/>
+                        <Input value={email} type="email" label="Email" size="lg" onChange={(e) => setEmail(e.target.value)} />
 
                         <div className="m-5"></div>
 
-                        <Input value={password} type="password" label="Password" size="lg" onChange={(e) => setPassword(e.target.value)}/>
+                        <Input value={password} type="password" label="Password" size="lg" onChange={(e) => setPassword(e.target.value)} />
                     </CardBody>
 
                     <CardFooter>
