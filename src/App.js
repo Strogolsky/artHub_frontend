@@ -8,6 +8,7 @@ import EditAccount from './components/User/EditAccount';
 import NotFound from "./components/NotFound";
 import ViewFolder from "./components/Folder/ViewFolder";
 import ViewPost from "./components/Post/ViewPost";
+import ViewUser from "./components/User/ViewUser";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<MainPage />} />
+            <Route path="user/:userId" element={<ViewUser />} />
             <Route path="user/:userId/edit" element={<EditAccount />} />
             <Route path="post/create" element={<CreatePost />} />
             <Route path="post/:postId" element={<ViewPost />} />
