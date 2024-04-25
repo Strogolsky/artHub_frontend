@@ -1,14 +1,35 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const ViewFolder = () => {
+    const navigate = useNavigate();
+
     const [searchText, setSearchText] = useState("");
-    const [imageUrls, setImageUrls] = useState([
-        "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
-        "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg",
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&usqp=CAU",
-        "https://media.wired.com/photos/5fb70f2ce7b75db783b7012c/master/pass/Gear-Photos-597589287.jpg",
+    const [posts, setPosts] = useState([
+        {
+            "id": 0,
+            "image": "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80",
+        },
+        {
+            "id": 1,
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
+        },
+        {
+            "id": 2,
+            "image": "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg",
+        },
+        {
+            "id": 3,
+            "image": "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
+        },
+        {
+            "id": 4,
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&usqp=CAU",
+        },
+        {
+            "id": 5,
+            "image": "https://media.wired.com/photos/5fb70f2ce7b75db783b7012c/master/pass/Gear-Photos-597589287.jpg",
+        }
     ])
 
     return (
@@ -42,7 +63,9 @@ const ViewFolder = () => {
                     Et vulputate in eleifend sit ut aliquam.
                 </p>
 
-                <button className="mt-5 bg-my-purple p-3 rounded-large" style={{fontSize: '16px'}}>
+                <button className="mt-5 bg-my-purple p-3 rounded-large"
+                        style={{fontSize: '16px'}}
+                        onClick={() => navigate('edit')}>
                     Edit folder
                 </button>
             </div>
@@ -51,18 +74,21 @@ const ViewFolder = () => {
                 <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center">
 
                     <div className="m-6" style={{width: '210px', height: '200px'}}>
-                        <div className="bg-my-light-grey rounded-large flex justify-center items-center" style={{width: '200px', height: '150px'}}>
+                        <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
+                                style={{width: '200px', height: '150px'}}
+                                onClick={() => navigate('/post/create')}>
                             Add new post
-                        </div>
+                        </button>
                     </div>
 
-                    {imageUrls.map((url, idx) => (
+                    {posts.map((post) => (
                         <div className="m-6" style={{width: '210px', height: '200px'}}>
                             <div className="rounded-large flex justify-center items-center" style={{width: '200px', height: '150px'}}>
-                                <img key={idx} style={{width: '200px', height: '150px'}}
-                                     className="object-cover hover:border-my-purple hover:border-4 rounded-large"
+                                <img key={post.id} style={{width: '200px', height: '150px'}}
+                                     className="object-cover hover:border-my-purple hover:border-4 hover:cursor-pointer rounded-large"
                                      alt="postImage"
-                                     src={url}/>
+                                     src={post.image}
+                                     onClick={() => navigate(`/post/${post.id}`)}/>
                             </div>
                             <p className="mt-1">postName</p>
                         </div>

@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import ChooseTags from "./ChooseTags";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
+    const navigate = useNavigate();
+
     const [postDescription, setPostDescription] = useState("");
 
     return (
         <div>
             <div>
-                <button
-                    className="m-3 bg-my-purple hover:bg-my-purple-light font-regular py-2 px-6
-                    rounded-large text-base active:bg-my-purple-dark" style={{ fontSize: '16px' }}>Back</button>
+                <button className="m-3 bg-my-purple hover:bg-my-purple-light font-regular py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
+                        style={{ fontSize: '16px' }}
+                        onClick={() => navigate(-1)}>
+                    Back
+                </button>
             </div>
             <div className="flex justify-center items-center h-screen">
                 <div className="flex flex-col items-center justify-center mx-10">

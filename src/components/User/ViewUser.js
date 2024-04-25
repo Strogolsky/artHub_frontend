@@ -7,10 +7,22 @@ const ViewUser = () => {
     const [searchText, setSearchText] = useState("");
 
     const [userFolders, setUserFolders] = useState([
-        "Created posts",
-        "Saved posts",
-        "Some random name",
-        "Another random name of folder",
+        {
+            "id": 0,
+            "title": "Created posts",
+        },
+        {
+            "id": 1,
+            "title": "Saved posts",
+        },
+        {
+            "id": 2,
+            "title": "Some random name",
+        },
+        {
+            "id": 3,
+            "title": "Another random name of folder"
+        },
     ]);
 
 
@@ -51,7 +63,9 @@ const ViewUser = () => {
                             onClick={() => navigate('edit')}>
                         Edit profile
                     </button>
-                    <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large" style={{fontSize: '16px'}}>
+                    <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large"
+                            style={{fontSize: '16px'}}
+                            onClick={() => navigate('/post/create')}>
                         Create post
                     </button>
                 </div>
@@ -68,10 +82,12 @@ const ViewUser = () => {
                         </button>
                     </div>
 
-                    {userFolders.map((folderName, idx) => (
+                    {userFolders.map((folder) => (
                         <div className="m-6" style={{width: '200px', height: '200px'}}>
-                            <div className="bg-my-light-grey rounded-large flex justify-center items-center" style={{width: '200px', height: '150px'}}></div>
-                            <p key={idx} className="mt-2">{folderName}</p>
+                            <button className="bg-my-light-grey hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center"
+                                 style={{width: '200px', height: '150px'}}
+                                 onClick={() => navigate(`/folder/${folder.id}`)}/>
+                            <p key={folder.id} className="mt-2">{folder.title}</p>
                         </div>
                     ))}
                 </div>
