@@ -61,10 +61,11 @@ const ViewUser = () => {
                 <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center">
 
                     <div className="m-6" style={{width: '210px', height: '200px'}}>
-                        <div className="bg-my-light-grey rounded-large flex justify-center items-center"
-                             style={{width: '200px', height: '150px'}}>
+                        <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
+                                style={{width: '200px', height: '150px'}}
+                                onClick={() => navigate('/folder/create')}>
                             Add new folder
-                        </div>
+                        </button>
                     </div>
 
                     {userFolders.map((folderName, idx) => (
