@@ -5,13 +5,31 @@ const ViewFolder = () => {
     const navigate = useNavigate();
 
     const [searchText, setSearchText] = useState("");
-    const [imageUrls, setImageUrls] = useState([
-        "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
-        "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg",
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&usqp=CAU",
-        "https://media.wired.com/photos/5fb70f2ce7b75db783b7012c/master/pass/Gear-Photos-597589287.jpg",
+    const [images, setImages] = useState([
+        {
+            "id": 0,
+            "url": "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80",
+        },
+        {
+            "id": 1,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
+        },
+        {
+            "id": 2,
+            "url": "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg",
+        },
+        {
+            "id": 3,
+            "url": "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
+        },
+        {
+            "id": 4,
+            "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&usqp=CAU",
+        },
+        {
+            "id": 5,
+            "url": "https://media.wired.com/photos/5fb70f2ce7b75db783b7012c/master/pass/Gear-Photos-597589287.jpg",
+        }
     ])
 
     return (
@@ -63,13 +81,14 @@ const ViewFolder = () => {
                         </button>
                     </div>
 
-                    {imageUrls.map((url, idx) => (
+                    {images.map((image) => (
                         <div className="m-6" style={{width: '210px', height: '200px'}}>
                             <div className="rounded-large flex justify-center items-center" style={{width: '200px', height: '150px'}}>
-                                <img key={idx} style={{width: '200px', height: '150px'}}
-                                     className="object-cover hover:border-my-purple hover:border-4 rounded-large"
+                                <img key={image.id} style={{width: '200px', height: '150px'}}
+                                     className="object-cover hover:border-my-purple hover:border-4 hover:cursor-pointer rounded-large"
                                      alt="postImage"
-                                     src={url}/>
+                                     src={image.url}
+                                     onClick={() => navigate(`/post/${image.id}`)}/>
                             </div>
                             <p className="mt-1">postName</p>
                         </div>
