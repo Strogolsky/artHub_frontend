@@ -1,15 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function EditPost() {
+    const navigate = useNavigate();
+
     const [folderName, setFolderName] = useState("");
     const [postDescription, setPostDescription] = useState("");
 
     return (
         <div>
             <div>
-                <button
-                    className="m-3 bg-my-purple hover:bg-my-purple-light font-regular py-2 px-6
-                    rounded-large text-base active:bg-my-purple-dark" style={{ fontSize: '16px' }}>Back</button>
+                <button className="m-3 bg-my-purple hover:bg-my-purple-light font-regular py-2 px-6
+                        rounded-large text-base active:bg-my-purple-dark"
+                        style={{ fontSize: '16px' }}
+                        onClick={() => navigate(-1)}>
+                    Back
+                </button>
             </div>
             <div className="flex flex-col items-center justify-center h-screen mt-n10">
                 <h1
