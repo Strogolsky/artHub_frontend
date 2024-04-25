@@ -1,6 +1,9 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const ViewUser = () => {
+    const navigate = useNavigate();
+
     const [searchText, setSearchText] = useState("");
 
     const [userFolders, setUserFolders] = useState([
@@ -43,7 +46,9 @@ const ViewUser = () => {
                 <p className="-mt-2" style={{color: '#8A8A8A', fontWeight: 400, fontSize: '16px'}}>email</p>
 
                 <div>
-                    <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large" style={{fontSize: '16px'}}>
+                    <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large"
+                            style={{fontSize: '16px'}}
+                            onClick={() => navigate('edit')}>
                         Edit profile
                     </button>
                     <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large" style={{fontSize: '16px'}}>
