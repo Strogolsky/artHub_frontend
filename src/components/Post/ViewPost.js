@@ -89,7 +89,7 @@ const ViewPost = () => {
                         <p className="my-5 text-xl text-left font-bold" style={{ fontSize: '36px' }}>{postTitle}</p>
                         <div className="flex items-center">
                             <button className="px-2 bg-my-light-grey hover:bg-my-purple-light active:bg-my-purple-dark rounded-large flex items-center"
-                                    style={{ width: '320px', height: "60px" }}
+                                    style={{ width: '320px', height: '60px' }}
                                     onClick={() => navigate(`/user/${userId}`)}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
                                     <img src={imageAutor} alt="Profile" className="w-full h-full object-cover" />
