@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function EditAccount() {
+    const navigate = useNavigate();
+
     const [userNickname, setNickname] = useState("");
     const [userEmail, setEmail] = useState("");
     const [userPassword, setPassword] = useState("");
@@ -9,7 +12,8 @@ function EditAccount() {
         <div>
             <div>
                 <button className="m-3 bg-my-purple hover:bg-my-purple-light py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                    style={{ fontSize: '16px' }}>
+                        style={{ fontSize: '16px' }}
+                        onClick={() => navigate(-1)}>
                     Back
                 </button>
             </div>
