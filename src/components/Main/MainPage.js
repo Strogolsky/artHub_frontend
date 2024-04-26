@@ -14,8 +14,8 @@ const MainPage = () => {
     const [isSignInOpen, setIsSignInOpen] = useState(false);
 
     const swapOpen = () => {
-        setIsSignUpOpen((curr) => !curr)
-        setIsSignInOpen((curr) => !curr)
+        setIsSignUpOpen((curr) => !curr);
+        setIsSignInOpen((curr) => !curr);
     }
 
     const [posts, setPosts] = useState([
