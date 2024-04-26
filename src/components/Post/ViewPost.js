@@ -16,8 +16,8 @@ const ViewPost = () => {
     const toggleAddToFolder = () => setAddToFolderOpen(!isAddToFolderOpen);
 
     const swapOpen = () => {
-        setIsSignUpOpen((curr) => !curr)
-        setIsSignInOpen((curr) => !curr)
+        setIsSignUpOpen((curr) => !curr);
+        setIsSignInOpen((curr) => !curr);
     }
 
     const userId = "1";
