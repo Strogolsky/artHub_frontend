@@ -11,7 +11,6 @@ const AddToFolder = () => {
     const handleOpenModal = () => setIsOpen(true);
     const handleCloseModal = () => {
         setIsOpen(false);
-        // Здесь можно добавить логику для сохранения выбранных папок
     };
     const handleSelectFolder = (folder) => {
         if (selectedFolders.includes(folder)) {
