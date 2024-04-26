@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {Dialog, DialogBody, DialogFooter, DialogHeader, Typography} from "@material-tailwind/react";
 import CrossIcon from "../Icons/CrossIcon";
 

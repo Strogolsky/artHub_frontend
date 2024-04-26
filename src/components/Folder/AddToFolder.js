@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Card, CardBody, Dialog, Typography } from "@material-tailwind/react";
 import CrossIcon from "../Icons/CrossIcon";
 
