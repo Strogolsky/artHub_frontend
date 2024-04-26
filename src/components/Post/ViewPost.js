@@ -22,7 +22,7 @@ const ViewPost = () => {
 
     const userId = "1";
     const imageUrl = "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80";
-    const imageAutor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    const imageAuthor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
     const postTitle = "My Awesome Post";
     const postAuthor = "Post Author";
     const imageDescription = "Lorem ipsum dolor sit amet consectetur. Donec faucibus non nibh id eleifend. Porttitor facilisis ullamcorper aenean tempus hac. Pulvinar velit vulputate lorem elementum. Et vulputate in eleifend sit ut aliquam.";
@@ -88,7 +88,7 @@ const ViewPost = () => {
                                     style={{ width: '320px', height: '60px' }}
                                     onClick={() => navigate(`/user/${userId}`)}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
-                                    <img src={imageAutor} alt="Profile" className="w-full h-full object-cover" />
+                                    <img src={imageAuthor} alt="Profile" className="w-full h-full object-cover" />
                                 </div>
                                 <p className="ml-4 text-xl text-left font-bold" style={{ fontSize: '14px' }}>
                                     {postAuthor}
