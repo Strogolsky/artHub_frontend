@@ -9,11 +9,13 @@ import NotFound from "./components/NotFound";
 import ViewFolder from "./components/Folder/ViewFolder";
 import ViewPost from "./components/Post/ViewPost";
 import ViewUser from "./components/User/ViewUser";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
       <div>
+        <ScrollToTop />
         <Routes>
           <Route path="/">
             <Route index element={<MainPage />} />
@@ -26,7 +28,6 @@ function App() {
             <Route path="folder/:folderId/edit" element={<EditFolder />} />
             <Route path="folder/create" element={<CreateFolder />} />
             <Route path="*" element={<NotFound />} />
-
           </Route>
         </Routes>
       </div>
