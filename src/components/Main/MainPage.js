@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
@@ -78,12 +78,12 @@ const MainPage = () => {
                     {posts.map((post) => (
                         <div key={post.id} className="m-6" style={{ width: '310px', height: '400px' }}>
                             <div className="rounded-large flex justify-center items-center"
-                                    style={{ width: '300px', height: '385px' }}>
+                                style={{ width: '300px', height: '385px' }}>
                                 <img key={post.id}
                                     className="hover:border-my-purple hover:cursor-pointer hover:border-4 object-cover rounded-large"
                                     alt={post.title}
                                     src={post.image.data}
-                                    onClick={() => navigate(`/post/${post.id}`)}/>
+                                    onClick={() => navigate(`/post/${post.id}`)} />
                             </div>
                             <p className="m-1">{post.title}</p>
                         </div>
