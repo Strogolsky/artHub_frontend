@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import SignIn from "../Main/SignIn";
 import SignUp from "../Main/SignUp";
 import AddToFolder from "../Folder/AddToFolder";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getPostById } from "../../api/Post";
+import NotFound from '../NotFound';
+import Loading from '../Loading';
 
 const ViewPost = () => {
     const navigate = useNavigate();
 
+    const { postId } = useParams();
     const [searchText, setSearchText] = useState("");
     const [isAuthorised, setIsAuthorised] = useState(false);
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
     const [isSignInOpen, setIsSignInOpen] = useState(false);
     const [isAddToFolderOpen, setAddToFolderOpen] = useState(false);
+    const [post, setPost] = useState(null);
+    const [error, setError] = useState(null);
 
     const toggleAddToFolder = () => setAddToFolderOpen(!isAddToFolderOpen);
 
@@ -20,13 +26,27 @@ const ViewPost = () => {
         setIsSignInOpen((curr) => !curr);
     }
 
-    const userId = "1";
-    const imageUrl = "https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80";
-    const imageAuthor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-    const postTitle = "My Awesome Post";
-    const postAuthor = "Post Author";
-    const imageDescription = "Lorem ipsum dolor sit amet consectetur. Donec faucibus non nibh id eleifend. Porttitor facilisis ullamcorper aenean tempus hac. Pulvinar velit vulputate lorem elementum. Et vulputate in eleifend sit ut aliquam.";
-    const postTags = ["Tag1", "Tag2", "Mountain"];
+    useEffect(() => {
+        getPostById(postId)
+            .then(data => {
+                setPost(data);
+            })
+            .catch(error => {
+                console.error('Failed to load post:', error.message);
+                setError(error.message);
+            });
+    }, [postId]);
+
+    if (error === '404 Not Found') return <NotFound />;
+    if (!post) return <Loading />;
+
+    const userId = 1;
+    const imageUrl = "https://us-tuna-sounds-images.voicemod.net/f96fc77f-c55e-477f-b19f-dd4469f9f992-1690445904161.jpg";
+    const imageAuthor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90oy1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    const postTitle = post.title || 'No title available';
+    const postAuthor = post.patron ? post.patron.username : 'Unknown Author';
+    const description = post.description || 'No description available';
+    const postTags = post.tags ? post.tags.map(tag => tag.name) : [];
 
     return (
         <div>
@@ -85,8 +105,8 @@ const ViewPost = () => {
                         <p className="my-5 text-xl text-left font-bold" style={{ fontSize: '36px' }}>{postTitle}</p>
                         <div className="flex items-center">
                             <button className="px-2 bg-my-light-grey hover:bg-my-purple-light active:bg-my-purple-dark rounded-large flex items-center"
-                                    style={{ width: '320px', height: '60px' }}
-                                    onClick={() => navigate(`/user/${userId}`)}>
+                                style={{ width: '320px', height: '60px' }}
+                                onClick={() => navigate(`/user/${userId}`)}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
                                     <img src={imageAuthor} alt="Profile" className="w-full h-full object-cover" />
                                 </div>
@@ -99,7 +119,7 @@ const ViewPost = () => {
                             </div>
                         </div>
                         <div className="my-4 rounded-large bg-my-light-grey" style={{ width: '380px', height: '195px' }}>
-                            <p className="p-2 kanit" style={{ fontSize: '12px' }}>{imageDescription}</p>
+                            <p className="p-2 kanit" style={{ fontSize: '12px' }}>{description}</p>
                         </div>
                         <div className="my-4 rounded-large bg-my-light-grey" style={{ width: '380px', height: '195px' }}>
                             <div className="rounded-large flex flex-wrap overflow-auto pb-3" style={{ maxHeight: '380px' }}>
