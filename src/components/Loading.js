@@ -1,8 +1,4 @@
-import { useNavigate } from "react-router-dom";
-
 const Loading = () => {
-    const navigate = useNavigate();
-
     return (
         <div className="container text-center mx-auto mt-24">
             <h1 style={{ fontWeight: 900, fontSize: '128px' }}>Loading...</h1>
