@@ -2,7 +2,7 @@ const POST_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_AP
 const getPostById = async (postId) => {
     const url = `${POST_URL}/${postId}`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {headers: {'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`}});
         if (!response.ok) {
             if (response.status === 404) {
                 throw new Error('404 Not Found');
@@ -16,4 +16,4 @@ const getPostById = async (postId) => {
     }
 }
 
-export { getPostById };
+export default getPostById;
