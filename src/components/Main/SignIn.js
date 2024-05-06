@@ -1,12 +1,41 @@
 import { Button, Card, CardBody, CardFooter, Dialog, Input, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import CrossIcon from "../Icons/CrossIcon";
+import Cookies from 'js-cookie';
 
-const SignIn = ({ isOpen, setIsOpen, swapOpen }) => {
-    const [email, setEmail] = useState("");
+const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
+
+    const [userData, setUserData] = useState();
+
+    const handleSignIn = () => {
+        const URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/auth/login`;
+
+        fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("505 Internal Server Error");
+            }
+            return response.json();
+        }).then(data => {
+            const jwt = data.token;
+            const expiresIn = data.expiresIn;
+            Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
+            handleIsOpen();
+            setIsAuthorised(true);
+        }).catch(error => console.error("Error: ", error))
+    }
 
     return (
         <div>
@@ -21,7 +50,7 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen }) => {
                             </Typography>
                         </div>
 
-                        <Input value={email} type="email" label="Email" size="lg" onChange={(e) => setEmail(e.target.value)} />
+                        <Input value={username} type="username" label="Username" size="lg" onChange={(e) => setUsername(e.target.value)} />
 
                         <div className="m-5"></div>
 
@@ -30,7 +59,7 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen }) => {
 
                     <CardFooter>
                         <div className="flex justify-center">
-                            <Button className="kanit-regular bg-my-purple-light text-black" size="lg" onClick={handleIsOpen}>
+                            <Button className="kanit-regular bg-my-purple-light text-black" size="lg" onClick={handleSignIn}>
                                 Sign in
                             </Button>
                         </div>
