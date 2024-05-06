@@ -82,7 +82,7 @@ const MainPage = () => {
                                 <img key={post.id}
                                     className="hover:border-my-purple hover:cursor-pointer hover:border-4 object-cover rounded-large"
                                     alt={post.title}
-                                    src={post.image.data}
+                                    src={`data:image;base64,${post.image.data}`}
                                     onClick={() => navigate(`/post/${post.id}`)} />
                             </div>
                             <p className="m-1">{post.title}</p>
