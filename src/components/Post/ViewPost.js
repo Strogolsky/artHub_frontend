@@ -3,7 +3,7 @@ import SignIn from "../Main/SignIn";
 import SignUp from "../Main/SignUp";
 import AddToFolder from "../Folder/AddToFolder";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPostById } from "../../api/Post";
+import getPostById from "../../api/Post";
 import NotFound from '../NotFound';
 import Loading from '../Loading';
 
@@ -40,13 +40,15 @@ const ViewPost = () => {
     if (error === '404 Not Found') return <NotFound />;
     if (!post) return <Loading />;
 
-    const userId = 1;
-    const imageUrl = "https://us-tuna-sounds-images.voicemod.net/f96fc77f-c55e-477f-b19f-dd4469f9f992-1690445904161.jpg";
+    const userId = post.patron.id;
+
     const imageAuthor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90oy1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
     const postTitle = post.title || 'No title available';
     const postAuthor = post.patron ? post.patron.username : 'Unknown Author';
     const description = post.description || 'No description available';
     const postTags = post.tags ? post.tags.map(tag => tag.name) : [];
+    const imageData = post.image.data;
 
     return (
         <div>
@@ -88,7 +90,10 @@ const ViewPost = () => {
             </div>
             <div className="flex justify-center items-center h-screen">
                 <div className="w-1/2 flex justify-end">
-                    <img src={imageUrl} className="object-cover rounded-large" alt="Selected Post" style={{ maxWidth: '90%', maxHeight: '85vh' }} />
+                    <img src={`data:image;base64,${imageData}`}
+                         className="object-cover rounded-large"
+                         alt="Selected Post"
+                         style={{ maxWidth: '90%', maxHeight: '85vh' }} />
                 </div>
                 <div className="w-1/2 flex justify-start flex-col items-left">
                     <div className="mx-12">
