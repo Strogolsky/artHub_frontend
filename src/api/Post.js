@@ -16,4 +16,24 @@ const getPostById = async (postId) => {
     }
 }
 
-export { getPostById };
+const updatePostById = async (postId, postData) => {
+    const url = `${POST_URL}/${postId}`;
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating post:', error);
+        throw error;
+    }
+}
+
+export { getPostById, updatePostById };
