@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import ChooseTags from './ChooseTags';
 import { getPostById, updatePostById } from "../../api/Post";
+import NotFound from "../NotFound";
 
 function EditPost() {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ function EditPost() {
         file: '',
         patronId: 0
     });
+    
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         if (postId) {
@@ -27,7 +30,7 @@ function EditPost() {
                 });
             }).catch(error => {
                 console.error('Error fetching post data:', error);
-                navigate('/error');
+                setIsError(true);
             });
         }
     }, [postId, navigate]);
@@ -39,6 +42,7 @@ function EditPost() {
         });
         console.log("Changed");
     };
+
     const handleEdit = async () => {
         try {
             const updatedPost = await updatePostById(postId, postData);
@@ -48,6 +52,8 @@ function EditPost() {
             console.error('Failed to update post:', error);
         }
     };
+
+    if (isError) return <NotFound />
 
     return (
         <div>
