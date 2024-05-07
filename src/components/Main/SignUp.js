@@ -1,13 +1,60 @@
 import { Button, Card, CardBody, CardFooter, Dialog, Input, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import CrossIcon from "../Icons/CrossIcon";
+import Cookies from "js-cookie";
 
-const SignUp = ({ isOpen, setIsOpen, swapOpen }) => {
+const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
+
+    const handleSignUp = () => {
+        const URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/auth/signup`;
+
+        fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                username: username,
+                password: password
+            })
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("505 Internal Server Error");
+            }
+            return response.json();
+        }).then(data => {
+            const loginURL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/auth/login`;
+
+            fetch(loginURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error("505 Internal Server Error");
+                }
+                return response.json();
+            }).then(loginData => {
+                const jwt = loginData.token;
+                const expiresIn = loginData.expiresIn;
+                Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
+                handleIsOpen();
+                setIsAuthorised(true);
+            }).catch(error => console.error("Error: ", error));
+        })
+
+    }
 
     return (
         <div>
@@ -35,7 +82,7 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen }) => {
 
                     <CardFooter>
                         <div className="flex justify-center">
-                            <Button className="kanit-regular bg-my-purple-light text-black" size="lg" onClick={handleIsOpen}>
+                            <Button className="kanit-regular bg-my-purple-light text-black" size="lg" onClick={handleSignUp}>
                                 Sign up
                             </Button>
                         </div>

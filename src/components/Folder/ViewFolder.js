@@ -2,16 +2,18 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
+import Cookies from "js-cookie";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
 
     const { folderId } = useParams();
+    const jwt = Cookies.get('jwt');
 
     const getFolderById = async(folderId) => {
         const URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/folders/${folderId}`
         try {
-            const response = await fetch(URL, {headers: {'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`}});
+            const response = await fetch(URL, {headers: {'Authorization': `Bearer ${jwt}`}});
             if (!response.ok) {
                 if (response.status === 404) {
                     throw new Error('404 Not Found');
