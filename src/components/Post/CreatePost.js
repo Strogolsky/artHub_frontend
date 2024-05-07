@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 function CreatePost() {
     const navigate = useNavigate();
 
+    const [postName, setPostName] = useState("");
     const [postDescription, setPostDescription] = useState("");
 
     return (
         <div>
             <div>
                 <button className="m-3 bg-my-purple hover:bg-my-purple-light font-regular py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                        style={{ fontSize: '16px' }}
-                        onClick={() => navigate(-1)}>
+                    style={{ fontSize: '16px' }}
+                    onClick={() => navigate(-1)}>
                     Back
                 </button>
             </div>
@@ -40,6 +41,13 @@ function CreatePost() {
                     <h1 className="m-10 font-bold text-4xl">
                         Create post
                     </h1>
+                    <div>
+                        <input type="text"
+                            className="m-2 bg-my-light-grey h-10 w-96 py-2 px-4 rounded-large focus:outline-my-purple-light"
+                            placeholder="Title"
+                            value={postName}
+                            onChange={(e) => setPostName(e.target.value)} />
+                    </div>
                     <div>
                         <textarea
                             className="m-4 bg-my-light-grey font-regular h-40 w-96 py-2 px-4 rounded-large resize-none focus:outline-my-purple-light"
