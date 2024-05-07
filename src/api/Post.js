@@ -1,4 +1,5 @@
 const POST_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/posts`
+
 const getPostById = async (postId) => {
     const url = `${POST_URL}/${postId}`;
     try {
@@ -16,15 +17,29 @@ const getPostById = async (postId) => {
     }
 }
 
+const b64toBlob = (b64Data) => {
+    const byteChars = atob(b64Data);
+    const byteNums = new Array(byteChars.length);
+    for (let i = 0; i < byteChars.length; i++) {
+        byteNums[i] = byteChars.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNums);
+    return new Blob([byteArray]);
+}
+
 const updatePostById = async (postId, postData) => {
     const url = `${POST_URL}/${postId}`;
+
+    const formData = new FormData();
+    formData.append('title', postData.title);
+    formData.append('description', postData.description);
+    formData.append('tagsId', postData.tagsId.join(','));
+    formData.append('file', b64toBlob(postData.file));
+
     try {
         const response = await fetch(url, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postData)
+            body: formData
         });
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
