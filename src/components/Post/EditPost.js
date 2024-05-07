@@ -13,7 +13,6 @@ function EditPost() {
         description: '',
         tagsId: [],
         file: '',
-        patronId: 0
     });
     
     const [isError, setIsError] = useState(false);
@@ -25,8 +24,7 @@ function EditPost() {
                     title: data.title || '',
                     description: data.description || '',
                     tagsId: data.tags.map(tag => tag.id) || [],
-                    file: data.file || '',
-                    patronId: data.patronId || 0
+                    file: data.image.data || '',
                 });
             }).catch(error => {
                 console.error('Error fetching post data:', error);
