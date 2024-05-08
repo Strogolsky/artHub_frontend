@@ -55,4 +55,22 @@ const updatePostById = async (postId, postData) => {
     }
 }
 
-export { getPostById, updatePostById };
+const deletePostById = async (postId) => {
+    const url = `${POST_URL}/${postId}`;
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw Error("403 Forbidden");
+
+    const response = await fetch(url, {method: 'DELETE', headers: {'Authorization': `Bearer ${jwt}`}});
+    if (!response.ok) {
+        if (response.status === 403) {
+            throw new Error("403 Forbidden");
+        }
+        throw Error("505 Internal Server Error");
+    }
+
+    return "Successful";
+}
+
+export { getPostById, updatePostById, deletePostById };

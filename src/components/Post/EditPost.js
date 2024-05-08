@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import ChooseTags from './ChooseTags';
-import { getPostById, updatePostById } from "../../api/PostAPI";
+import {deletePostById, getPostById, updatePostById} from "../../api/PostAPI";
 import NotFound from "../NotFound";
 
 function EditPost() {
@@ -51,6 +51,17 @@ function EditPost() {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await deletePostById(postId);
+            console.log("Post deleted");
+            navigate('/');
+        } catch (error) {
+            console.log("Cannot delete post: ", error);
+            setIsError(true);
+        }
+    }
+
     if (isError) return <NotFound />
 
     return (
@@ -87,9 +98,9 @@ function EditPost() {
                 </div>
                 <ChooseTags tags={postData.tagsId} setTags={(tags) => setPostData({ ...postData, tagsId: tags })} />
                 <div className="flex">
-                    <button
-                        className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 font-regular py-3 px-5 rounded-large text-base" style={{ fontSize: '24px' }}
-                    >
+                    <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 font-regular py-3 px-5 rounded-large text-base"
+                            style={{ fontSize: '24px' }}
+                            onClick={handleDelete}>
                         Delete
                     </button>
                     <button
