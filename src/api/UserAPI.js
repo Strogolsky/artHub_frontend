@@ -6,7 +6,7 @@ const getUserAccount = async () => {
     const url = `${USER_URL}/account`;
     const jwt = Cookies.get('jwt');
 
-    if (jwt.empty())
+    if (!jwt)
         throw new Error("403 Forbidden");
 
     const response = await fetch(url, {headers: {'Authorization': `Bearer ${jwt}`}});
