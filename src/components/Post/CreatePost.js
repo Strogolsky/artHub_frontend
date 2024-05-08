@@ -1,12 +1,26 @@
 import { useState } from 'react';
 import ChooseTags from "./ChooseTags";
 import { useNavigate } from "react-router-dom";
+import {createPost} from "../../api/PostAPI";
 
 function CreatePost() {
     const navigate = useNavigate();
 
-    const [postName, setPostName] = useState("");
+    const [postTitle, setPostTitle] = useState("");
     const [postDescription, setPostDescription] = useState("");
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleCreatePost = async () => {
+        try {
+            const createdPost = await createPost({postTitle, postDescription, selectedTags, selectedFile});
+            console.log("Post successfully created", createdPost);
+            navigate(`/post/${createdPost.id}`);
+        } catch (error) {
+            console.log("Error creating post: ", error);
+        //  todo handle errors
+        }
+    }
 
     return (
         <div>
@@ -23,12 +37,8 @@ function CreatePost() {
                         <input
                             type="file"
                             accept="image/*"
-                            className="opacity-0 absolute h-full w-full z-10"
-                            onChange={(e) => {
-                                if (e.target.files.length > 0) {
-                                    console.log('Файл выбран:', e.target.files[0].name);
-                                }
-                            }}
+                            className="hover:cursor-pointer opacity-0 absolute h-full w-full z-10"
+                            onChange={(e) => setSelectedFile(e.target.files[0])}
                         />
                         <div className="m-2 bg-my-light-grey font-regular h-96 w-96 py-2 px-4 rounded-large flex items-center justify-center cursor-pointer"
                             style={{ height: '500px' }}>
@@ -45,8 +55,8 @@ function CreatePost() {
                         <input type="text"
                             className="m-2 bg-my-light-grey h-10 w-96 py-2 px-4 rounded-large focus:outline-my-purple-light"
                             placeholder="Title"
-                            value={postName}
-                            onChange={(e) => setPostName(e.target.value)} />
+                            value={postTitle}
+                            onChange={(e) => setPostTitle(e.target.value)} />
                     </div>
                     <div>
                         <textarea
@@ -61,7 +71,7 @@ function CreatePost() {
                         <button
                             className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
                             style={{ fontSize: '24px' }}
-                        >
+                            onClick={handleCreatePost}>
                             Create
                         </button>
                     </div>

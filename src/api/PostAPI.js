@@ -33,6 +33,10 @@ const b64toBlob = (b64Data) => {
 
 const updatePostById = async (postId, postData) => {
     const url = `${POST_URL}/${postId}`;
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw new Error("403 Forbidden");
 
     const formData = new FormData();
     formData.append('title', postData.title);
@@ -42,8 +46,11 @@ const updatePostById = async (postId, postData) => {
 
     try {
         const response = await fetch(url, {
-            method: 'PUT',
-            body: formData
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${jwt}`,
+            },
+            body: formData,
         });
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -60,17 +67,48 @@ const deletePostById = async (postId) => {
     const jwt = Cookies.get('jwt');
 
     if (!jwt)
-        throw Error("403 Forbidden");
+        throw new Error("403 Forbidden");
 
     const response = await fetch(url, {method: 'DELETE', headers: {'Authorization': `Bearer ${jwt}`}});
     if (!response.ok) {
         if (response.status === 403) {
             throw new Error("403 Forbidden");
         }
-        throw Error("505 Internal Server Error");
+        throw new Error("505 Internal Server Error");
     }
 
     return "Successful";
 }
 
-export { getPostById, updatePostById, deletePostById };
+const createPost = async (postData) => {
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw new Error("403 Forbidden");
+
+    const tags = (postData ? postData.selectedTags.join(',') : '');
+
+    const formData = new FormData();
+    formData.append('title', postData.postTitle);
+    formData.append('description', postData.postDescription);
+    formData.append('tagsId', tags);
+    formData.append('file', postData.selectedFile);
+
+    const response = await fetch(POST_URL, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${jwt}`
+        },
+        body: formData,
+    });
+
+    if (!response.ok) {
+        if (response.status === 403)
+            throw new Error("403 Forbidden");
+        throw new Error("505 Internal Server Error");
+    }
+
+    return await response.json();
+}
+
+export { getPostById, updatePostById, deletePostById, createPost };
