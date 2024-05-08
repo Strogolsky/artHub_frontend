@@ -4,11 +4,11 @@ import EditFolder from './components/Folder/EditFolder';
 import EditPost from './components/Post/EditPost';
 import CreatePost from './components/Post/CreatePost';
 import MainPage from "./components/Main/MainPage";
-import EditAccount from './components/User/EditAccount';
+import EditAccount from './components/Account/EditAccount';
 import NotFound from "./components/NotFound";
 import ViewFolder from "./components/Folder/ViewFolder";
 import ViewPost from "./components/Post/ViewPost";
-import ViewAccount from "./components/User/ViewAccount";
+import ViewAccount from "./components/Account/ViewAccount";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
