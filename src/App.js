@@ -4,11 +4,11 @@ import EditFolder from './components/Folder/EditFolder';
 import EditPost from './components/Post/EditPost';
 import CreatePost from './components/Post/CreatePost';
 import MainPage from "./components/Main/MainPage";
-import EditAccount from './components/User/EditAccount';
+import EditAccount from './components/Account/EditAccount';
 import NotFound from "./components/NotFound";
 import ViewFolder from "./components/Folder/ViewFolder";
 import ViewPost from "./components/Post/ViewPost";
-import ViewUser from "./components/User/ViewUser";
+import ViewAccount from "./components/Account/ViewAccount";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
@@ -19,8 +19,8 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<MainPage />} />
-            <Route path="user/:userId" element={<ViewUser />} />
-            <Route path="user/:userId/edit" element={<EditAccount />} />
+            <Route path="account" element={<ViewAccount />} />
+            <Route path="account/edit" element={<EditAccount />} />
             <Route path="post/create" element={<CreatePost />} />
             <Route path="post/:postId" element={<ViewPost />} />
             <Route path="post/:postId/edit" element={<EditPost />} />

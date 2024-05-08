@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import ChooseTags from './ChooseTags';
-import { getPostById, updatePostById } from "../../api/Post";
+import { getPostById, updatePostById } from "../../api/PostAPI";
 import NotFound from "../NotFound";
 
 function EditPost() {
