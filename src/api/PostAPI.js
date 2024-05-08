@@ -46,7 +46,7 @@ const updatePostById = async (postId, postData) => {
 
     try {
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${jwt}`,
             },
