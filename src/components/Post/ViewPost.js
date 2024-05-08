@@ -111,7 +111,7 @@ const ViewPost = () => {
                         <div className="flex items-center">
                             <button className="px-2 bg-my-light-grey hover:bg-my-purple-light active:bg-my-purple-dark rounded-large flex items-center"
                                 style={{ width: '320px', height: '60px' }}
-                                onClick={() => navigate(`/user/${userId}`)}>
+                                onClick={() => navigate(`/account`)}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
                                     <img src={imageAuthor} alt="Profile" className="w-full h-full object-cover" />
                                 </div>
