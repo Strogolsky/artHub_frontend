@@ -1,7 +1,7 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-const ViewUser = () => {
+const ViewAccount = () => {
     const navigate = useNavigate();
 
     const [searchText, setSearchText] = useState("");
@@ -96,4 +96,4 @@ const ViewUser = () => {
     )
 }
 
-export default ViewUser;
+export default ViewAccount;
