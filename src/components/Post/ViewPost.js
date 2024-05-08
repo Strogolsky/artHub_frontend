@@ -3,7 +3,7 @@ import SignIn from "../Main/SignIn";
 import SignUp from "../Main/SignUp";
 import AddToFolder from "../Folder/AddToFolder";
 import { useNavigate, useParams } from "react-router-dom";
-import getPostById from "../../api/Post";
+import { getPostById } from "../../api/Post";
 import NotFound from '../NotFound';
 import Loading from '../Loading';
 
