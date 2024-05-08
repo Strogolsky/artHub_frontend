@@ -19,8 +19,8 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<MainPage />} />
-            <Route path="user/:userId" element={<ViewUser />} />
-            <Route path="user/:userId/edit" element={<EditAccount />} />
+            <Route path="account" element={<ViewAccount />} />
+            <Route path="account/edit" element={<EditAccount />} />
             <Route path="post/create" element={<CreatePost />} />
             <Route path="post/:postId" element={<ViewPost />} />
             <Route path="post/:postId/edit" element={<EditPost />} />
