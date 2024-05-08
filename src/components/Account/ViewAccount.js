@@ -1,30 +1,35 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {getUserAccount} from "../../api/UserAPI";
+import NotFound from "../NotFound";
+import {getUserFolders} from "../../api/FolderAPI";
+import Loading from "../Loading";
 
 const ViewAccount = () => {
     const navigate = useNavigate();
 
     const [searchText, setSearchText] = useState("");
 
-    const [userFolders, setUserFolders] = useState([
-        {
-            "id": 0,
-            "title": "Created posts",
-        },
-        {
-            "id": 1,
-            "title": "Saved posts",
-        },
-        {
-            "id": 2,
-            "title": "Some random name",
-        },
-        {
-            "id": 3,
-            "title": "Another random name of folder"
-        },
-    ]);
+    const [accountData, setAccountData] = useState();
+    const [userFolders, setUserFolders] = useState();
 
+    const [isError, setIsError] = useState(false);
+
+    useEffect(() => {
+        getUserAccount()
+            .then(data => setAccountData(data))
+            .catch(() => setIsError(true));
+
+        getUserFolders()
+            .then(data => setUserFolders(data))
+            .catch(() => setIsError(true));
+    }, []);
+
+    if (isError) return <NotFound />
+    if (!accountData || !userFolders) return <Loading />
+
+    const username = accountData.username;
+    const email = accountData.email;
 
     return (
         <div>
@@ -54,8 +59,8 @@ const ViewAccount = () => {
                     {/* todo: add icon */}
                 </div>
 
-                <h1 className="mt-4" style={{fontWeight: 700, fontSize: '48px'}}>Nickname</h1>
-                <p className="-mt-2" style={{color: '#8A8A8A', fontWeight: 400, fontSize: '16px'}}>email</p>
+                <h1 className="mt-4" style={{fontWeight: 700, fontSize: '48px'}}>{username}</h1>
+                <p className="-mt-2" style={{color: '#8A8A8A', fontWeight: 400, fontSize: '16px'}}>{email}</p>
 
                 <div>
                     <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large"
@@ -83,11 +88,11 @@ const ViewAccount = () => {
                     </div>
 
                     {userFolders.map((folder) => (
-                        <div className="m-6" style={{width: '200px', height: '200px'}}>
+                        <div key={folder.id} className="m-6" style={{width: '200px', height: '200px'}}>
                             <button className="bg-my-light-grey hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center"
                                  style={{width: '200px', height: '150px'}}
                                  onClick={() => navigate(`/folder/${folder.id}`)}/>
-                            <p key={folder.id} className="mt-2">{folder.title}</p>
+                            <p className="mt-2">{folder.title}</p>
                         </div>
                     ))}
                 </div>
