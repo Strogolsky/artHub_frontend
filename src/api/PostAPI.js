@@ -70,7 +70,7 @@ const deletePostById = async (postId) => {
         throw Error("505 Internal Server Error");
     }
 
-    return await response.json();
+    return "Successful";
 }
 
 export { getPostById, updatePostById, deletePostById };
