@@ -55,7 +55,7 @@ function EditPost() {
         try {
             await deletePostById(postId);
             console.log("Post deleted");
-            navigate(-1);
+            navigate('/');
         } catch (error) {
             console.log("Cannot delete post: ", error);
             setIsError(true);
