@@ -10,20 +10,20 @@ const ViewFolder = () => {
     const { folderId } = useParams();
 
     const [folderData, setFolderData] = useState();
-    const [error, setError] = useState("");
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getFolderById(folderId)
             .then(data => setFolderData(data))
             .catch(error => {
                 console.error("Error fetching data:", error);
-                setError(error.message);
+                setIsError(true);
             })
     }, [folderId]);
 
     const [searchText, setSearchText] = useState("");
 
-    if (error === '404 Not Found') return <NotFound />
+    if (isError) return <NotFound />
     if (!folderData) return <Loading />;
 
     return (
