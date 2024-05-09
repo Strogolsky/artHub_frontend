@@ -36,4 +36,4 @@ const getFolderById = async(folderId) => {
     return await response.json();
 }
 
-export { getUserFolders };
+export { getUserFolders, getFolderById };
