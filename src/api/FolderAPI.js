@@ -2,6 +2,35 @@ import Cookies from "js-cookie";
 
 const FOLDER_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/folders`
 
+const createFolder = async (folderData) => {
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw new Error("403 Forbidden");
+
+    const response = await fetch(FOLDER_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+            title: folderData.folderTitle,
+            description: folderData.folderDescription,
+            postIds: []
+        }),
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!response.ok) {
+        if (response.status === 403) {
+            throw new Error("403 Forbidden");
+        }
+        throw new Error("500 Internal Server Error");
+    }
+
+    return await response.json();
+}
+
 const getUserFolders = async () => {
     const url = `${FOLDER_URL}/user`;
     const jwt = Cookies.get('jwt');
@@ -19,7 +48,7 @@ const getUserFolders = async () => {
     return await response.json();
 }
 
-const getFolderById = async(folderId) => {
+const getFolderById = async (folderId) => {
     const url = `${FOLDER_URL}/${folderId}`;
     const jwt = Cookies.get('jwt');
 
@@ -85,4 +114,4 @@ const deleteFolderById = async (folderId) => {
     return "Successfully deleted";
 }
 
-export { getUserFolders, getFolderById, updateFolderById, deleteFolderById };
+export { getUserFolders, getFolderById, updateFolderById, deleteFolderById, createFolder };
