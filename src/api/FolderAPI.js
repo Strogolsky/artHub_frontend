@@ -1,9 +1,9 @@
 import Cookies from "js-cookie";
 
-const USER_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/folders`
+const FOLDER_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/folders`
 
 const getUserFolders = async () => {
-    const url = `${USER_URL}/user`;
+    const url = `${FOLDER_URL}/user`;
     const jwt = Cookies.get('jwt');
 
     if (!jwt)
