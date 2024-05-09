@@ -2,14 +2,12 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import Cookies from "js-cookie";
 import {getFolderById} from "../../api/FolderAPI";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
 
     const { folderId } = useParams();
-    const jwt = Cookies.get('jwt');
 
     const [folderData, setFolderData] = useState();
     const [error, setError] = useState("");
