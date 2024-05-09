@@ -1,11 +1,22 @@
 import {useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {createFolder} from "../../api/FolderAPI";
 
 function CreateFolder() {
     const navigate = useNavigate();
 
-    const [folderName, setFolderName] = useState("");
+    const [folderTitle, setFolderTitle] = useState("");
     const [folderDescription, setFolderDescription] = useState("");
+
+    const handleCreate = async () => {
+        try {
+            const createdFolder = await createFolder({folderTitle, folderDescription});
+            console.log("Successfully created folder");
+            navigate(`/folder/${createdFolder.id}`);
+        } catch (error) {
+            console.log("Failed to create folder: ", error);
+        }
+    }
 
     return (
         <div>
@@ -24,8 +35,8 @@ function CreateFolder() {
                     <input type="text"
                            className="m-2 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
                            placeholder="Title"
-                           value={folderName}
-                           onChange={(e) => setFolderName(e.target.value)}
+                           value={folderTitle}
+                           onChange={(e) => setFolderTitle(e.target.value)}
                            style={{width: '400px', height: '40px'}}/>
                 </div>
                 <div>
@@ -37,7 +48,8 @@ function CreateFolder() {
                 </div>
 
                 <button className="m-1 bg-my-purple hover:bg-my-purple-light py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
-                        style={{fontSize: '24px'}}>
+                        style={{fontSize: '24px'}}
+                        onClick={handleCreate}>
                     Create
                 </button>
             </div>
