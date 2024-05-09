@@ -68,4 +68,21 @@ const updateFolderById = async (folderId, folderData) => {
     return await response.json();
 }
 
-export { getUserFolders, getFolderById, updateFolderById };
+const deleteFolderById = async (folderId) => {
+    const url = `${FOLDER_URL}/${folderId}`;
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw new Error("403 Forbidden");
+
+    const response = await fetch(url, {method: 'DELETE', headers: {'Authorization': `Bearer ${jwt}`}});
+    if (!response.ok) {
+        if (response.status === 403) {
+            throw new Error("403 Forbidden");
+        }
+        throw new Error("500 Internal Server Error");
+    }
+    return "Successfully deleted";
+}
+
+export { getUserFolders, getFolderById, updateFolderById, deleteFolderById };
