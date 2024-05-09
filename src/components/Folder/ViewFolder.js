@@ -10,23 +10,6 @@ const ViewFolder = () => {
     const { folderId } = useParams();
     const jwt = Cookies.get('jwt');
 
-    const getFolderById = async(folderId) => {
-        const URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/folders/${folderId}`
-        try {
-            const response = await fetch(URL, {headers: {'Authorization': `Bearer ${jwt}`}});
-            if (!response.ok) {
-                if (response.status === 404) {
-                    throw new Error('404 Not Found');
-                }
-                throw new Error('505 Internal Server Error')
-            }
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            throw error;
-        }
-    }
-
     const [folderData, setFolderData] = useState();
     const [error, setError] = useState("");
 
