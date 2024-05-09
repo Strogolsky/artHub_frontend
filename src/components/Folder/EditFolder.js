@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {getFolderById, updateFolderById} from "../../api/FolderAPI";
+import {deleteFolderById, getFolderById, updateFolderById} from "../../api/FolderAPI";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
+import {deletePostById} from "../../api/PostAPI";
 
 function EditFolder() {
     const navigate = useNavigate();
@@ -52,6 +53,16 @@ function EditFolder() {
         }
     }
 
+    const handleDelete = async () => {
+        try {
+            await deleteFolderById(folderId);
+            console.log("Folder deleted");
+            navigate('/');
+        } catch (error) {
+            console.log("Failed to delete folder: ", error);
+        }
+    }
+
     return (
         <div>
             <div>
@@ -83,7 +94,9 @@ function EditFolder() {
                               style={{width: '400px'}}/>
                 </div>
                 <div className="flex">
-                    <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base" style={{fontSize: '24px'}}>
+                    <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base"
+                            style={{fontSize: '24px'}}
+                            onClick={handleDelete}>
                         Delete
                     </button>
                     <button className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
