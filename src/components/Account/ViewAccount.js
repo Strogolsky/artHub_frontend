@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getUserAccount} from "../../api/UserAPI";
+import {getUserAccount} from "../../api/AccountAPI";
 import NotFound from "../NotFound";
 import {getUserFolders} from "../../api/FolderAPI";
 import Loading from "../Loading";
