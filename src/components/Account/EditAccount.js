@@ -1,12 +1,48 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
+import NotFound from "../NotFound";
+import {deleteUserAccount, getUserAccount} from "../../api/AccountAPI";
 
 function EditAccount() {
     const navigate = useNavigate();
 
-    const [userNickname, setNickname] = useState("");
+    const [isResolved, setIsResolved] = useState(false);
+    const [isError, setIsError] = useState(false);
+
+    const [username, setUsername] = useState("");
     const [userEmail, setEmail] = useState("");
+    const [userTags, setUserTags] = useState([]);
+
     const [userPassword, setPassword] = useState("");
+
+    useEffect(() => {
+        getUserAccount()
+            .then(data => {
+                setUsername(data.username);
+                setEmail(data.email);
+                data.preferredTags.map((tagId) => setUserTags((prev) => [...prev, tagId]));
+                setIsResolved(true);
+            })
+            .catch(error => {
+                console.error("Error getting user account: ", error);
+                setIsError(true);
+            })
+    }, []);
+
+    if (isError) return <NotFound />
+    if (!isResolved) return <Loading />
+
+    const handleDelete = async () => {
+        try {
+            await deleteUserAccount();
+            console.log("Successfully deleted account");
+            navigate('/');
+
+        } catch (error) {
+            console.error("Error deleting account: ", error);
+        }
+    }
 
     return (
         <div>
@@ -26,8 +62,8 @@ function EditAccount() {
                            disabled={true}
                         className="cursor-not-allowed m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
                         placeholder="New nickname"
-                        value={userNickname}
-                        onChange={(e) => setNickname(e.target.value)}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         style={{ width: '400px', height: '40px' }} />
                 </div>
                 <div>
@@ -49,7 +85,9 @@ function EditAccount() {
                            style={{ width: '400px', height: '40px' }} />
                 </div>
                 <div className="flex">
-                    <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base" style={{ fontSize: '24px' }}>
+                    <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base"
+                            style={{ fontSize: '24px' }}
+                            onClick={handleDelete}>
                         Delete
                     </button>
                     <button className="cursor-not-allowed my-1 mx-4 bg-my-purple-light py-3 px-5 rounded-large text-base"
