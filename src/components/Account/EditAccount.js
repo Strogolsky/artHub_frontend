@@ -23,7 +23,8 @@ function EditAccount() {
                 </h1>
                 <div>
                     <input type="text"
-                        className="m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
+                           disabled={true}
+                        className="cursor-not-allowed m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
                         placeholder="New nickname"
                         value={userNickname}
                         onChange={(e) => setNickname(e.target.value)}
@@ -31,7 +32,8 @@ function EditAccount() {
                 </div>
                 <div>
                     <input type="text"
-                        className="m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
+                           disabled={true}
+                        className="cursor-not-allowed m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
                         placeholder="New email"
                         value={userEmail}
                         onChange={(e) => setEmail(e.target.value)}
@@ -39,17 +41,18 @@ function EditAccount() {
                 </div>
                 <div>
                     <input type="text"
-                        className="m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
-                        placeholder="New password"
-                        value={userPassword}
-                        onChange={(e) => setPassword(e.target.value)}
-                        style={{ width: '400px', height: '40px' }} />
+                           disabled={true}
+                           className="cursor-not-allowed m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
+                           placeholder="New password"
+                           value={userPassword}
+                           onChange={(e) => setPassword(e.target.value)}
+                           style={{ width: '400px', height: '40px' }} />
                 </div>
                 <div className="flex">
                     <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base" style={{ fontSize: '24px' }}>
                         Delete
                     </button>
-                    <button className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
+                    <button className="cursor-not-allowed my-1 mx-4 bg-my-purple-light py-3 px-5 rounded-large text-base"
                         style={{ fontSize: '24px' }}>
                         Edit
                     </button>
