@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
+import {getAllPosts} from "../../api/PostAPI";
 
 
 const MainPage = () => {
-    const API = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
-
     const [posts, setPosts] = useState([]);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-        fetch(`${API}/api/posts`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                setPosts(data);
-            })
+        getAllPosts()
+            .then(data => setPosts(data))
+            .catch(error => {
+                console.error("Error fetching posts: ", error);
+                setIsError(true);
+            });
+
     }, []);
 
 

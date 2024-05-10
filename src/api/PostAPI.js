@@ -2,6 +2,19 @@ import Cookies from "js-cookie";
 
 const POST_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/posts`
 
+const getAllPosts = async () => {
+    const response = await fetch(POST_URL);
+
+    if (!response.ok) {
+        if (response.status === 404) {
+            throw new Error("404 Not Found");
+        }
+        throw new Error("500 Internal Server Error");
+    }
+
+    return await response.json();
+}
+
 const getPostById = async (postId) => {
     const url = `${POST_URL}/${postId}`;
     const jwt = Cookies.get('jwt');
@@ -111,4 +124,4 @@ const createPost = async (postData) => {
     return await response.json();
 }
 
-export { getPostById, updatePostById, deletePostById, createPost };
+export { getPostById, updatePostById, deletePostById, createPost, getAllPosts };
