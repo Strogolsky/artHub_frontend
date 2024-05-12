@@ -42,4 +42,27 @@ const deleteUserAccount = async () => {
     return "Successful";
 }
 
-export { getUserAccount, deleteUserAccount };
+const addPreferredTags = async (preferredTags) => {
+    const url = `${ACCOUNT_URL}/tags`;
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw new Error("403 Forbidden");
+
+    const response = await fetch(url, {
+        method: 'POST',
+        body: preferredTags,
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        },
+    })
+
+    if (!response.ok) {
+        throw new Error("500 Internal Server Error");
+    }
+
+    return await response.json();
+}
+
+export { getUserAccount, deleteUserAccount, addPreferredTags };
