@@ -66,7 +66,9 @@ function CreatePost() {
                             onChange={(e) => setPostDescription(e.target.value)}
                         />
                     </div>
-                    <ChooseTags />
+
+                    <ChooseTags tags={selectedTags} setTags={(tags) => setSelectedTags(tags)} />
+
                     <div>
                         <button
                             className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
