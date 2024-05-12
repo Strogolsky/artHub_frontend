@@ -96,7 +96,9 @@ function EditPost() {
                         style={{ width: '400px' }}
                     />
                 </div>
+
                 <ChooseTags tags={postData.tagsId} setTags={(tags) => setPostData({ ...postData, tagsId: tags })} />
+
                 <div className="flex">
                     <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 font-regular py-3 px-5 rounded-large text-base"
                             style={{ fontSize: '24px' }}
