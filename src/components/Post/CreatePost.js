@@ -67,7 +67,7 @@ function CreatePost() {
                         />
                     </div>
 
-                    <ChooseTags tags={selectedTags} setTags={(tags) => setSelectedTags(tags)} />
+                    <ChooseTags buttonText="Tags" tags={selectedTags} setTags={(tags) => setSelectedTags(tags)} />
 
                     <div>
                         <button
