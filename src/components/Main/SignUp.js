@@ -2,58 +2,32 @@ import { Button, Card, CardBody, CardFooter, Dialog, Input, Typography } from "@
 import { useState } from "react";
 import CrossIcon from "../Icons/CrossIcon";
 import Cookies from "js-cookie";
+import {signUp} from "../../api/AuthAPI";
+import {signIn} from "../../api/AuthAPI";
+import ChooseTags from "../Post/ChooseTags";
 
 const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isError, setIsError] = useState(false);
+
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
 
     const handleSignUp = () => {
-        const URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/auth/signup`;
-
-        fetch(URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                username: username,
-                password: password
-            })
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error("505 Internal Server Error");
-            }
-            return response.json();
-        }).then(data => {
-            const loginURL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/auth/login`;
-
-            fetch(loginURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password
-                })
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error("505 Internal Server Error");
-                }
-                return response.json();
-            }).then(loginData => {
+        signUp(JSON.stringify({email, username, password}))
+            .then(() => signIn(JSON.stringify({username, password})))
+            .then(loginData => {
                 const jwt = loginData.token;
                 const expiresIn = loginData.expiresIn;
                 Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
                 handleIsOpen();
                 setIsAuthorised(true);
-            }).catch(error => console.error("Error: ", error));
-        })
-
+            .catch((error) => {
+                console.log("Failed to sign up: ", error);
+                setIsError(true);
+            })
     }
 
     return (
