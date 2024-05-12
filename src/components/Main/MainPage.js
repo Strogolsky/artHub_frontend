@@ -2,27 +2,24 @@ import { useEffect, useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
-import {getAllPosts} from "../../api/PostAPI";
+import SearchInput from "../Search/SearchInput";
 
 
-const MainPage = () => {
+const MainPage = ({search, fetchFunc}) => {
     const [posts, setPosts] = useState([]);
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-        getAllPosts()
+        fetchFunc()
             .then(data => setPosts(data))
             .catch(error => {
                 console.error("Error fetching posts: ", error);
                 setIsError(true);
             });
-
-    }, []);
+    }, [search]);
 
 
     const navigate = useNavigate();
-
-    const [searchText, setSearchText] = useState("");
     const [isAuthorised, setIsAuthorised] = useState(false);
 
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -40,14 +37,7 @@ const MainPage = () => {
                     <img alt="ArtHub logo" />
                 </div>
 
-                <div className="flex-grow text-center mx-auto">
-                    <input type="text"
-                        className="m-2 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light text-center"
-                        placeholder="Search"
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        style={{ width: '700px', height: '44px' }} />
-                </div>
+                <SearchInput initSearchText={search} />
 
                 {isAuthorised ? (
                     <div className="mr-3 relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
