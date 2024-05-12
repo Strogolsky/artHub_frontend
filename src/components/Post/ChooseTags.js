@@ -3,7 +3,7 @@ import {Dialog, DialogBody, DialogFooter, DialogHeader, select, Typography} from
 import CrossIcon from "../Icons/CrossIcon";
 import {createTags, getAllTags} from "../../api/TagAPI";
 
-const ChooseTags = ({tags, setTags}) => {
+const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedTags, setSelectedTags] = useState([])
     const [searchTagText, setSearchTagText] = useState('');
@@ -62,12 +62,13 @@ const ChooseTags = ({tags, setTags}) => {
     }
 
 
+    const btnClasses = buttonClasses || "m-2 bg-my-pink hover:bg-my-pink-light active:bg-my-pink-dark font-regular py-2 px-4 rounded-large";
+    const btnSize = buttonSize || {width: '384px', height: '40px'};
+
     return (
         <>
-            <button className="m-2 bg-my-pink hover:bg-my-pink-light active:bg-my-pink-dark font-regular py-2 px-4 rounded-large"
-                    style={{ width: '384px', height: '40px' }}
-                    onClick={handleIsOpen}>
-                Tags
+            <button className={btnClasses} style={btnSize} onClick={handleIsOpen}>
+                {buttonText}
             </button>
             <Dialog open={isOpen} handler={handleIsOpen} size="md">
                 <CrossIcon className="justify-self-start ml-3 mt-3 h-5 w-5" onClick={handleIsOpen} />
