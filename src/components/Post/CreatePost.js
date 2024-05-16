@@ -1,21 +1,41 @@
 import { useState } from 'react';
 import ChooseTags from "./ChooseTags";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {createPost} from "../../api/PostAPI";
+import {getFolderById, updateFolderById} from "../../api/FolderAPI";
 
 function CreatePost() {
     const navigate = useNavigate();
-
+    const location = useLocation();
     const [postTitle, setPostTitle] = useState("");
     const [postDescription, setPostDescription] = useState("");
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
+    const { folderId } = location.state || "";
+
+
+    const addPostToFolder = async (postId, folderId) => {
+        const folder = await getFolderById(folderId);
+
+        const folderData = {
+            title: folder.title,
+            description: folder.description,
+            postIds: [...folder.posts.map(post => parseInt(post.id)), parseInt(postId)]
+        };
+
+        await updateFolderById(folderId, folderData);
+    }
 
     const handleCreatePost = async () => {
         try {
             const createdPost = await createPost({postTitle, postDescription, selectedTags, selectedFile});
             console.log("Post successfully created", createdPost);
             navigate(`/post/${createdPost.id}`);
+
+            if (folderId) {
+                await addPostToFolder(createdPost.id, folderId);
+            }
+
         } catch (error) {
             console.log("Error creating post: ", error);
         //  todo handle errors
