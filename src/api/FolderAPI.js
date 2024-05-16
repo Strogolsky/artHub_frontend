@@ -72,8 +72,6 @@ const updateFolderById = async (folderId, folderData) => {
     if (!jwt)
         throw new Error("403 Forbidden");
 
-    const posts = folderData.posts ? folderData.posts.join(',') : '';
-
     const response = await fetch(url, {
         method: 'PUT',
         headers: {
@@ -83,7 +81,7 @@ const updateFolderById = async (folderId, folderData) => {
         body: JSON.stringify({
             title: folderData.title,
             description: folderData.description,
-            postIds: folderData.posts
+            postIds: folderData.posts || folderData.postIds
         })
     });
 
