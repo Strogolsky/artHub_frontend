@@ -8,6 +8,7 @@ import NotFound from '../NotFound';
 import Loading from '../Loading';
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
+import Logo from "../Logo";
 
 const ViewPost = () => {
     const navigate = useNavigate();
@@ -55,9 +56,7 @@ const ViewPost = () => {
     return (
         <div>
             <div className="flex justify-between items-center">
-                <div className="pl-2 flex-none">
-                    <img alt="ArtHub logo" />
-                </div>
+                <Logo />
 
                 <SearchInput />
 
