@@ -5,6 +5,8 @@ import NotFound from "../NotFound";
 import { getFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
+import ArtHubLogo from "../../resources/ArtHubLogo.svg"
+import Logo from "../Logo";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
@@ -31,9 +33,7 @@ const ViewFolder = () => {
     return (
         <div>
             <div className="flex justify-between items-center">
-                <div className="pl-2 flex-none">
-                    <img alt="ArtHub logo" />
-                </div>
+                <Logo />
 
                 <SearchInput />
 
