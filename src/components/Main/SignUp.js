@@ -26,6 +26,7 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                 Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
                 handleIsOpen();
                 setIsAuthorised(true);
+                window.location.reload();
             }).then(() => addPreferredTags(JSON.stringify(preferredTags)))
             .catch((error) => {
                 console.log("Failed to sign up: ", error);
