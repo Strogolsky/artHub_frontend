@@ -11,22 +11,9 @@ import Authorisation from "../Authorisation";
 
 const ViewPost = () => {
     const navigate = useNavigate();
-
     const { postId } = useParams();
-    const [searchText, setSearchText] = useState("");
-    const [isAuthorised, setIsAuthorised] = useState(false);
-    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-    const [isSignInOpen, setIsSignInOpen] = useState(false);
-    const [isAddToFolderOpen, setAddToFolderOpen] = useState(false);
     const [post, setPost] = useState(null);
-    const [error, setError] = useState(null);
-
-    const toggleAddToFolder = () => setAddToFolderOpen(!isAddToFolderOpen);
-
-    const swapOpen = () => {
-        setIsSignUpOpen((curr) => !curr);
-        setIsSignInOpen((curr) => !curr);
-    }
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getPostById(postId)
@@ -35,14 +22,12 @@ const ViewPost = () => {
             })
             .catch(error => {
                 console.error('Failed to load post:', error.message);
-                setError(error.message);
+                setIsError(true);
             });
     }, [postId]);
 
-    if (error === '404 Not Found') return <NotFound />;
+    if (isError) return <NotFound />;
     if (!post) return <Loading />;
-
-    const userId = post.patron.id;
 
     const imageAuthor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90oy1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
@@ -74,7 +59,9 @@ const ViewPost = () => {
                 <div className="w-1/2 flex justify-start flex-col items-left">
                     <div className="mx-12">
                         <div className="flex items-center space-x-4">
-                            <AddToFolder isOpen={isAddToFolderOpen} onClose={toggleAddToFolder} />
+
+                            <AddToFolder postId={postId} />
+
                             <button
                                 className="bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
                                 style={{ fontSize: '16px' }}
