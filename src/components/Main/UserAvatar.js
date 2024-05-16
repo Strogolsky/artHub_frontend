@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie";
 
 const UserAvatar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +9,12 @@ const UserAvatar = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    const signOut = () => {
+        Cookies.remove('jwt');
+        navigate('/');
+        window.location.reload();
+    }
 
     return (
         <div className="relative">
@@ -45,7 +52,8 @@ const UserAvatar = () => {
                         My posts
                     </li>
                     <li role="menuitem"
-                        className="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        className="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                        onClick={() => signOut()}>
                         Sign out
                     </li>
                 </ul>
