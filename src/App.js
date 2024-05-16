@@ -11,7 +11,6 @@ import ViewPost from "./components/Post/ViewPost";
 import ViewAccount from "./components/Account/ViewAccount";
 import ScrollToTop from "./components/ScrollToTop";
 import SearchPage from "./components/Search/SearchPage";
-import {getAllPosts} from "./api/PostAPI";
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/">
-            <Route index element={<MainPage search="" fetchFunc={getAllPosts} />} />
+            <Route index element={<MainPage />} />
             <Route path="account" element={<ViewAccount />} />
             <Route path="account/edit" element={<EditAccount />} />
             <Route path="post/create" element={<CreatePost />} />

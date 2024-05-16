@@ -1,19 +1,75 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import MainPage from "../Main/MainPage";
 import {searchPostsByPrompt} from "../../api/SearchAPI";
+import {useEffect, useState} from "react";
+import NotFound from "../NotFound";
+import SearchInput from "./SearchInput";
+import SignUp from "../Main/SignUp";
+import SignIn from "../Main/SignIn";
+import Authorisation from "../Authorisation";
 
 
 const SearchPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const searchParam = new URLSearchParams(location.search).get('s');
+    const [posts, setPosts] = useState([]);
+    const [isError, setIsError] = useState(false);
+    const [isAuthorised, setIsAuthorised] = useState(false);
+
+    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+    const [isSignInOpen, setIsSignInOpen] = useState(false);
+
+    const swapOpen = () => {
+        setIsSignUpOpen((curr) => !curr);
+        setIsSignInOpen((curr) => !curr);
+    }
 
     if (searchParam === '') {
         navigate('/');
     }
 
+    useEffect(() => {
+        searchPostsByPrompt(searchParam)
+            .then(data => setPosts(data))
+            .catch(error => {
+                console.error("Error searching posts: ", error);
+                setIsError(true);
+            })
+    }, [searchParam]);
+
+    if (isError) return <NotFound />
+
     return (
-        <MainPage search={searchParam} fetchFunc={() => searchPostsByPrompt(searchParam)} />
+        <div>
+            <div className="flex justify-between items-center">
+                <div className="pl-2 flex-none">
+                    <img alt="ArtHub logo"/>
+                </div>
+
+                <SearchInput initSearchText={searchParam}/>
+
+                <Authorisation />
+            </div>
+
+            <div className="mt-14 mb-10 flex justify-center">
+                <div className="text-center grid grid-cols-1 items-center justify-center md:grid-cols-2 lg:grid-cols-3">
+
+                    {posts.map((post, idx) => (
+                        <div key={idx} className="m-6" style={{width: '310px', height: '400px'}}>
+                            <div className="rounded-large flex justify-center items-center" style={{
+                                width: '300px',
+                                height: '385px'
+                            }}>
+                                <img key={post.id} className="hover:border-my-purple hover:cursor-pointer hover:border-4 object-cover rounded-large" alt={post.title} src={`data:image;base64,${post.image.data}`} onClick={() => navigate(`/post/${post.id}`)}/>
+                            </div>
+                            <p className="m-1">{post.title}</p>
+                        </div>
+                    ))}
+
+                </div>
+            </div>
+
+        </div>
     )
 }
 

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import UserAvatar from "../Main/UserAvatar";
 import { getFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
+import Authorisation from "../Authorisation";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const ViewFolder = () => {
 
                 <SearchInput />
 
-                <UserAvatar />
+                <Authorisation />
             </div>
 
             <div className="container text-center mx-auto mt-10" style={{ maxWidth: '30%' }}>

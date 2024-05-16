@@ -21,6 +21,7 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                 Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
                 handleIsOpen();
                 setIsAuthorised(true);
+                window.location.reload();
             }).catch((error) => {
                 console.log("Error signing in: ", error);
                 setIsError(true);

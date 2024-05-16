@@ -4,8 +4,8 @@ import { getUserAccount } from "../../api/AccountAPI";
 import NotFound from "../NotFound";
 import { getUserFolders } from "../../api/FolderAPI";
 import Loading from "../Loading";
-import UserAvatar from "../Main/UserAvatar";
 import SearchInput from "../Search/SearchInput";
+import Authorisation from "../Authorisation";
 
 const ViewAccount = () => {
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const ViewAccount = () => {
 
                 <SearchInput />
 
-                <UserAvatar />
+                <Authorisation />
             </div>
 
             <div className="container flex flex-col items-center justify-center mx-auto mt-10">
