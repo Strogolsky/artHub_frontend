@@ -1,9 +1,10 @@
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {getUserAccount} from "../../api/AccountAPI";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getUserAccount } from "../../api/AccountAPI";
 import NotFound from "../NotFound";
-import {getUserFolders} from "../../api/FolderAPI";
+import { getUserFolders } from "../../api/FolderAPI";
 import Loading from "../Loading";
+import UserAvatar from "../Main/UserAvatar";
 import SearchInput from "../Search/SearchInput";
 
 const ViewAccount = () => {
@@ -36,16 +37,12 @@ const ViewAccount = () => {
         <div>
             <div className="flex justify-between items-center">
                 <div className="pl-2 flex-none">
-                    <img alt="ArtHub logo"/>
+                    <img alt="ArtHub logo" />
                 </div>
 
                 <SearchInput />
 
-                <div className="mr-5 relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                    <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path>
-                    </svg>
-                </div>
+                <UserAvatar />
             </div>
 
             <div className="container flex flex-col items-center justify-center mx-auto mt-10">
@@ -53,18 +50,18 @@ const ViewAccount = () => {
                     {/* todo: add icon */}
                 </div>
 
-                <h1 className="mt-4" style={{fontWeight: 700, fontSize: '48px'}}>{username}</h1>
-                <p className="-mt-2" style={{color: '#8A8A8A', fontWeight: 400, fontSize: '16px'}}>{email}</p>
+                <h1 className="mt-4" style={{ fontWeight: 700, fontSize: '48px' }}>{username}</h1>
+                <p className="-mt-2" style={{ color: '#8A8A8A', fontWeight: 400, fontSize: '16px' }}>{email}</p>
 
                 <div>
                     <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large"
-                            style={{fontSize: '16px'}}
-                            onClick={() => navigate('edit')}>
+                        style={{ fontSize: '16px' }}
+                        onClick={() => navigate('edit')}>
                         Edit profile
                     </button>
                     <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large"
-                            style={{fontSize: '16px'}}
-                            onClick={() => navigate('/post/create')}>
+                        style={{ fontSize: '16px' }}
+                        onClick={() => navigate('/post/create')}>
                         Create post
                     </button>
                 </div>
@@ -73,19 +70,19 @@ const ViewAccount = () => {
             <div className="mt-14 mb-10 flex justify-center">
                 <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center">
 
-                    <div className="m-6" style={{width: '210px', height: '200px'}}>
+                    <div className="m-6" style={{ width: '210px', height: '200px' }}>
                         <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
-                                style={{width: '200px', height: '150px'}}
-                                onClick={() => navigate('/folder/create')}>
+                            style={{ width: '200px', height: '150px' }}
+                            onClick={() => navigate('/folder/create')}>
                             Add new folder
                         </button>
                     </div>
 
                     {userFolders.map((folder) => (
-                        <div key={folder.id} className="m-6" style={{width: '200px', height: '200px'}}>
+                        <div key={folder.id} className="m-6" style={{ width: '200px', height: '200px' }}>
                             <button className="bg-my-light-grey hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center"
-                                 style={{width: '200px', height: '150px'}}
-                                 onClick={() => navigate(`/folder/${folder.id}`)}/>
+                                style={{ width: '200px', height: '150px' }}
+                                onClick={() => navigate(`/folder/${folder.id}`)} />
                             <p className="mt-2">{folder.title}</p>
                         </div>
                     ))}
