@@ -1,25 +1,11 @@
 import { useEffect, useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import { useNavigate } from "react-router-dom";
 import SearchInput from "../Search/SearchInput";
+import InfiniteFeed from "./InfiniteFeed";
 
 
-const MainPage = ({search, fetchFunc}) => {
-    const [posts, setPosts] = useState([]);
-    const [isError, setIsError] = useState(false);
-
-    useEffect(() => {
-        fetchFunc()
-            .then(data => setPosts(data))
-            .catch(error => {
-                console.error("Error fetching posts: ", error);
-                setIsError(true);
-            });
-    }, [search]);
-
-
-    const navigate = useNavigate();
+const MainPage = () => {
     const [isAuthorised, setIsAuthorised] = useState(false);
 
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -37,7 +23,7 @@ const MainPage = ({search, fetchFunc}) => {
                     <img alt="ArtHub logo" />
                 </div>
 
-                <SearchInput initSearchText={search} />
+                <SearchInput />
 
                 {isAuthorised ? (
                     <div className="mr-3 relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -58,29 +44,10 @@ const MainPage = ({search, fetchFunc}) => {
                         <SignIn isOpen={isSignInOpen} setIsOpen={setIsSignInOpen} swapOpen={swapOpen} setIsAuthorised={setIsAuthorised} />
                     </div>
                 )}
-
-
             </div>
 
-            <div className="mt-14 mb-10 flex justify-center">
-                <div className="text-center grid grid-cols-1 items-center justify-center md:grid-cols-2 lg:grid-cols-3">
+            <InfiniteFeed />
 
-                    {posts.map((post) => (
-                        <div key={post.id} className="m-6" style={{ width: '310px', height: '400px' }}>
-                            <div className="rounded-large flex justify-center items-center"
-                                style={{ width: '300px', height: '385px' }}>
-                                <img key={post.id}
-                                    className="hover:border-my-purple hover:cursor-pointer hover:border-4 object-cover rounded-large"
-                                    alt={post.title}
-                                    src={`data:image;base64,${post.image.data}`}
-                                    onClick={() => navigate(`/post/${post.id}`)} />
-                            </div>
-                            <p className="m-1">{post.title}</p>
-                        </div>
-                    ))}
-
-                </div>
-            </div>
         </div>
     )
 }
