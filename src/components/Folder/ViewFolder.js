@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import {getFolderById} from "../../api/FolderAPI";
+import { getFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 
@@ -32,7 +32,7 @@ const ViewFolder = () => {
         <div>
             <div className="flex justify-between items-center">
                 <div className="pl-2 flex-none">
-                    <img alt="ArtHub logo"/>
+                    <img alt="ArtHub logo" />
                 </div>
 
                 <SearchInput />
@@ -40,15 +40,15 @@ const ViewFolder = () => {
                 <Authorisation />
             </div>
 
-            <div className="container text-center mx-auto mt-10" style={{maxWidth: '30%'}}>
-                <h1 style={{fontWeight: 700, fontSize: '48px'}}>{folderData.title}</h1>
-                <p className="text-center" style={{fontWeight: 400, fontSize: '14px'}}>
+            <div className="container text-center mx-auto mt-10" style={{ maxWidth: '30%' }}>
+                <h1 style={{ fontWeight: 700, fontSize: '48px' }}>{folderData.title}</h1>
+                <p className="text-center" style={{ fontWeight: 400, fontSize: '14px' }}>
                     {folderData.description}
                 </p>
 
                 <button className="mt-5 bg-my-purple p-3 rounded-large"
-                        style={{fontSize: '16px'}}
-                        onClick={() => navigate('edit')}>
+                    style={{ fontSize: '16px' }}
+                    onClick={() => navigate('edit')}>
                     Edit folder
                 </button>
             </div>
@@ -56,22 +56,22 @@ const ViewFolder = () => {
             <div className="mt-14 mb-10 flex justify-center">
                 <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center">
 
-                    <div className="m-6" style={{width: '210px', height: '200px'}}>
+                    <div className="m-6" style={{ width: '210px', height: '200px' }}>
                         <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
-                                style={{width: '200px', height: '150px'}}
-                                onClick={() => navigate('/post/create')}>
+                            style={{ width: '200px', height: '150px' }}
+                            onClick={() => navigate('/post/create')}>
                             Add new post
                         </button>
                     </div>
 
                     {folderData.posts.map((post) => (
-                        <div key={post.id} className="m-6" style={{width: '210px', height: '200px'}}>
-                            <div className="rounded-large flex justify-center items-center" style={{width: '200px', height: '150px'}}>
-                                <img style={{width: '200px', height: '150px'}}
-                                     className="object-cover hover:border-my-purple hover:border-4 hover:cursor-pointer rounded-large"
-                                     alt={post.title}
-                                     src={`data:image;base64,${post.image.data}`}
-                                     onClick={() => navigate(`/post/${post.id}`)}/>
+                        <div key={post.id} className="m-6" style={{ width: '210px', height: '200px' }}>
+                            <div className="rounded-large flex justify-center items-center" style={{ width: '200px', height: '150px' }}>
+                                <img style={{ width: '200px', height: '150px' }}
+                                    className="object-cover hover:border-my-purple hover:border-4 hover:cursor-pointer rounded-large"
+                                    alt={post.title}
+                                    src={`data:image;base64,${post.image.data}`}
+                                    onClick={() => navigate(`/post/${post.id}`)} />
                             </div>
                             <p className="mt-1">{post.title}</p>
                         </div>
