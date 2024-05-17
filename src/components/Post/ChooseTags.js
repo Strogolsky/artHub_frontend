@@ -13,7 +13,7 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
     const handleIsOpen = () => setIsOpen(curr => !curr);
     const handleChosenTags = (newTag) => {
         if (newTag.trim().length !== 0) {
-            setSelectedTags((curr) => [...curr, newTag.trim()]);
+            !selectedTags.includes(newTag) && setSelectedTags((curr) => [...curr, newTag.trim()]);
             setSearchTagText('');
         }
     }
