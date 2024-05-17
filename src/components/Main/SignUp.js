@@ -6,14 +6,14 @@ import {signUp} from "../../api/AuthAPI";
 import {signIn} from "../../api/AuthAPI";
 import ChooseTags from "../Post/ChooseTags";
 import {addPreferredTags} from "../../api/AccountAPI";
+import {useNavigate} from "react-router-dom";
 
 const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isError, setIsError] = useState(false);
-
-    const [preferredTags, setPreferredTags] = useState([])
+    const navigate = useNavigate();
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
 
@@ -26,9 +26,8 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                 Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
                 handleIsOpen();
                 setIsAuthorised(true);
-                window.location.reload();
-            }).then(() => addPreferredTags(JSON.stringify(preferredTags)))
-            .catch((error) => {
+                navigate('/account/edit/tags');
+            }).catch((error) => {
                 console.log("Failed to sign up: ", error);
                 setIsError(true);
             })
@@ -56,14 +55,6 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                         <div className="m-5"></div>
 
                         <Input value={password} type="password" label="Password" size="lg" onChange={(e) => setPassword(e.target.value)} />
-
-                        <div className="m-5"></div>
-
-                        <ChooseTags buttonSize={{width: '100%', height: '40px'}}
-                                    buttonClasses="text-black bg-my-pink hover:bg-my-pink-light active:bg-my-pink-dark font-regular py-2 px-4 rounded-large"
-                                    buttonText="Select preferred tags"
-                                    tags={[]}
-                                    setTags={(tags) => setPreferredTags(tags)} />
                     </CardBody>
 
                     <CardFooter>
