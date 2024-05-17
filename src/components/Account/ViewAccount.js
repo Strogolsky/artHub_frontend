@@ -59,7 +59,7 @@ const ViewAccount = () => {
                     <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large"
                         style={{ fontSize: '16px' }}
                         onClick={() => navigate('edit')}>
-                        Edit profile
+                        Edit account
                     </button>
                     <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large"
                         style={{ fontSize: '16px' }}
