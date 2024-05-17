@@ -13,7 +13,7 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
     const handleIsOpen = () => setIsOpen(curr => !curr);
     const handleChosenTags = (newTag) => {
         if (newTag.trim().length !== 0) {
-            setSelectedTags((curr) => [...curr, newTag.trim()]);
+            !selectedTags.includes(newTag) && setSelectedTags((curr) => [...curr, newTag.trim()]);
             setSearchTagText('');
         }
     }
@@ -65,6 +65,12 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
     const btnClasses = buttonClasses || "m-2 bg-my-pink hover:bg-my-pink-light active:bg-my-pink-dark font-regular py-2 px-4 rounded-large";
     const btnSize = buttonSize || {width: '384px', height: '40px'};
 
+    const handlePressKey = (event) => {
+        if (event.key === 'Enter') {
+            handleChosenTags(searchTagText)
+        }
+    }
+
     return (
         <>
             <button className={btnClasses} style={btnSize} onClick={handleIsOpen}>
@@ -86,7 +92,9 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
                                placeholder="Search for tag"
                                value={searchTagText}
                                onChange={(e) => setSearchTagText(e.target.value)}
-                               style={{ width: '60%', }}/>
+                               style={{ width: '60%', }}
+                               onKeyDown={handlePressKey}
+                        />
 
                         <button onClick={() => handleChosenTags(searchTagText)}
                                 className="kanit-regular ml-7 bg-my-purple-light rounded-large p-2 text-black">
