@@ -24,7 +24,7 @@ const PreferredTags = () => {
 
     const handleChosenTags = (newTag) => {
         if (newTag.trim().length !== 0) {
-            !selectedTags.includes(newTag) && setSelectedTags((curr) => [...curr, newTag.trim()]);
+            !selectedTags.includes(newTag.trim()) && setSelectedTags((curr) => [...curr, newTag.trim()]);
             setSearchTagText('');
         }
     }
