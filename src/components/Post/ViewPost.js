@@ -8,7 +8,7 @@ import NotFound from '../NotFound';
 import Loading from '../Loading';
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import AnotherUserIcon from '../imageViews/AnotherUserIcon';
+import AnotherUserIcon from '../ImageViews/AnotherUserIcon';
 import Logo from "../ImageViews/Logo";
 
 const ViewPost = () => {
