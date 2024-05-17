@@ -109,9 +109,9 @@ const PreferredTags = () => {
             </div>
 
             <div className="flex justify-center">
-                <div className="items-center bg-my-light-grey rounded-large h-96" style={{width: "25%"}}>
+                <div className="items-center bg-my-light-grey rounded-large overflow-auto h-96" style={{width: "25%"}}>
                     <h3 className="text-center text-2xl m-1 mb-2">Selected tags</h3>
-                    <div className="rounded-large flex flex-wrap overflow-auto pb-3" style={{}}>
+                    <div className="rounded-large flex flex-wrap pb-3" style={{}}>
 
                         {userPreferredTags.map((tag) =>
                             <div key={tag.id}
@@ -133,9 +133,9 @@ const PreferredTags = () => {
                     </div>
                 </div>
 
-                <div className="ml-7 items-center bg-my-light-grey rounded-large h-96" style={{width: "25%"}}>
+                <div className="ml-7 items-center bg-my-light-grey overflow-auto rounded-large h-96" style={{width: "25%"}}>
                     <h3 className="text-center text-2xl m-1 mb-2">Tags to select</h3>
-                    <div className="rounded-large flex flex-wrap overflow-auto pb-3">
+                    <div className="rounded-large flex flex-wrap pb-3">
                         {allTags.map((tag) =>
                             (!selectedTags.includes(tag.name) && !userPreferredTags.map(tag => tag.name).includes(tag.name) &&
                                 <div key={tag.id}
