@@ -75,7 +75,7 @@ const ViewPost = () => {
                             <button className="px-2 bg-my-light-grey hover:bg-my-purple-light active:bg-my-purple-dark rounded-large flex items-center"
                                 style={{ width: '320px', height: '60px' }}
                                 onClick={() => navigate(`/account`)}>
-                                <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                                <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden relative">
                                     <AnotherUserIcon />
                                 </div>
                                 <p className="ml-4 text-xl text-left font-bold" style={{ fontSize: '14px' }}>

@@ -5,25 +5,16 @@ const Logo = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="relative overflow-hidden cursor-pointer"
-            onClick={() => navigate('/')}
+        <img className="object-cover absolute"
+            src={Alien}
+            alt="Another user icon"
             style={{
-                width: '80px',
-                height: '50px',
-                borderRadius: '15%'
-            }}>
-
-            <img className="object-cover absolute"
-                src={Alien}
-                alt="Another user icon"
-                style={{
-                    top: '55%',
-                    left: '23%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '100%',
-                    height: '100%',
-                }} />
-        </div>
+                top: '60%',
+                left: '47%',
+                transform: 'translate(-50%, -50%)',
+                width: '200%',
+                height: '200%',
+            }} />
     )
 }
 
