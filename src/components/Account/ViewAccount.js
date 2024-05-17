@@ -82,7 +82,7 @@ const ViewAccount = () => {
 
                     {userFolders.map((folder) => (
                         <div key={folder.id} className="m-6" style={{ width: '200px', height: '200px' }}>
-                            <button className=" hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center relative "
+                            <button className="rounded-large flex justify-center items-center relative "
                                 style={{ width: '200px', height: '150px' }}
                                 onClick={() => navigate(`/folder/${folder.id}`)}>
                                 <FolderIcon />
