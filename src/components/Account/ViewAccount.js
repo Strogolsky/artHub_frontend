@@ -6,9 +6,8 @@ import { getUserFolders } from "../../api/FolderAPI";
 import Loading from "../Loading";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import ArtHubLogo from "../../resources/ArtHubLogo.svg"
-import Logo from "../Logo";
-import UserIcon from "../UserIcon"
+import Logo from "../ImageViews/Logo";
+import UserIcon from "../ImageViews/UserIcon"
 
 const ViewAccount = () => {
     const navigate = useNavigate();

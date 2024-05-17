@@ -5,8 +5,7 @@ import NotFound from "../NotFound";
 import { getFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import ArtHubLogo from "../../resources/ArtHubLogo.svg"
-import Logo from "../Logo";
+import Logo from "../ImageViews/Logo";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
@@ -58,7 +57,7 @@ const ViewFolder = () => {
                     <div className="m-6" style={{ width: '210px', height: '200px' }}>
                         <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
                             style={{ width: '200px', height: '150px' }}
-                            onClick={() => navigate('/post/create', {state: {folderId}})}>
+                            onClick={() => navigate('/post/create', { state: { folderId } })}>
                             Add new post
                         </button>
                     </div>

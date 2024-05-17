@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
-import UserIcon from "../UserIcon"
+import UserIcon from "../ImageViews/UserIcon"
 
 const UserAvatar = () => {
     const [isOpen, setIsOpen] = useState(false);

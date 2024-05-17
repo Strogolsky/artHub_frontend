@@ -1,22 +1,21 @@
-import Cosmonaut from "../resources/Cosmonaut.svg"
+import Alien from "../../resources/Alien.svg"
 import { useNavigate } from "react-router-dom";
 
-const UserIcon = () => {
+const AnotherUserIcon = () => {
     const navigate = useNavigate();
 
     return (
-
         <img className="object-cover absolute"
-            src={Cosmonaut}
-            alt="User icon"
+            src={Alien}
+            alt="Another user icon"
             style={{
                 top: '60%',
-                left: '48%',
+                left: '47%',
                 transform: 'translate(-50%, -50%)',
-                width: '220%',
-                height: '220%',
+                width: '200%',
+                height: '200%',
             }} />
     )
 }
 
-export default UserIcon;
+export default AnotherUserIcon;

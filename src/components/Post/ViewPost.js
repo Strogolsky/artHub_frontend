@@ -8,8 +8,8 @@ import NotFound from '../NotFound';
 import Loading from '../Loading';
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import AnotherUserIcon from "../AnotherUserIcon"
-import Logo from "../Logo";
+import AnotherUserIcon from '../imageViews/AnotherUserIcon';
+import Logo from "../ImageViews/Logo";
 
 const ViewPost = () => {
     const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import SearchInput from "../Search/SearchInput";
 import InfiniteFeed from "./InfiniteFeed";
 import Authorisation from "../Authorisation";
-import Logo from "../Logo";
+import Logo from "../ImageViews/Logo";
 
 
 const MainPage = () => {
