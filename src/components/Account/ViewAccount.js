@@ -8,6 +8,7 @@ import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 import Logo from "../ImageViews/Logo";
 import UserIcon from "../ImageViews/UserIcon"
+import FolderIcon from "../ImageViews/FolderIcon";
 
 const ViewAccount = () => {
     const navigate = useNavigate();
@@ -81,9 +82,11 @@ const ViewAccount = () => {
 
                     {userFolders.map((folder) => (
                         <div key={folder.id} className="m-6" style={{ width: '200px', height: '200px' }}>
-                            <button className="bg-my-light-grey hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center"
+                            <button className=" hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center relative "
                                 style={{ width: '200px', height: '150px' }}
-                                onClick={() => navigate(`/folder/${folder.id}`)} />
+                                onClick={() => navigate(`/folder/${folder.id}`)}>
+                                <FolderIcon />
+                            </button>
                             <p className="mt-2">{folder.title}</p>
                         </div>
                     ))}
