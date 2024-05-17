@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import { getFolderById } from "../../api/FolderAPI";
+import {getFolderById, updateFolderById} from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 import Logo from "../ImageViews/Logo";
+import ImageWithCross from "./ImageWithCross";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const ViewFolder = () => {
 
     const [folderData, setFolderData] = useState();
     const [isError, setIsError] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
 
     useEffect(() => {
         getFolderById(folderId)
@@ -22,7 +24,20 @@ const ViewFolder = () => {
                 console.error("Error fetching data:", error);
                 setIsError(true);
             })
-    }, [folderId]);
+    }, [folderId, isUpdated]);
+
+    const handleDeletePostFromFolder = async (postIdToDelete) => {
+        const newPostIds = folderData.posts.map(post => post.id).filter(id => id !== postIdToDelete)
+
+        const newFolderData = {
+            title: folderData.title,
+            description: folderData.description,
+            postIds: newPostIds
+        }
+
+        await updateFolderById(folderId, newFolderData);
+        setIsUpdated((curr) => !curr);
+    }
 
 
     if (isError) return <NotFound />
@@ -65,12 +80,9 @@ const ViewFolder = () => {
                     {folderData.posts.map((post) => (
                         <div key={post.id} className="m-6" style={{ width: '210px', height: '200px' }}>
                             <div className="rounded-large flex justify-center items-center" style={{ width: '200px', height: '150px' }}>
-                                <img style={{ width: '200px', height: '150px' }}
-                                    className="object-cover hover:border-my-purple hover:border-4 hover:cursor-pointer rounded-large"
-                                    alt={post.title}
-                                    src={`data:image;base64,${post.image.data}`}
-                                    onClick={() => navigate(`/post/${post.id}`)} />
+                                <ImageWithCross post={post} handleDeletePostFromFolder={() => handleDeletePostFromFolder(post.id)} />
                             </div>
+
                             <p className="mt-1">{post.title}</p>
                         </div>
                     ))}
