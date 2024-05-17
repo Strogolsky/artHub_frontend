@@ -53,7 +53,7 @@ function EditAccount() {
                     Back
                 </button>
             </div>
-            <div className="flex flex-col items-center justify-center h-screen">
+            <div className="flex flex-col items-center justify-center pt-24">
                 <h1 className="m-10 kanit-bold text-base" style={{ fontSize: '48px' }}>
                     Edit Account
                 </h1>
@@ -84,6 +84,16 @@ function EditAccount() {
                            onChange={(e) => setPassword(e.target.value)}
                            style={{ width: '400px', height: '40px' }} />
                 </div>
+
+                <div className="pb-5">
+                    <button className="my-1 mx-4 bg-my-pink-dark py-2 px-5 rounded-large text-base"
+                            style={{ fontSize: '18px', width: "400px" }}
+                            onClick={() => navigate('tags')}
+                    >
+                        Choose preferred tags
+                    </button>
+                </div>
+
                 <div className="flex">
                     <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base"
                             style={{ fontSize: '24px' }}
@@ -91,7 +101,7 @@ function EditAccount() {
                         Delete
                     </button>
                     <button className="cursor-not-allowed my-1 mx-4 bg-my-purple-light py-3 px-5 rounded-large text-base"
-                        style={{ fontSize: '24px' }}>
+                            style={{ fontSize: '24px' }}>
                         Edit
                     </button>
                 </div>
