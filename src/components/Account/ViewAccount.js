@@ -6,8 +6,8 @@ import { getUserFolders } from "../../api/FolderAPI";
 import Loading from "../Loading";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import ArtHubLogo from "../../resources/ArtHubLogo.svg"
-import Logo from "../Logo";
+import Logo from "../ImageViews/Logo";
+import UserIcon from "../ImageViews/UserIcon"
 
 const ViewAccount = () => {
     const navigate = useNavigate();
@@ -47,8 +47,8 @@ const ViewAccount = () => {
             </div>
 
             <div className="container flex flex-col items-center justify-center mx-auto mt-10">
-                <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center">
-                    {/* todo: add icon */}
+                <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center relative overflow-hidden">
+                    <UserIcon />
                 </div>
 
                 <h1 className="mt-4" style={{ fontWeight: 700, fontSize: '48px' }}>{username}</h1>
