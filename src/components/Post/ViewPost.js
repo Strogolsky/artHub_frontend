@@ -8,6 +8,7 @@ import NotFound from '../NotFound';
 import Loading from '../Loading';
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
+import AnotherUserIcon from "../AnotherUserIcon"
 import Logo from "../Logo";
 
 const ViewPost = () => {
@@ -51,9 +52,9 @@ const ViewPost = () => {
             <div className="flex justify-center items-center h-screen">
                 <div className="w-1/2 flex justify-end">
                     <img src={`data:image;base64,${imageData}`}
-                         className="object-cover rounded-large"
-                         alt="Selected Post"
-                         style={{ maxWidth: '90%', maxHeight: '85vh' }} />
+                        className="object-cover rounded-large"
+                        alt="Selected Post"
+                        style={{ maxWidth: '90%', maxHeight: '85vh' }} />
                 </div>
                 <div className="w-1/2 flex justify-start flex-col items-left">
                     <div className="mx-12">
@@ -75,7 +76,7 @@ const ViewPost = () => {
                                 style={{ width: '320px', height: '60px' }}
                                 onClick={() => navigate(`/account`)}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
-                                    <img src={imageAuthor} alt="Profile" className="w-full h-full object-cover" />
+                                    <AnotherUserIcon />
                                 </div>
                                 <p className="ml-4 text-xl text-left font-bold" style={{ fontSize: '14px' }}>
                                     {postAuthor}
