@@ -3,7 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {deleteFolderById, getFolderById, updateFolderById} from "../../api/FolderAPI";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import {deletePostById} from "../../api/PostAPI";
+import {getUserAccount} from "../../api/AccountAPI";
 
 function EditFolder() {
     const navigate = useNavigate();
@@ -13,10 +13,12 @@ function EditFolder() {
     const [folderData, setFolderData] = useState({
         title: '',
         description: '',
-        posts: []
+        posts: [],
+        patronId: -1
     });
 
     const [isError, setIsError] = useState(false);
+    const [userId, setUserId] = useState(-1);
 
     useEffect(() => {
         getFolderById(folderId)
@@ -24,17 +26,26 @@ function EditFolder() {
                 setFolderData({
                     title: data.title || '',
                     description: data.description || '',
-                    posts: data.posts.map((post) => post.id) || []
+                    posts: data.posts.map((post) => post.id) || [],
+                    patronId: data.patron.id
                 })
             })
             .catch((error) => {
                 setIsError(true);
                 console.log("Error getting folder: ", error);
             })
+
+        getUserAccount()
+            .then(data => setUserId(data.id))
+            .catch(error => {
+                console.error("Error getting user data: ", error);
+                setIsError(true);
+            })
     }, [folderId]);
 
     if (isError) return <NotFound />
-    if (!folderData) return <Loading />
+    if (userId === -1 || folderData.patronId === -1) return <Loading />
+
 
     const handleChange = (e) => {
         setFolderData({
@@ -62,6 +73,8 @@ function EditFolder() {
             console.log("Failed to delete folder: ", error);
         }
     }
+
+    if (userId !== folderData.patronId) return <NotFound />
 
     return (
         <div>
