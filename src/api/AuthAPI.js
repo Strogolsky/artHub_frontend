@@ -30,7 +30,11 @@ const signUp = async (credentials) => {
     })
 
     if (!response.ok) {
-        throw new Error("500 Internal Server Error");
+        if (response.status == 409) {
+            throw new Error("A user with this name mail already exists");
+        } else {
+            throw new Error("500 Internal Server Error");
+        }
     }
 
     return await response.json();
