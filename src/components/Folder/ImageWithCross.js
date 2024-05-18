@@ -2,7 +2,7 @@ import CrossIcon from "../Icons/CrossIcon";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-const ImageWithCross = ({post, handleDeletePostFromFolder}) => {
+const ImageWithCross = ({post, handleDeletePostFromFolder, block}) => {
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const ImageWithCross = ({post, handleDeletePostFromFolder}) => {
                  onClick={() => navigate(`/post/${post.id}`)}
             />
 
-            {isHovered &&
+            {isHovered && !block &&
                 <CrossIcon className="absolute cursor-pointer top-2 right-2 w-6 h-6 bg-my-light-grey bg-opacity-70 hover:bg-opacity-100"
                            style={{"borderRadius": "50%"}}
                            onClick={handleDeletePostFromFolder}
