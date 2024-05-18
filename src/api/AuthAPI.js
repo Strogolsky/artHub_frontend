@@ -12,7 +12,11 @@ const signIn = async (credentials) => {
     });
 
     if (!response.ok) {
-        throw new Error("500 Internal Server Error");
+        if (response.status == 401) {
+            throw new Error("Invalid login or password");
+        } else {
+            throw new Error("500 Internal Server Error");
+        }
     }
 
     return await response.json();
