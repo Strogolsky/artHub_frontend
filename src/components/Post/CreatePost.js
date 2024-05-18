@@ -50,7 +50,8 @@ function CreatePost() {
 
         } catch (error) {
             console.log("Error creating post: ", error);
-            setModalMessages(error);
+            errorMessages.push(error);
+            setModalMessages(errorMessages);
             setModalIsOpen(true);
             return;
         }
