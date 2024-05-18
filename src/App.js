@@ -11,6 +11,7 @@ import ViewPost from "./components/Post/ViewPost";
 import ViewAccount from "./components/Account/ViewAccount";
 import ScrollToTop from "./components/ScrollToTop";
 import SearchPage from "./components/Search/SearchPage";
+import PreferredTags from "./components/Account/PreferredTags";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="account" element={<ViewAccount />} />
             <Route path="account/edit" element={<EditAccount />} />
+            <Route path="account/edit/tags" element={<PreferredTags />} />
             <Route path="post/create" element={<CreatePost />} />
             <Route path="post/:postId" element={<ViewPost />} />
             <Route path="post/:postId/edit" element={<EditPost />} />

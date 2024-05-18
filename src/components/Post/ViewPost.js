@@ -8,6 +8,8 @@ import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 import Logo from "../Logo";
 import {getUserAccount} from "../../api/AccountAPI";
+import AnotherUserIcon from '../ImageViews/AnotherUserIcon';
+import Logo from "../ImageViews/Logo";
 
 const ViewPost = () => {
     const navigate = useNavigate();
@@ -60,9 +62,9 @@ const ViewPost = () => {
             <div className="flex justify-center items-center h-screen">
                 <div className="w-1/2 flex justify-end">
                     <img src={`data:image;base64,${imageData}`}
-                         className="object-cover rounded-large"
-                         alt="Selected Post"
-                         style={{ maxWidth: '90%', maxHeight: '85vh' }} />
+                        className="object-cover rounded-large"
+                        alt="Selected Post"
+                        style={{ maxWidth: '90%', maxHeight: '85vh' }} />
                 </div>
                 <div className="w-1/2 flex justify-start flex-col items-left">
                     <div className="mx-12">
@@ -87,8 +89,8 @@ const ViewPost = () => {
                             <div className={`${userId === post.patron.id ? "hover:bg-my-purple-light active:bg-my-purple-dark cursor-pointer" : ""} px-2 bg-my-light-grey rounded-large flex items-center`}
                                 style={{ width: '320px', height: '60px' }}
                                 onClick={() => {if (userId === post.patron.id) navigate(`/account`)}}>
-                                <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
-                                    <img src={imageAuthor} alt="Profile" className="w-full h-full object-cover" />
+                                <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden relative">
+                                    <AnotherUserIcon />
                                 </div>
                                 <p className="ml-4 text-xl text-left font-bold" style={{ fontSize: '14px' }}>
                                     {postAuthor}

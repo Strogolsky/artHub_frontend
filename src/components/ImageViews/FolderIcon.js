@@ -1,0 +1,22 @@
+import Icon from "../../resources/FolderIcon.svg"
+import { useNavigate } from "react-router-dom";
+
+const FolderIcon = () => {
+    const navigate = useNavigate();
+
+    return (
+
+        <img className="object-cover absolute"
+            src={Icon}
+            alt="User icon"
+            style={{
+                top: '55%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '220%',
+                height: '220%',
+            }} />
+    )
+}
+
+export default FolderIcon;

@@ -6,8 +6,9 @@ import { getUserFolders } from "../../api/FolderAPI";
 import Loading from "../Loading";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import ArtHubLogo from "../../resources/ArtHubLogo.svg"
-import Logo from "../Logo";
+import Logo from "../ImageViews/Logo";
+import UserIcon from "../ImageViews/UserIcon"
+import FolderIcon from "../ImageViews/FolderIcon";
 
 const ViewAccount = () => {
     const navigate = useNavigate();
@@ -47,8 +48,8 @@ const ViewAccount = () => {
             </div>
 
             <div className="container flex flex-col items-center justify-center mx-auto mt-10">
-                <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center">
-                    {/* todo: add icon */}
+                <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center relative overflow-hidden">
+                    <UserIcon />
                 </div>
 
                 <h1 className="mt-4" style={{ fontWeight: 700, fontSize: '48px' }}>{username}</h1>
@@ -58,7 +59,7 @@ const ViewAccount = () => {
                     <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large"
                         style={{ fontSize: '16px' }}
                         onClick={() => navigate('edit')}>
-                        Edit profile
+                        Edit account
                     </button>
                     <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large"
                         style={{ fontSize: '16px' }}
@@ -81,9 +82,11 @@ const ViewAccount = () => {
 
                     {userFolders.map((folder) => (
                         <div key={folder.id} className="m-6" style={{ width: '200px', height: '200px' }}>
-                            <button className="bg-my-light-grey hover:border-my-purple hover:border-4 rounded-large flex justify-center items-center"
+                            <button className="rounded-large flex justify-center items-center relative "
                                 style={{ width: '200px', height: '150px' }}
-                                onClick={() => navigate(`/folder/${folder.id}`)} />
+                                onClick={() => navigate(`/folder/${folder.id}`)}>
+                                <FolderIcon />
+                            </button>
                             <p className="mt-2">{folder.title}</p>
                         </div>
                     ))}
