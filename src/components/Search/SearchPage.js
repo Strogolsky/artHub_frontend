@@ -3,10 +3,9 @@ import { searchPostsByPrompt } from "../../api/SearchAPI";
 import { useEffect, useState } from "react";
 import NotFound from "../NotFound";
 import SearchInput from "./SearchInput";
-import SignUp from "../Main/SignUp";
-import SignIn from "../Main/SignIn";
 import Authorisation from "../Authorisation"
 import Logo from "../ImageViews/Logo";
+import Loading from "../Loading";
 
 
 const SearchPage = () => {
@@ -15,15 +14,7 @@ const SearchPage = () => {
     const searchParam = new URLSearchParams(location.search).get('s');
     const [posts, setPosts] = useState([]);
     const [isError, setIsError] = useState(false);
-    const [isAuthorised, setIsAuthorised] = useState(false);
-
-    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-    const [isSignInOpen, setIsSignInOpen] = useState(false);
-
-    const swapOpen = () => {
-        setIsSignUpOpen((curr) => !curr);
-        setIsSignInOpen((curr) => !curr);
-    }
+    const [isFinished, setIsFinished] = useState(false);
 
     if (searchParam === '') {
         navigate('/');
@@ -31,7 +22,10 @@ const SearchPage = () => {
 
     useEffect(() => {
         searchPostsByPrompt(searchParam)
-            .then(data => setPosts(data))
+            .then(data => {
+                setPosts(data);
+                setIsFinished(true);
+            })
             .catch(error => {
                 console.error("Error searching posts: ", error);
                 setIsError(true);
@@ -39,6 +33,7 @@ const SearchPage = () => {
     }, [searchParam]);
 
     if (isError) return <NotFound />
+    if (!isFinished) return <Loading />
 
     return (
         <div>
