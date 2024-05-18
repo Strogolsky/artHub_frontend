@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import ChooseTags from "./ChooseTags";
-import {useLocation, useNavigate} from "react-router-dom";
-import {createPost} from "../../api/PostAPI";
-import {getFolderById, updateFolderById} from "../../api/FolderAPI";
+import { useLocation, useNavigate } from "react-router-dom";
+import { createPost } from "../../api/PostAPI";
+import { getFolderById, updateFolderById } from "../../api/FolderAPI";
+import Modal from "../Modal.js";
 
 function CreatePost() {
     const navigate = useNavigate();
@@ -11,8 +12,9 @@ function CreatePost() {
     const [postDescription, setPostDescription] = useState("");
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalMessages, setModalMessages] = useState([]);
     const { folderId } = location.state || "";
-
 
     const addPostToFolder = async (postId, folderId) => {
         const folder = await getFolderById(folderId);
@@ -27,8 +29,18 @@ function CreatePost() {
     }
 
     const handleCreatePost = async () => {
+        const errorMessages = [];
+        if (!postTitle) errorMessages.push("Please fill in the title.");
+        if (!selectedFile) errorMessages.push("Please upload an image.");
+
+        if (errorMessages.length > 0) {
+            setModalMessages(errorMessages);
+            setModalIsOpen(true);
+            return;
+        }
+
         try {
-            const createdPost = await createPost({postTitle, postDescription, selectedTags, selectedFile});
+            const createdPost = await createPost({ postTitle, postDescription, selectedTags, selectedFile });
             console.log("Post successfully created", createdPost);
             navigate(`/post/${createdPost.id}`);
 
@@ -38,8 +50,15 @@ function CreatePost() {
 
         } catch (error) {
             console.log("Error creating post: ", error);
-        //  todo handle errors
+            errorMessages.push(error);
+            setModalMessages(errorMessages);
+            setModalIsOpen(true);
+            return;
         }
+    }
+
+    const closeModal = () => {
+        setModalIsOpen(false);
     }
 
     return (
@@ -62,7 +81,7 @@ function CreatePost() {
                         />
                         <div className="m-2 bg-my-light-grey font-regular h-96 w-96 py-2 px-4 rounded-large flex items-center justify-center cursor-pointer"
                             style={{ height: '500px' }}>
-                            <span className=" font-color-my-light-grey">Select file</span>
+                            <span className="font-color-my-light-grey">Select file</span>
                         </div>
                     </div>
                 </div>
@@ -74,7 +93,7 @@ function CreatePost() {
                     <div>
                         <input type="text"
                             className="m-2 bg-my-light-grey h-10 w-96 py-2 px-4 rounded-large focus:outline-my-purple-light"
-                            placeholder="Title"
+                            placeholder="*Title"
                             value={postTitle}
                             onChange={(e) => setPostTitle(e.target.value)} />
                     </div>
@@ -100,6 +119,11 @@ function CreatePost() {
                 </div>
             </div>
 
+            <Modal
+                isOpen={modalIsOpen}
+                onClose={closeModal}
+                messages={modalMessages}
+            />
         </div>
     );
 }
