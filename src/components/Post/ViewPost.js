@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import SignIn from "../Main/SignIn";
-import SignUp from "../Main/SignUp";
 import AddToFolder from "../Folder/AddToFolder";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPostById } from "../../api/PostAPI";
@@ -9,12 +7,14 @@ import Loading from '../Loading';
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 import Logo from "../Logo";
+import {getUserAccount} from "../../api/AccountAPI";
 
 const ViewPost = () => {
     const navigate = useNavigate();
     const { postId } = useParams();
     const [post, setPost] = useState(null);
     const [isError, setIsError] = useState(false);
+    const [userId, setUserId] = useState(-1);
 
     useEffect(() => {
         getPostById(postId)
@@ -25,6 +25,15 @@ const ViewPost = () => {
                 console.error('Failed to load post:', error.message);
                 setIsError(true);
             });
+
+        getUserAccount()
+            .then(data => {
+                setUserId(data.id)
+            })
+            .catch(error => {
+                console.error("Failed to get user account: ", error);
+                setIsError(true);
+            })
     }, [postId]);
 
     if (isError) return <NotFound />;
@@ -61,26 +70,32 @@ const ViewPost = () => {
 
                             <AddToFolder postId={postId} />
 
-                            <button
-                                className="bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
-                                style={{ fontSize: '16px' }}
-                                onClick={() => navigate('edit')}
-                            >
-                                Edit
-                            </button>
+                            {userId === post.patron.id &&
+                                <button
+                                    className="bg-my-purple hover:bg-my-purple-light font-regular py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
+                                    style={{ fontSize: '16px' }}
+                                    onClick={() => navigate('edit')}>
+                                    Edit
+                                </button>
+                            }
+
                         </div>
                         <p className="my-5 text-xl text-left font-bold" style={{ fontSize: '36px' }}>{postTitle}</p>
                         <div className="flex items-center">
-                            <button className="px-2 bg-my-light-grey hover:bg-my-purple-light active:bg-my-purple-dark rounded-large flex items-center"
+
+
+                            <div className={`${userId === post.patron.id ? "hover:bg-my-purple-light active:bg-my-purple-dark cursor-pointer" : ""} px-2 bg-my-light-grey rounded-large flex items-center`}
                                 style={{ width: '320px', height: '60px' }}
-                                onClick={() => navigate(`/account`)}>
+                                onClick={() => {if (userId === post.patron.id) navigate(`/account`)}}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
                                     <img src={imageAuthor} alt="Profile" className="w-full h-full object-cover" />
                                 </div>
                                 <p className="ml-4 text-xl text-left font-bold" style={{ fontSize: '14px' }}>
                                     {postAuthor}
                                 </p>
-                            </button>
+                            </div>
+
+
                             <div className="flex-shrink-0 h-12 w-12 rounded-full overflow-hidden ml-2">
                                 <button className="w-full h-full object-cover bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark" />
                             </div>
