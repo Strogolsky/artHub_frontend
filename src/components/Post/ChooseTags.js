@@ -107,7 +107,7 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
 
                             {selectedTags.map((tag, idx) =>
                                 <div key={idx}
-                                     className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink-dark text-center w-auto"
+                                     className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
                                      style={{height: 'fit-content'}}
                                      onClick={() => removeSelectedTag(tag)}>
                                     {tag}
@@ -117,7 +117,7 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
                             {allTags.map((tag) =>
                                 (!selectedTags.includes(tag.name) &&
                                     <div key={tag.id}
-                                         className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
+                                         className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-purple-light text-center w-auto"
                                          style={{height: 'fit-content'}}
                                          onClick={() => addSelectedTag(tag.name)}>
                                         {tag.name}
