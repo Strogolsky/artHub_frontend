@@ -9,12 +9,22 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [password, setPassword] = useState("");
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isUsernameError, setIsUsernameError] = useState(false);
+    const [isPasswordError, setIsPasswordError] = useState(false);
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
 
-    const [userData, setUserData] = useState();
-
     const handleSignIn = () => {
+        if (username.trim().length === 0) {
+            setIsUsernameError(true);
+            return;
+        }
+
+        if (password.length === 0) {
+            setIsPasswordError(true);
+            return;
+        }
+
         signIn(JSON.stringify({ username, password }))
             .then(data => {
                 const jwt = data.token;
@@ -36,6 +46,32 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
         handleIsOpen();
     };
 
+    const handleUsernameInput = (event) => {
+        if (isError) {
+            setIsError(false);
+            setErrorMessage("");
+        }
+
+        if (isUsernameError) {
+            setIsUsernameError(false);
+        }
+
+        setUsername(event.target.value)
+    }
+
+    const handlePasswordInput = (event) => {
+        if (isError) {
+            setIsError(false);
+            setErrorMessage("");
+        }
+
+        if (isPasswordError) {
+            setIsPasswordError(false);
+        }
+
+        setPassword(event.target.value);
+    }
+
     return (
         <div>
             <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black" style={{ textTransform: 'initial', fontSize: '16px' }} onClick={handleIsOpen}>Sign In</Button>
@@ -50,18 +86,30 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                         </div>
                         {isError && (
                             <div>
-                                <div className="flex justify-center bg-red-500 text-white p-2 rounded-md">
+                                <div className="flex text-center justify-center bg-red-500 text-white p-2 rounded-md">
                                     {errorMessage}
                                 </div>
                                 <div className="m-5"></div>
                             </div>
                         )}
 
-                        <Input value={username} type="username" label="Username" size="lg" onChange={(e) => setUsername(e.target.value)} />
+                        <Input value={username}
+                               type="username"
+                               label="Username"
+                               size="lg"
+                               onChange={(e) => handleUsernameInput(e)}
+                               error={isUsernameError}
+                        />
 
                         <div className="m-5"></div>
 
-                        <Input value={password} type="password" label="Password" size="lg" onChange={(e) => setPassword(e.target.value)} />
+                        <Input value={password}
+                               type="password"
+                               label="Password"
+                               size="lg"
+                               onChange={(e) => handlePasswordInput(e)}
+                               error={isPasswordError}
+                        />
                     </CardBody>
 
                     <CardFooter>

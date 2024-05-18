@@ -4,8 +4,6 @@ import CrossIcon from "../Icons/CrossIcon";
 import Cookies from "js-cookie";
 import { signUp } from "../../api/AuthAPI";
 import { signIn } from "../../api/AuthAPI";
-import ChooseTags from "../Post/ChooseTags";
-import { addPreferredTags } from "../../api/AccountAPI";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
@@ -15,10 +13,31 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
+    const [isUsernameError, setIsUsernameError] = useState(false);
+    const [isEmailError, setIsEmailError] = useState(false);
+    const [isPasswordError, setIsPasswordError] = useState(false);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
 
     const handleSignUp = () => {
+
+        if (username.trim().length === 0) {
+            setIsUsernameError(true);
+            return;
+        }
+
+        if (email.trim().length === 0 || !emailRegex.test(email)) {
+            setIsEmailError(true);
+            return;
+        }
+
+        if (password.length === 0) {
+            setIsPasswordError(true);
+            return;
+        }
+
         signUp(JSON.stringify({ email, username, password }))
             .then(() => signIn(JSON.stringify({ username, password })))
             .then(loginData => {
@@ -41,6 +60,45 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
         handleIsOpen();
     };
 
+    const handleUsernameInput = (event) => {
+        if (isError) {
+            setIsError(false);
+            setErrorMessage("");
+        }
+
+        if (isUsernameError) {
+            setIsUsernameError(false);
+        }
+
+        setUsername(event.target.value);
+    }
+
+    const handleEmailInput = (event) => {
+        if (isError) {
+            setIsError(false);
+            setErrorMessage("");
+        }
+
+        if (isEmailError) {
+            setIsEmailError(false);
+        }
+
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordInput = (event) => {
+        if (isError) {
+            setIsError(false);
+            setErrorMessage("");
+        }
+
+        if (isPasswordError) {
+            setIsPasswordError(false);
+        }
+
+        setPassword(event.target.value);
+    }
+
     return (
         <div>
             <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black" style={{ textTransform: 'initial', fontSize: '16px' }} onClick={handleIsOpen}>Sign Up</Button>
@@ -53,23 +111,41 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                                 Create account
                             </Typography>
                         </div>
+
                         {isError && (
                             <div>
-                                <div className="flex justify-center bg-red-500 text-white p-2 rounded-md">
+                                <div className="flex text-center justify-center bg-red-500 text-white p-2 rounded-md">
                                     {errorMessage}
                                 </div>
                                 <div className="m-5"></div>
                             </div>
                         )}
-                        <Input value={username} label="Username" size="lg" onChange={(e) => setUsername(e.target.value)} />
+
+                        <Input value={username}
+                               label="Username"
+                               size="lg"
+                               onChange={(e) => handleUsernameInput(e)}
+                               error={isUsernameError}
+                        />
 
                         <div className="m-5"></div>
 
-                        <Input value={email} type="email" label="Email" size="lg" onChange={(e) => setEmail(e.target.value)} />
+                        <Input value={email}
+                               type="email"
+                               label="Email"
+                               size="lg"
+                               onChange={(e) => handleEmailInput(e)}
+                               error={isEmailError}
+                        />
 
                         <div className="m-5"></div>
 
-                        <Input value={password} type="password" label="Password" size="lg" onChange={(e) => setPassword(e.target.value)} />
+                        <Input value={password}
+                               type="password"
+                               label="Password"
+                               size="lg"
+                               error={isPasswordError}
+                               onChange={(e) => handlePasswordInput(e)} />
                     </CardBody>
 
                     <CardFooter>
