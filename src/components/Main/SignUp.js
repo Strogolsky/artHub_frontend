@@ -2,50 +2,65 @@ import { Button, Card, CardBody, CardFooter, Dialog, Input, Typography } from "@
 import { useState } from "react";
 import CrossIcon from "../Icons/CrossIcon";
 import Cookies from "js-cookie";
-import {signUp} from "../../api/AuthAPI";
-import {signIn} from "../../api/AuthAPI";
+import { signUp } from "../../api/AuthAPI";
+import { signIn } from "../../api/AuthAPI";
 import ChooseTags from "../Post/ChooseTags";
-import {addPreferredTags} from "../../api/AccountAPI";
-import {useNavigate} from "react-router-dom";
+import { addPreferredTags } from "../../api/AccountAPI";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
 
     const handleIsOpen = () => setIsOpen((cur) => !cur);
 
     const handleSignUp = () => {
-        signUp(JSON.stringify({email, username, password}))
-            .then(() => signIn(JSON.stringify({username, password})))
+        signUp(JSON.stringify({ email, username, password }))
+            .then(() => signIn(JSON.stringify({ username, password })))
             .then(loginData => {
                 const jwt = loginData.token;
                 const expiresIn = loginData.expiresIn;
-                Cookies.set('jwt', jwt, {expires: new Date(Date.now() + expiresIn)});
-                handleIsOpen();
+                Cookies.set('jwt', jwt, { expires: new Date(Date.now() + expiresIn) });
+                handleCloseDialog();
                 setIsAuthorised(true);
                 navigate('/account/edit/tags');
             }).catch((error) => {
+                setErrorMessage(error.message);
                 console.log("Failed to sign up: ", error);
                 setIsError(true);
             })
     }
 
+    const handleCloseDialog = () => {
+        setIsError(false);
+        setErrorMessage("");
+        handleIsOpen();
+    };
+
     return (
         <div>
             <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black" style={{ textTransform: 'initial', fontSize: '16px' }} onClick={handleIsOpen}>Sign Up</Button>
-            <Dialog size="xs" open={isOpen} handler={handleIsOpen} className="bg-transparent shadow-none">
+            <Dialog size="xs" open={isOpen} handler={handleCloseDialog} className="bg-transparent shadow-none">
                 <Card className="flex flex-col gap-4">
                     <CardBody>
                         <div className="flex flex-col">
-                            <CrossIcon className="mr-3 h-5 w-5" onClick={handleIsOpen} />
+                            <CrossIcon className="mr-3 h-5 w-5" onClick={handleCloseDialog} />
                             <Typography className="kanit-bold flex justify-center mb-7" variant="h2" color="blue-gray">
                                 Create account
                             </Typography>
                         </div>
-
+                        {isError && (
+                            <div>
+                                <div className="flex justify-center bg-red-500 text-white p-2 rounded-md">
+                                    {errorMessage}
+                                </div>
+                                <div className="m-5"></div>
+                            </div>
+                        )}
                         <Input value={username} label="Username" size="lg" onChange={(e) => setUsername(e.target.value)} />
 
                         <div className="m-5"></div>
