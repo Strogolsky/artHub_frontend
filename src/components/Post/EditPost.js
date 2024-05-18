@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ChooseTags from './ChooseTags';
 import {deletePostById, getPostById, updatePostById} from "../../api/PostAPI";
 import NotFound from "../NotFound";
+import {getUserAccount} from "../../api/AccountAPI";
+import Loading from "../Loading";
 
 function EditPost() {
     const navigate = useNavigate();
@@ -13,9 +15,11 @@ function EditPost() {
         description: '',
         tagsId: [],
         file: '',
+        patronId: -1
     });
     
     const [isError, setIsError] = useState(false);
+    const [userId, setUserId] = useState(-1);
 
     useEffect(() => {
         if (postId) {
@@ -25,11 +29,19 @@ function EditPost() {
                     description: data.description || '',
                     tagsId: data.tags.map(tag => tag.id) || [],
                     file: data.image.data || '',
+                    patronId: data.patron.id
                 });
             }).catch(error => {
                 console.error('Error fetching post data:', error);
                 setIsError(true);
             });
+
+            getUserAccount()
+                .then(data => setUserId(data.id))
+                .catch(error => {
+                    console.error("Error getting user account: ", error);
+                    setIsError(true);
+                })
         }
     }, [postId, navigate]);
 
@@ -63,6 +75,8 @@ function EditPost() {
     }
 
     if (isError) return <NotFound />
+    if (postData.patronId === -1 || userId === -1) return <Loading />
+    if (userId !== postData.patronId) return <NotFound />
 
     return (
         <div>
