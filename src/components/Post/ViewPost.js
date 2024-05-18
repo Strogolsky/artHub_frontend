@@ -6,10 +6,10 @@ import NotFound from '../NotFound';
 import Loading from '../Loading';
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
-import Logo from "../Logo";
 import {getUserAccount} from "../../api/AccountAPI";
 import AnotherUserIcon from '../ImageViews/AnotherUserIcon';
 import Logo from "../ImageViews/Logo";
+import UserIcon from "../ImageViews/UserIcon";
 
 const ViewPost = () => {
     const navigate = useNavigate();
@@ -40,8 +40,6 @@ const ViewPost = () => {
 
     if (isError) return <NotFound />;
     if (!post) return <Loading />;
-
-    const imageAuthor = "https://images.unsplash.com/photo-1576174464184-fb78fe882bfd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90oy1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     const postTitle = post.title || 'No title available';
     const postAuthor = post.patron ? post.patron.username : 'Unknown Author';
@@ -90,7 +88,7 @@ const ViewPost = () => {
                                 style={{ width: '320px', height: '60px' }}
                                 onClick={() => {if (userId === post.patron.id) navigate(`/account`)}}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden relative">
-                                    <AnotherUserIcon />
+                                    {userId === post.patron.id ? <UserIcon /> : <AnotherUserIcon />}
                                 </div>
                                 <p className="ml-4 text-xl text-left font-bold" style={{ fontSize: '14px' }}>
                                     {postAuthor}
