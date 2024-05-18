@@ -12,7 +12,11 @@ const signIn = async (credentials) => {
     });
 
     if (!response.ok) {
-        throw new Error("500 Internal Server Error");
+        if (response.status === 401) {
+            throw new Error("Invalid login or password");
+        } else {
+            throw new Error("500 Internal Server Error");
+        }
     }
 
     return await response.json();
@@ -30,7 +34,11 @@ const signUp = async (credentials) => {
     })
 
     if (!response.ok) {
-        throw new Error("500 Internal Server Error");
+        if (response.status === 409) {
+            throw new Error("A user with this username or email already exists");
+        } else {
+            throw new Error("500 Internal Server Error");
+        }
     }
 
     return await response.json();
