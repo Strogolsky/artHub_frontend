@@ -29,13 +29,17 @@ docker-compose build
 ## Step 3: Start the Frontend Service
 Start the frontend service using Docker Compose:
 
-```sh
-docker-compose up```
+```
+sh
+docker-compose up
+```
 
 The frontend application will be available at http://localhost:3000.
 
 ## Step 4: Stop the Frontend Service
 To stop the frontend service, press Ctrl+C in the terminal where the service is running or run:
 
-```sh
-docker-compose down```
+```
+sh
+docker-compose down
+```
