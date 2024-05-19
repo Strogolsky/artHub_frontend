@@ -12,6 +12,7 @@ import ViewAccount from "./components/Account/ViewAccount";
 import ScrollToTop from "./components/ScrollToTop";
 import SearchPage from "./components/Search/SearchPage";
 import PreferredTags from "./components/Account/PreferredTags";
+import ViewCreatedPosts from './components/Folder/ViewCreatedPosts';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="post/:postId" element={<ViewPost />} />
             <Route path="post/:postId/edit" element={<EditPost />} />
             <Route path="folder/:folderId" element={<ViewFolder />} />
+            <Route path="post/created" element={<ViewCreatedPosts />} />
             <Route path="folder/:folderId/edit" element={<EditFolder />} />
             <Route path="folder/create" element={<CreateFolder />} />
             <Route path="search" element={<SearchPage />} />
