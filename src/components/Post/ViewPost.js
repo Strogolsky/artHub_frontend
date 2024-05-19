@@ -85,7 +85,7 @@ const ViewPost = () => {
 
 
                             <div className={`${userId === post.patron.id ? "hover:bg-my-purple-light active:bg-my-purple-dark cursor-pointer" : ""} px-2 bg-my-light-grey rounded-large flex items-center`}
-                                style={{ width: '320px', height: '60px' }}
+                                style={{ width: '380px', height: '60px' }}
                                 onClick={() => {if (userId === post.patron.id) navigate(`/account`)}}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden relative">
                                     {userId === post.patron.id ? <UserIcon /> : <AnotherUserIcon />}
@@ -96,9 +96,9 @@ const ViewPost = () => {
                             </div>
 
 
-                            <div className="flex-shrink-0 h-12 w-12 rounded-full overflow-hidden ml-2">
-                                <button className="w-full h-full object-cover bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark" />
-                            </div>
+                            {/*<div className="flex-shrink-0 h-12 w-12 rounded-full overflow-hidden ml-2">*/}
+                            {/*    <button className="w-full h-full object-cover bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark" />*/}
+                            {/*</div>*/}
                         </div>
                         <div className="my-4 rounded-large bg-my-light-grey" style={{ width: '380px', height: '195px' }}>
                             <p className="p-2 kanit" style={{ fontSize: '12px' }}>{description}</p>
