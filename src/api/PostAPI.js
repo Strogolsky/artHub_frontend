@@ -3,7 +3,12 @@ import Cookies from "js-cookie";
 const POST_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/posts`
 
 const getAllPosts = async () => {
-    const response = await fetch(POST_URL);
+    const jwt = Cookies.get('jwt');
+    const options = {};
+    if (jwt)
+        options.headers = {'Authorization': `Bearer ${jwt}`}
+
+    const response = await fetch(POST_URL, options);
 
     if (!response.ok) {
         if (response.status === 404) {
@@ -19,38 +24,37 @@ const getPostById = async (postId) => {
     const url = `${POST_URL}/${postId}`;
     const jwt = Cookies.get('jwt');
 
-    try {
-        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${jwt}` } });
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error('404 Not Found');
-            }
-            throw new Error('Network response was not ok');
+    const options = {};
+    if (jwt)
+        options.headers = {'Authorization': `Bearer ${jwt}`}
+
+    const response = await fetch(url, options);
+    if (!response.ok) {
+        if (response.status === 404) {
+            throw new Error('404 Not Found');
         }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
+        throw new Error('Network response was not ok');
     }
+
+    return await response.json();
 }
 
 const getPostsByPatronId = async (userId) => {
     const url = `${POST_URL}/user/${userId}`;
     const jwt = Cookies.get('jwt');
 
-    try {
-        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${jwt}` } });
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error('404 Not Found');
-            }
-            throw new Error('Network response was not ok');
+    const options = {};
+    if (jwt)
+        options.headers = {'Authorization': `Bearer ${jwt}`}
+
+    const response = await fetch(url, options);
+    if (!response.ok) {
+        if (response.status === 404) {
+            throw new Error('404 Not Found');
         }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
+        throw new Error('Network response was not ok');
     }
+    return await response.json();
 }
 
 const b64toBlob = (b64Data) => {

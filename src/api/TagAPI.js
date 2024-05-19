@@ -5,10 +5,12 @@ const TAG_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP
 const getAllTags = async () => {
     const jwt = Cookies.get('jwt');
 
-    if (!jwt)
-        throw new Error("403 Forbidden")
+    const options = {};
+    if (jwt)
+        options.headers = {'Authorization': `Bearer ${jwt}`}
 
-    const response = await fetch(TAG_URL, {headers: {'Authorization': `Bearer ${jwt}`}});
+    const response = await fetch(TAG_URL, options);
+
     if (!response.ok) {
         if (response.status === 403) {
             throw new Error("403 Forbidden");
