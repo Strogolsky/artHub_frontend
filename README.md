@@ -14,13 +14,16 @@ Make sure you have the following installed on your local machine:
 
 Clone the repository containing the frontend application code to your local machine:
 
-```git clone https://gitlab.fit.cvut.cz/gordeser/arthub_frontend
-cd Arthub_frontend```
+```
+git clone https://gitlab.fit.cvut.cz/gordeser/arthub_frontend
+cd Arthub_frontend
+```
 
 ## Step 2: Build the Docker Image
 Build the Docker image for the frontend service by running:
 
-```docker-compose build
+```
+docker-compose build
 ```
 
 ## Step 3: Start the Frontend Service
