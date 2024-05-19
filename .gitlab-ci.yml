@@ -1,0 +1,34 @@
+stages:
+  - install
+  - build
+
+variables:
+  NODE_ENV: 'production'
+  # Cache dependencies to speed up subsequent builds
+  CACHE_DIR: node_modules
+
+cache:
+  paths:
+    - $CACHE_DIR
+
+install_dependencies:
+  stage: install
+  image: node:18 # Use the official Node.js image
+  script:
+    - npm ci # Clean install dependencies
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 week
+
+build:
+  stage: build
+  image: node:18
+  script:
+    - export CI=false
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
