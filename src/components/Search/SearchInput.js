@@ -7,7 +7,8 @@ const SearchInput = ({initSearchText}) => {
 
     const handlePressKey = (event) => {
         if (event.key === 'Enter') {
-            navigate(`/search?s=${encodeURIComponent(searchText)}`, {state: {searchText}});
+            const trimmedSearchText = searchText.trim();
+            navigate(`/search?s=${encodeURIComponent(trimmedSearchText)}`, {state: {trimmedSearchText}});
         }
     }
 

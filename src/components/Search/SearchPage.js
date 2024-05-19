@@ -11,7 +11,7 @@ import Loading from "../Loading";
 const SearchPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const searchParam = new URLSearchParams(location.search).get('s');
+    const searchParam = new URLSearchParams(location.search).get('s').trim();
     const [posts, setPosts] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
