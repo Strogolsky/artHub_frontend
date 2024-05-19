@@ -1,19 +1,19 @@
 import Cookies from "js-cookie";
 
-const RECOMMENDATION_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/recommendations/posts`
+const RECOMMENDATION_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/recommendations`
 
-const getRecommendedPosts = async (page, size) => {
-    const url = `${RECOMMENDATION_URL}?page=${page}&size=${size}`;
-    const jwt = Cookies.get('jwt');
+const getRecommendedPosts = async (page, size, isGuest) => {
+    const url = `${RECOMMENDATION_URL}/${isGuest ? 'guest' : 'posts'}?page=${page}&size=${size}`;
 
-    if (!jwt)
-        throw new Error("403 Forbidden");
-
-    const response = await fetch(url, {
-        headers: {
+    const options = {};
+    if (!isGuest) {
+        const jwt = Cookies.get('jwt');
+        options.headers = {
             'Authorization': `Bearer ${jwt}`
-        }
-    });
+        };
+    }
+
+    const response = await fetch(url, options);
 
     if (!response.ok) {
         if (response.status === 403)

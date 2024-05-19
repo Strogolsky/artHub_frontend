@@ -4,7 +4,6 @@ import Authorisation from "../Authorisation";
 import Logo from "../ImageViews/Logo";
 import {useState} from "react";
 import Loading from "../Loading";
-import AllPosts from "./AllPosts";
 
 
 const MainPage = () => {
@@ -22,9 +21,7 @@ const MainPage = () => {
 
             {isAuthed === undefined
                 ? <Loading />
-                : (isAuthed === true
-                    ? <InfiniteFeed />
-                    : <AllPosts />)
+                : <InfiniteFeed isGuest={!isAuthed} />
             }
         </div>
     )
