@@ -80,6 +80,14 @@ const ViewAccount = () => {
                         </button>
                     </div>
 
+                    <div className="m-6" style={{ width: '210px', height: '200px' }}>
+                        <button className="bg-my-light-grey hover:bg-my-purple-light hover:border-my-purple-dark hover:border-2 rounded-large flex justify-center items-center"
+                            style={{ width: '200px', height: '150px' }}
+                            onClick={() => navigate('/post/created')}>
+                            My posts
+                        </button>
+                    </div>
+
                     {userFolders.map((folder) => (
                         <div key={folder.id} className="m-6" style={{ width: '200px', height: '200px' }}>
                             <button className="rounded-large flex justify-center items-center relative "

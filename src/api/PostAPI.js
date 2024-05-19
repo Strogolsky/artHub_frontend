@@ -20,7 +20,26 @@ const getPostById = async (postId) => {
     const jwt = Cookies.get('jwt');
 
     try {
-        const response = await fetch(url, {headers: {'Authorization': `Bearer ${jwt}`}});
+        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${jwt}` } });
+        if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error('404 Not Found');
+            }
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
+const getPostsByPatronId = async (userId) => {
+    const url = `${POST_URL}/user/${userId}`;
+    const jwt = Cookies.get('jwt');
+
+    try {
+        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${jwt}` } });
         if (!response.ok) {
             if (response.status === 404) {
                 throw new Error('404 Not Found');
@@ -82,7 +101,7 @@ const deletePostById = async (postId) => {
     if (!jwt)
         throw new Error("403 Forbidden");
 
-    const response = await fetch(url, {method: 'DELETE', headers: {'Authorization': `Bearer ${jwt}`}});
+    const response = await fetch(url, { method: 'DELETE', headers: { 'Authorization': `Bearer ${jwt}` } });
     if (!response.ok) {
         if (response.status === 403) {
             throw new Error("403 Forbidden");
@@ -124,4 +143,4 @@ const createPost = async (postData) => {
     return await response.json();
 }
 
-export { getPostById, updatePostById, deletePostById, createPost, getAllPosts };
+export { getPostById, updatePostById, deletePostById, createPost, getAllPosts, getPostsByPatronId };
