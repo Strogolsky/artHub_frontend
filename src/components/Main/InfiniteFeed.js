@@ -6,7 +6,7 @@ import NotFound from "../NotFound";
 import PostsSection from "./PostsSection";
 
 
-const InfiniteFeed = () => {
+const InfiniteFeed = ({isGuest}) => {
     const [posts, setPosts] = useState([]);
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);
@@ -19,7 +19,7 @@ const InfiniteFeed = () => {
 
     const fetchPosts = async (pageToFetch) => {
         try {
-            const data = await getRecommendedPosts(pageToFetch, size);
+            const data = await getRecommendedPosts(pageToFetch, size, isGuest);
 
             setPosts(prevPosts => [...prevPosts, ...data.content]);
 
