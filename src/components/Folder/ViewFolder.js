@@ -30,9 +30,8 @@ const ViewFolder = () => {
 
         getUserAccount()
             .then(data => setUserId(data.id))
-            .catch(error => {
-                console.error("Error fetching data: ", error);
-                setIsError(true);
+            .catch(_ => {
+                setUserId(-2);
             })
     }, [folderId, isUpdated]);
 

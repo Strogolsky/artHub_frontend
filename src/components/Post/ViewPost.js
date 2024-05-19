@@ -32,9 +32,8 @@ const ViewPost = () => {
             .then(data => {
                 setUserId(data.id)
             })
-            .catch(error => {
-                console.error("Failed to get user account: ", error);
-                setIsError(true);
+            .catch(_ => {
+                setUserId(-2);
             })
     }, [postId]);
 
@@ -68,7 +67,7 @@ const ViewPost = () => {
                     <div className="mx-12">
                         <div className="flex items-center space-x-4">
 
-                            <AddToFolder postId={postId} />
+                            {userId !== -2 && <AddToFolder postId={postId} />}
 
                             {userId === post.patron.id &&
                                 <button
