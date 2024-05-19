@@ -4,7 +4,7 @@ import SignUp from "./Main/SignUp";
 import SignIn from "./Main/SignIn";
 import UserAvatar from "./Main/UserAvatar";
 
-const Authorisation = () => {
+const Authorisation = ({setIsAuthedParent}) => {
     const [isAuthorised, setIsAuthorised] = useState(false);
 
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -19,8 +19,10 @@ const Authorisation = () => {
         try {
             await getUserAccount();
             setIsAuthorised(true);
+            setIsAuthedParent && setIsAuthedParent(true);
         } catch (_) {
             setIsAuthorised(false);
+            setIsAuthedParent && setIsAuthedParent(false);
         }
     }
 
