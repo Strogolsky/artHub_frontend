@@ -9,8 +9,8 @@ services:
       - ./src:/app/src
     build: .
     environment:
-      FAST_REFRESH: false
-      WATCHPACK_POLLING: true
+      FAST_REFRESH: 0
+      WATCHPACK_POLLING: 1
     ports:
       - "3000:3000"
     command: npm start
