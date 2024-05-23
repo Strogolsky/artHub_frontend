@@ -15,7 +15,7 @@ const SearchInput = ({initSearchText}) => {
     return (
         <div className="flex-grow text-center mx-auto">
             <input type="text"
-                   className="m-2 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light text-center"
+                   className="bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light text-center"
                    placeholder="Search"
                    value={searchText}
                    onChange={(e) => setSearchText(e.target.value)}

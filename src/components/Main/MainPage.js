@@ -14,7 +14,7 @@ const MainPage = () => {
             <div className="flex justify-between items-center">
                 <Logo />
 
-                <SearchInput />
+                {isAuthed !== undefined && isAuthed && <SearchInput />}
 
                 <Authorisation setIsAuthedParent={setIsAuthed} />
             </div>

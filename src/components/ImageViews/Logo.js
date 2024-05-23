@@ -5,7 +5,7 @@ const Logo = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="relative overflow-hidden cursor-pointer"
+        <div className="relative overflow-hidden cursor-pointer mt-2"
             onClick={() => navigate('/')}
             style={{
                 width: '100px',

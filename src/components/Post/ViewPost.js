@@ -51,7 +51,7 @@ const ViewPost = () => {
             <div className="flex justify-between items-center">
                 <Logo />
 
-                <SearchInput />
+                {userId !== -1 && userId !== -2 && <SearchInput />}
 
                 <Authorisation />
             </div>
