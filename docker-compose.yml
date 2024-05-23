@@ -2,15 +2,24 @@ version: "3.8"
 
 services:
   frontend:
-    container_name: frontend
+    container_name: arthub_frontend
     restart: always
     volumes:
       - /app/node_modules
       - ./src:/app/src
     build: .
     environment:
-      FAST_REFRESH: 0
-      WATCHPACK_POLLING: 1
+      - FAST_REFRESH=0
+      - WATCHPACK_POLLING=1
+      - REACT_APP_API_URL=backend_server
+      - REACT_APP_API_PORT=8080
     ports:
       - "3000:3000"
+    networks:
+      - frontend_network
     command: npm start
+
+
+networks:
+  frontend_network:
+    external: true
