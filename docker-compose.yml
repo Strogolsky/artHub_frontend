@@ -11,15 +11,8 @@ services:
     environment:
       - FAST_REFRESH=0
       - WATCHPACK_POLLING=1
-      - REACT_APP_API_URL=backend_server
+      - REACT_APP_API_URL=localhost
       - REACT_APP_API_PORT=8080
     ports:
       - "3000:3000"
-    networks:
-      - frontend_network
     command: npm start
-
-
-networks:
-  frontend_network:
-    external: true
