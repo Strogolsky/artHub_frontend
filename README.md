@@ -19,9 +19,8 @@ git clone https://gitlab.fit.cvut.cz/gordeser/arthub_frontend
 cd Arthub_frontend
 ```
 
-## Step 2: Set URL and port
-1. Open the `.env` file in the root of project
-2. Update the values of `REACT_APP_API_URL` and `REACT_APP_API_PORT` to match the backend server's URL and port
+## Step 2: Set backend URL and port
+Update the values of `REACT_APP_API_URL` and `REACT_APP_API_PORT` in `docker-compose.yml` file to match the backend server's URL and port
 
 ## Step 3: Build the Docker Image
 Build the Docker image for the frontend service by running:
