@@ -65,4 +65,36 @@ const addPreferredTags = async (preferredTags) => {
     return await response.json();
 }
 
-export { getUserAccount, deleteUserAccount, addPreferredTags };
+const updateUserAccount = async (username, email) => {
+    const url = `${ACCOUNT_URL}`;
+    const jwt = Cookies.get('jwt');
+
+    if (!jwt)
+        throw new Error("403 Forbidden");
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify({username, email}),
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (!response.ok) {
+        if (response.status === 409) {
+            const responseText = await response.text();
+
+            if (responseText.includes("username")) {
+                throw new Error("A user with this username already exists");
+            } else if (responseText.includes("email")) {
+                throw new Error("A user with this email already exists");
+            }
+        }
+        throw new Error("500 Internal Server Error");
+    }
+
+    return await response.json();
+}
+
+export { getUserAccount, deleteUserAccount, addPreferredTags, updateUserAccount };
