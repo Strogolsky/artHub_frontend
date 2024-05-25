@@ -20,7 +20,7 @@ const getUserAccount = async () => {
 }
 
 const deleteUserAccount = async () => {
-    const url = `${ACCOUNT_URL}/delete`;
+    const url = `${ACCOUNT_URL}`;
     const jwt = Cookies.get('jwt');
 
     if (!jwt)
