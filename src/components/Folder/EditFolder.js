@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
-import {deleteFolderById, getFolderById, updateFolderById} from "../../api/FolderAPI";
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
+import { deleteFolderById, getFolderById, updateFolderById } from "../../api/FolderAPI";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import {getUserAccount} from "../../api/AccountAPI";
+import { getUserAccount } from "../../api/AccountAPI";
 
 function EditFolder() {
     const navigate = useNavigate();
@@ -80,41 +80,41 @@ function EditFolder() {
         <div>
             <div>
                 <button className="m-3 bg-my-purple hover:bg-my-purple-light py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                        style={{fontSize: '16px'}}
-                        onClick={() => navigate(-1)}>
+                    style={{ fontSize: '16px' }}
+                    onClick={() => navigate(-1)}>
                     Back
                 </button>
             </div>
             <div className="flex flex-col items-center justify-center h-screen">
-                <h1 className="m-10 kanit-bold text-base" style={{fontSize: '48px'}}>
+                <h1 className="m-10 kanit-bold text-base" style={{ fontSize: '48px' }}>
                     Edit Folder
                 </h1>
                 <div>
                     <input type="text"
-                           className="m-2 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
-                           placeholder="Title"
-                           name="title"
-                           value={folderData.title}
-                           onChange={handleChange}
-                           style={{ width: '400px', height: '40px' }}/>
+                        className="m-2 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
+                        placeholder="Title"
+                        name="title"
+                        value={folderData.title}
+                        onChange={handleChange}
+                        style={{ width: '400px', height: '40px' }} />
                 </div>
                 <div>
                     <textarea className="m-4 bg-my-light-grey h-40 w-96 py-2 px-4 rounded-large resize-none focus:outline-my-purple-light"
-                              placeholder="Description"
-                              name="description"
-                              value={folderData.description}
-                              onChange={handleChange}
-                              style={{width: '400px'}}/>
+                        placeholder="Description"
+                        name="description"
+                        value={folderData.description}
+                        onChange={handleChange}
+                        style={{ width: '400px' }} />
                 </div>
                 <div className="flex">
                     <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base"
-                            style={{fontSize: '24px'}}
-                            onClick={handleDelete}>
+                        style={{ fontSize: '24px' }}
+                        onClick={handleDelete}>
                         Delete
                     </button>
                     <button className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light py-3 px-5 rounded-large text-base active:bg-my-purple-dark"
-                            style={{fontSize: '24px'}}
-                            onClick={handleEdit}>
+                        style={{ fontSize: '24px' }}
+                        onClick={handleEdit}>
                         Edit
                     </button>
                 </div>

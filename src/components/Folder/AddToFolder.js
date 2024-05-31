@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Card, CardBody, Dialog, Typography } from "@material-tailwind/react";
 import CrossIcon from "../Icons/CrossIcon";
-import {getFolderById, getUserFolders, updateFolderById} from "../../api/FolderAPI";
+import { getFolderById, getUserFolders, updateFolderById } from "../../api/FolderAPI";
 
-const AddToFolder = ({postId}) => {
+const AddToFolder = ({ postId }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedFolders, setSelectedFolders] = useState([]);
     const [folders, setFolders] = useState([]);
@@ -37,7 +37,7 @@ const AddToFolder = ({postId}) => {
             setSelectedFolders([...selectedFolders, folder]);
         }
     };
-    
+
     useEffect(() => {
         getUserFolders()
             .then(data => setFolders(data))
@@ -53,7 +53,10 @@ const AddToFolder = ({postId}) => {
             <Button
                 className="my-1 bg-my-purple hover:bg-my-purple-light kanit-regular py-3 px-5 rounded-large text-base text-black"
                 onClick={handleIsOpen}
-                style={{ textTransform: 'none' }}
+                style={{
+                    textTransform: 'none',
+                    borderRadius: '15px'
+                }}
             >
                 Save
             </Button>
@@ -76,8 +79,11 @@ const AddToFolder = ({postId}) => {
                                     </Typography>
 
                                     <Button
-                                        className={`kanit-regular py-2 px-4 rounded-lg ${selectedFolders.includes(folder.id) ? 'bg-my-purple-light' : 'bg-my-purple-dark'}`}
+                                        className={`kanit-regular py-2 px-4 rounded-lg ${selectedFolders.includes(folder.id) ? 'bg-my-purple-light' : 'bg-my-purple'}`}
                                         onClick={() => handleSelectFolder(folder.id)}
+                                        style={{
+                                            textTransform: 'initial'
+                                        }}
                                     >
                                         {selectedFolders.includes(folder.id) ? 'Added' : 'Add'}
                                     </Button>
@@ -88,15 +94,20 @@ const AddToFolder = ({postId}) => {
                     </CardBody>
                     <div className="flex justify-center p-4">
                         <Button
-                            className="bg-my-purple kanit-regular text-black py-2 px-5 rounded-lg"
+                            className="bg-my-purple kanit-regular text-black"
                             onClick={handleAddToFolders}
+                            style={{
+                                textTransform: 'initial',
+                                fontSize: '16px',
+                                borderRadius: "15px"
+                            }}
                         >
                             Save Changes
                         </Button>
                     </div>
                 </Card>
             </Dialog>
-        </div>
+        </div >
     );
 };
 

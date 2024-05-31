@@ -54,7 +54,7 @@ const ViewCreatedPosts = () => {
             </div>
             <div className="container text-center mx-auto mt-10" style={{ maxWidth: '30%' }}>
                 <h1 style={{ fontWeight: 700, fontSize: '48px' }}>My posts</h1>
-                <button className="mt-5 bg-my-purple p-3 rounded-large"
+                <button className="mt-5 bg-my-purple p-3 rounded-large hover:bg-my-purple-light active:bg-my-purple-dark"
                     style={{ fontSize: '16px' }}
                     onClick={() => navigate('/post/create')}>
                     Add new post

@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import {deleteUserAccount, getUserAccount, updateUserAccount} from "../../api/AccountAPI";
+import { deleteUserAccount, getUserAccount, updateUserAccount } from "../../api/AccountAPI";
 import outlined from "@material-tailwind/react/theme/components/timeline/timelineIconColors/outlined";
-import {signIn} from "../../api/AuthAPI";
+import { signIn } from "../../api/AuthAPI";
 import Cookies from "js-cookie";
 
 function EditAccount() {
@@ -107,8 +107,8 @@ function EditAccount() {
         <div>
             <div>
                 <button className="m-3 bg-my-purple hover:bg-my-purple-light py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                        style={{ fontSize: '16px' }}
-                        onClick={() => navigate(-1)}>
+                    style={{ fontSize: '16px' }}
+                    onClick={() => navigate(-1)}>
                     Back
                 </button>
             </div>
@@ -144,16 +144,16 @@ function EditAccount() {
                 </div>
                 <div>
                     <input type="text"
-                           disabled={true}
-                           className="cursor-not-allowed m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
-                           placeholder="New password"
-                           style={{ width: '400px', height: '40px' }} />
+                        disabled={true}
+                        className="cursor-not-allowed m-3 bg-my-light-grey h-10 w-72 py-2 px-4 rounded-large focus:outline-my-purple-light"
+                        placeholder="New password"
+                        style={{ width: '400px', height: '40px' }} />
                 </div>
 
                 <div className="pb-5">
-                    <button className="my-1 mx-4 bg-my-pink-dark py-2 px-5 rounded-large text-base"
-                            style={{ fontSize: '18px', width: "400px" }}
-                            onClick={() => navigate('tags')}
+                    <button className="my-1 mx-4 bg-my-pink hover:bg-my-pink-light active:bg-my-pink-dark py-2 px-5 rounded-large text-base"
+                        style={{ fontSize: '18px', width: "400px" }}
+                        onClick={() => navigate('tags')}
                     >
                         Choose preferred tags
                     </button>
@@ -161,13 +161,13 @@ function EditAccount() {
 
                 <div className="flex">
                     <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 py-3 px-5 rounded-large text-base"
-                            style={{ fontSize: '24px' }}
-                            onClick={handleDelete}>
+                        style={{ fontSize: '24px' }}
+                        onClick={handleDelete}>
                         Delete
                     </button>
-                    <button className="my-1 mx-4 bg-my-purple-light hover:bg-my-purple active:bg-my-purple-dark py-3 px-5 rounded-large text-base"
-                            style={{ fontSize: '24px' }}
-                            onClick={handleEdit}>
+                    <button className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark py-3 px-5 rounded-large text-base"
+                        style={{ fontSize: '24px' }}
+                        onClick={handleEdit}>
                         Edit
                     </button>
                 </div>
