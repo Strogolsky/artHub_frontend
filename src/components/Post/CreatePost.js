@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import ChooseTags from "./ChooseTags";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createPost } from "../../api/PostAPI";
@@ -61,6 +61,22 @@ function CreatePost() {
         setModalIsOpen(false);
     }
 
+    const [imageData, setImageData] = useState(null);
+
+    useEffect(() => {
+        if (selectedFile) {
+          const url = URL.createObjectURL(selectedFile);
+          setImageData(url);
+          return () => URL.revokeObjectURL(url);
+        }
+    }, [selectedFile]);
+
+    const handleSelectFile = (e) => {
+        if (e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
+    }
+
     return (
         <div>
             <div>
@@ -73,15 +89,23 @@ function CreatePost() {
             <div className="flex justify-center items-center h-screen">
                 <div className="flex flex-col items-center justify-center mx-10">
                     <div className="relative">
-                        <input
-                            type="file"
-                            accept="image/*"
-                            className="hover:cursor-pointer opacity-0 absolute h-full w-full z-10"
-                            onChange={(e) => setSelectedFile(e.target.files[0])}
-                        />
-                        <div className="m-2 bg-my-light-grey font-regular h-96 w-96 py-2 px-4 rounded-large flex items-center justify-center cursor-pointer"
-                            style={{ height: '500px' }}>
-                            <span className="font-color-my-light-grey">Select file</span>
+                        <h1 className="text-center" style={{fontSize: "30px"}}>Select image</h1>
+                        <div className={`m-2 ${!selectedFile ? "bg-my-light-grey" : ""} font-regular py-2 px-4 rounded-large flex items-center justify-center cursor-pointer`} style={{
+                            height: '500px',
+                            width: '400px'
+                        }}>
+                            <input type="file" accept="image/*" className="hover:cursor-pointer opacity-0 absolute h-full w-full z-10" title="Click here to select image" onChange={(e) => handleSelectFile(e)}/>
+
+                            {selectedFile ? (
+                                <>
+                                    <img src={imageData} alt="Selected" className="object-cover h-full w-full rounded-large" style={{
+                                        maxWidth: '400px',
+                                        maxHeight: '500px'
+                                    }}/>
+                                </>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                 </div>
