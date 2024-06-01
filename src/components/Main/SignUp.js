@@ -101,7 +101,14 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
 
     return (
         <div>
-            <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black" style={{ textTransform: 'initial', fontSize: '16px' }} onClick={handleIsOpen}>Sign Up</Button>
+            <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black"
+                style={{
+                    textTransform: 'initial',
+                    fontSize: '16px',
+                    borderRadius: '15px'
+                }}
+                onClick={handleIsOpen}
+            >Sign Up</Button>
             <Dialog size="xs" open={isOpen} handler={handleCloseDialog} className="bg-transparent shadow-none">
                 <Card className="flex flex-col gap-4">
                     <CardBody>
@@ -122,35 +129,40 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                         )}
 
                         <Input value={username}
-                               label="Username"
-                               size="lg"
-                               onChange={(e) => handleUsernameInput(e)}
-                               error={isUsernameError}
+                            label="Username"
+                            size="lg"
+                            onChange={(e) => handleUsernameInput(e)}
+                            error={isUsernameError}
                         />
 
                         <div className="m-5"></div>
 
                         <Input value={email}
-                               type="email"
-                               label="Email"
-                               size="lg"
-                               onChange={(e) => handleEmailInput(e)}
-                               error={isEmailError}
+                            type="email"
+                            label="Email"
+                            size="lg"
+                            onChange={(e) => handleEmailInput(e)}
+                            error={isEmailError}
                         />
 
                         <div className="m-5"></div>
 
                         <Input value={password}
-                               type="password"
-                               label="Password"
-                               size="lg"
-                               error={isPasswordError}
-                               onChange={(e) => handlePasswordInput(e)} />
+                            type="password"
+                            label="Password"
+                            size="lg"
+                            error={isPasswordError}
+                            onChange={(e) => handlePasswordInput(e)} />
                     </CardBody>
 
                     <CardFooter>
                         <div className="flex justify-center">
-                            <Button className="kanit-regular bg-my-purple-light text-black" size="lg" onClick={handleSignUp}>
+                            <Button className="kanit-regular bg-my-purple text-black" size="lg"
+                                onClick={handleSignUp}
+                                style={{
+                                    borderRadius: '15px',
+                                    textTransform: 'initial'
+                                }}>
                                 Sign up
                             </Button>
                         </div>

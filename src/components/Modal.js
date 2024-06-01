@@ -2,7 +2,7 @@ const Modal = ({ isOpen, onClose, messages }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-55 z-50 backdrop-blur-sm">
             <div className="bg-white rounded-lg p-6 w-96 flex flex-col items-center">
                 <h2 className="text-xl font-semibold mb-4 text-center">Error</h2>
                 {messages.map((message, index) => (
@@ -10,7 +10,7 @@ const Modal = ({ isOpen, onClose, messages }) => {
                 ))}
                 <div className="mt-4">
                     <button
-                        className="bg-my-purple hover:bg-my-purple-light py-2 px-4 rounded-large"
+                        className="bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark py-2 px-4 rounded-large"
                         onClick={onClose}>
                         Close
                     </button>

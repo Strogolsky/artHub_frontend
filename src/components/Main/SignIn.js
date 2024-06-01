@@ -74,7 +74,12 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
 
     return (
         <div>
-            <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black" style={{ textTransform: 'initial', fontSize: '16px' }} onClick={handleIsOpen}>Sign In</Button>
+            <Button className="kanit-regular bg-my-purple hover:bg-my-purple-light text-black"
+                style={{
+                    textTransform: 'initial',
+                    fontSize: '16px',
+                    borderRadius: '15px'
+                }} onClick={handleIsOpen}>Sign In</Button>
             <Dialog size="xs" open={isOpen} handler={handleCloseDialog} className="bg-transparent shadow-none">
                 <Card className="flex flex-col gap-4">
                     <CardBody>
@@ -94,27 +99,32 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                         )}
 
                         <Input value={username}
-                               type="username"
-                               label="Username"
-                               size="lg"
-                               onChange={(e) => handleUsernameInput(e)}
-                               error={isUsernameError}
+                            type="username"
+                            label="Username"
+                            size="lg"
+                            onChange={(e) => handleUsernameInput(e)}
+                            error={isUsernameError}
                         />
 
                         <div className="m-5"></div>
 
                         <Input value={password}
-                               type="password"
-                               label="Password"
-                               size="lg"
-                               onChange={(e) => handlePasswordInput(e)}
-                               error={isPasswordError}
+                            type="password"
+                            label="Password"
+                            size="lg"
+                            onChange={(e) => handlePasswordInput(e)}
+                            error={isPasswordError}
                         />
                     </CardBody>
 
                     <CardFooter>
                         <div className="flex justify-center">
-                            <Button className="kanit-regular bg-my-purple-light text-black" size="lg" onClick={handleSignIn}>
+                            <Button className="kanit-regular bg-my-purple text-black" size="lg"
+                                onClick={handleSignIn}
+                                style={{
+                                    borderRadius: '15px',
+                                    textTransform: 'initial'
+                                }}>
                                 Sign in
                             </Button>
                         </div>

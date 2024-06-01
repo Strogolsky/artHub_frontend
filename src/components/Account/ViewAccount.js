@@ -56,12 +56,12 @@ const ViewAccount = () => {
                 <p className="-mt-2" style={{ color: '#8A8A8A', fontWeight: 400, fontSize: '16px' }}>{email}</p>
 
                 <div>
-                    <button className="mt-5 bg-my-purple p-2.5 pl-6 pr-6 rounded-large"
+                    <button className="mt-5 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark p-2.5 pl-6 pr-6 rounded-large"
                         style={{ fontSize: '16px' }}
                         onClick={() => navigate('edit')}>
                         Edit account
                     </button>
-                    <button className="ml-8 mt-5 bg-my-purple p-2.5 pl-5 pr-5 rounded-large"
+                    <button className="ml-8 mt-5 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark p-2.5 pl-5 pr-5 rounded-large"
                         style={{ fontSize: '16px' }}
                         onClick={() => navigate('/post/create')}>
                         Create post
@@ -90,7 +90,7 @@ const ViewAccount = () => {
 
                     {userFolders.map((folder) => (
                         <div key={folder.id} className="m-6" style={{ width: '200px', height: '200px' }}>
-                            <button className="rounded-large flex justify-center items-center relative "
+                            <button className="rounded-large flex justify-center items-center relative transition-transform duration-300 hover:scale-90 "
                                 style={{ width: '200px', height: '150px' }}
                                 onClick={() => navigate(`/folder/${folder.id}`)}>
                                 <FolderIcon />

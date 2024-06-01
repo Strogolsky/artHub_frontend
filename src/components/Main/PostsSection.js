@@ -1,6 +1,6 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const PostsSection = ({posts}) => {
+const PostsSection = ({ posts }) => {
     const navigate = useNavigate();
 
     return (
@@ -8,15 +8,15 @@ const PostsSection = ({posts}) => {
             <div className="text-center grid grid-cols-1 items-center justify-center md:grid-cols-2 lg:grid-cols-3">
 
                 {posts.map((post, idx) => (
-                    <div key={idx} className="m-6" style={{width: '310px', height: '400px'}}>
+                    <div key={idx} className="m-6" style={{ width: '310px', height: '400px' }}>
                         <div className="rounded-large flex justify-center items-center" style={{
                             width: '300px',
                             height: '385px'
                         }}>
                             <img key={post.id}
-                                 className="hover:border-my-purple hover:cursor-pointer hover:border-4 object-cover rounded-large"
-                                 alt={post.title} src={`data:image;base64,${post.image.data}`}
-                                 onClick={() => navigate(`/post/${post.id}`)}/>
+                                className="object-cover rounded-large transition-transform duration-300 hover:scale-95"
+                                alt={post.title} src={`data:image;base64,${post.image.data}`}
+                                onClick={() => navigate(`/post/${post.id}`)} />
                         </div>
                         <p className="m-1">{post.title}</p>
                     </div>

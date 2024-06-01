@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import {getFolderById, updateFolderById} from "../../api/FolderAPI";
+import { getFolderById, updateFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 import Logo from "../ImageViews/Logo";
 import ImageWithCross from "./ImageWithCross";
-import {getUserAccount} from "../../api/AccountAPI";
+import { getUserAccount } from "../../api/AccountAPI";
 
 const ViewFolder = () => {
     const navigate = useNavigate();
@@ -68,7 +68,7 @@ const ViewFolder = () => {
                 </p>
 
                 {userId === folderData.patron.id &&
-                    <button className="mt-5 bg-my-purple p-3 rounded-large"
+                    <button className="mt-5 bg-my-purple p-3 rounded-large hover:bg-my-purple-light active:bg-my-purple-dark"
                         style={{ fontSize: '16px' }}
                         onClick={() => navigate('edit')}>
                         Edit folder
@@ -91,7 +91,7 @@ const ViewFolder = () => {
 
                     {folderData.posts.map((post) => (
                         <div key={post.id} className="m-6" style={{ width: '210px', height: '200px' }}>
-                            <div className="rounded-large flex justify-center items-center" style={{ width: '200px', height: '150px' }}>
+                            <div className="rounded-large flex justify-center items-center transition-transform duration-300 hover:scale-95" style={{ width: '200px', height: '150px' }}>
                                 <ImageWithCross block={userId !== folderData.patron.id} post={post} handleDeletePostFromFolder={() => handleDeletePostFromFolder(post.id)} />
                             </div>
 

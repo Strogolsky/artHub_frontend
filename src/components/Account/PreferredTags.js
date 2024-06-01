@@ -1,9 +1,9 @@
-import {useNavigate} from "react-router-dom";
-import {Typography} from "@material-tailwind/react";
-import {useEffect, useState} from "react";
-import {createTags, getAllTags} from "../../api/TagAPI";
+import { useNavigate } from "react-router-dom";
+import { Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { createTags, getAllTags } from "../../api/TagAPI";
 import NotFound from "../NotFound";
-import {addPreferredTags, getUserAccount} from "../../api/AccountAPI";
+import { addPreferredTags, getUserAccount } from "../../api/AccountAPI";
 
 
 const PreferredTags = () => {
@@ -64,7 +64,7 @@ const PreferredTags = () => {
             return !found;
         });
 
-        const tagsJSON = tagsToCreate.map(name => ({name}));
+        const tagsJSON = tagsToCreate.map(name => ({ name }));
         const createdTags = await createTags(JSON.stringify(tagsJSON));
 
         createdTags.map(tag => tagIds.push(tag.id));
@@ -84,8 +84,8 @@ const PreferredTags = () => {
         <div>
             <div>
                 <button className="m-3 bg-my-purple hover:bg-my-purple-light py-2 px-6 rounded-large text-base active:bg-my-purple-dark"
-                        style={{fontSize: '16px'}}
-                        onClick={() => navigate(-1)}>
+                    style={{ fontSize: '16px' }}
+                    onClick={() => navigate(-1)}>
                     Back
                 </button>
             </div>
@@ -98,34 +98,34 @@ const PreferredTags = () => {
                 <input type="text" className="bg-my-light-grey py-2 px-4 rounded-large focus:outline-my-purple-light text-center" placeholder="Search for tag"
                     value={searchTagText}
                     onChange={(e) => setSearchTagText(e.target.value)}
-                    style={{width: '30%'}}
+                    style={{ width: '30%' }}
                     onKeyDown={handlePressKey}
                 />
 
-                <button className="kanit-regular ml-7 bg-my-purple-light rounded-large p-2 text-black"
-                        onClick={() => handleChosenTags(searchTagText)}>
+                <button className="kanit-regular ml-7 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark rounded-large p-2 text-black"
+                    onClick={() => handleChosenTags(searchTagText)}>
                     Add tag
                 </button>
             </div>
 
             <div className="flex justify-center">
-                <div className="items-center bg-my-light-grey rounded-large overflow-auto h-96" style={{width: "25%"}}>
+                <div className="items-center bg-my-light-grey rounded-large overflow-auto h-96" style={{ width: "25%" }}>
                     <h3 className="text-center text-2xl m-1 mb-2">Selected tags</h3>
                     <div className="rounded-large flex flex-wrap pb-3" style={{}}>
 
                         {userPreferredTags.map((tag) =>
                             <div key={tag.id}
-                                 className="kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-purple-dark text-center w-auto"
-                                 style={{height: 'fit-content'}}>
-                                    {tag.name}
+                                className="kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-purple text-center w-auto"
+                                style={{ height: 'fit-content' }}>
+                                {tag.name}
                             </div>
                         )}
 
                         {selectedTags.map((tag, idx) =>
                             <div key={idx}
-                                 className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink-dark text-center w-auto"
-                                 style={{height: 'fit-content'}}
-                                 onClick={() => removeSelectedTag(tag)}>
+                                className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
+                                style={{ height: 'fit-content' }}
+                                onClick={() => removeSelectedTag(tag)}>
                                 {tag}
                             </div>
                         )}
@@ -133,18 +133,18 @@ const PreferredTags = () => {
                     </div>
                 </div>
 
-                <div className="ml-7 items-center bg-my-light-grey overflow-auto rounded-large h-96" style={{width: "25%"}}>
+                <div className="ml-7 items-center bg-my-light-grey overflow-auto rounded-large h-96" style={{ width: "25%" }}>
                     <h3 className="text-center text-2xl m-1 mb-2">Tags to select</h3>
                     <div className="rounded-large flex flex-wrap pb-3">
                         {allTags.map((tag) =>
-                            (!selectedTags.includes(tag.name) && !userPreferredTags.map(tag => tag.name).includes(tag.name) &&
-                                <div key={tag.id}
-                                     className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
-                                     style={{height: 'fit-content'}}
-                                     onClick={() => addSelectedTag(tag.name)}>
-                                    {tag.name}
-                                </div>
-                            )
+                        (!selectedTags.includes(tag.name) && !userPreferredTags.map(tag => tag.name).includes(tag.name) &&
+                            <div key={tag.id}
+                                className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
+                                style={{ height: 'fit-content' }}
+                                onClick={() => addSelectedTag(tag.name)}>
+                                {tag.name}
+                            </div>
+                        )
                         )}
 
                     </div>
@@ -154,9 +154,9 @@ const PreferredTags = () => {
 
 
             <div className="flex flex-col items-center justify-center">
-                <button className="my-1 mx-4 bg-my-purple-light py-3 mt-6 px-5 rounded-large text-base"
-                        style={{fontSize: '24px'}}
-                        onClick={savePreferredTags}
+                <button className="my-1 mx-4 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark py-3 mt-6 px-5 rounded-large text-base"
+                    style={{ fontSize: '24px' }}
+                    onClick={savePreferredTags}
                 >
                     Save
                 </button>
