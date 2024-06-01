@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { Button, Card, CardBody, Dialog, Typography } from "@material-tailwind/react";
 import CrossIcon from "../Icons/CrossIcon";
 import { getFolderById, getUserFolders, updateFolderById } from "../../api/FolderAPI";
+import {useNavigate} from "react-router-dom";
 
-const AddToFolder = ({ postId }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const AddToFolder = ({ postId, isOpenDefault }) => {
+    const [isOpen, setIsOpen] = useState(isOpenDefault);
     const [selectedFolders, setSelectedFolders] = useState([]);
     const [folders, setFolders] = useState([]);
+    const navigate = useNavigate();
 
     const handleIsOpen = () => setIsOpen(curr => !curr);
 
@@ -48,6 +50,10 @@ const AddToFolder = ({ postId }) => {
         setSelectedFolders([]);
     }, [isOpen]);
 
+    const handleCreateFolder = () => {
+        navigate('/folder/create', {state: {postId}});
+    }
+
     return (
         <div>
             <Button
@@ -72,25 +78,28 @@ const AddToFolder = ({ postId }) => {
 
                         <div className="overflow-y-auto max-h-96 py-2 flex flex-col items-center">
 
-                            {folders.map(folder => (
-                                <div key={folder.id} className="w-full md:w-3/4 lg:w-2/3 bg-gray-200 m-1 p-2 flex justify-between items-center rounded-lg">
-                                    <Typography className="text-black kanit-regular">
-                                        {folder.title}
-                                    </Typography>
+                            <button className={`kanit-regular py-2 px-4 mb-3 rounded-large bg-my-purple text-black hover:bg-my-purple-light active:bg-my-purple-dark`}
+                                    onClick={handleCreateFolder}
+                                    style={{textTransform: 'initial'}}>
+                                Create folder
+                            </button>
 
-                                    <Button
-                                        className={`kanit-regular py-2 px-4 rounded-lg ${selectedFolders.includes(folder.id) ? 'bg-my-purple-light' : 'bg-my-purple'}`}
-                                        onClick={() => handleSelectFolder(folder.id)}
-                                        style={{
+
+                                {folders.map(folder => (
+                                    <div key={folder.id} className="w-full md:w-3/4 lg:w-2/3 bg-gray-200 m-1 p-2 flex justify-between items-center rounded-lg">
+                                        <Typography className="text-black kanit-regular">
+                                            {folder.title}
+                                        </Typography>
+
+                                        <Button className={`kanit-regular py-2 px-4 rounded-lg ${selectedFolders.includes(folder.id) ? 'bg-my-purple-light' : 'bg-my-purple'}`} onClick={() => handleSelectFolder(folder.id)} style={{
                                             textTransform: 'initial'
-                                        }}
-                                    >
-                                        {selectedFolders.includes(folder.id) ? 'Added' : 'Add'}
-                                    </Button>
-                                </div>
-                            ))}
+                                        }}>
+                                            {selectedFolders.includes(folder.id) ? 'Added' : 'Add'}
+                                        </Button>
+                                    </div>
+                                ))}
 
-                        </div>
+                            </div>
                     </CardBody>
                     <div className="flex justify-center p-4">
                         <Button
@@ -102,7 +111,7 @@ const AddToFolder = ({ postId }) => {
                                 borderRadius: "15px"
                             }}
                         >
-                            Save Changes
+                            Save changes
                         </Button>
                     </div>
                 </Card>
