@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { searchPostsByPrompt } from "../../api/SearchAPI";
 import { useEffect, useState } from "react";
-import NotFound from "../NotFound";
+import NotFound from "../Statuses/NotFound";
 import SearchInput from "./SearchInput";
 import Authorisation from "../Authorisation"
 import Logo from "../ImageViews/Logo";
-import Loading from "../Loading";
+import Loading from "../Statuses/Loading";
 
 
 const SearchPage = () => {

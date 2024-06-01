@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Loading from "../Loading";
+import Loading from "../Statuses/Loading";
 import { getRecommendedPosts } from "../../api/RecommendationAPI"
-import NotFound from "../NotFound";
+import NotFound from "../Statuses/NotFound";
 import PostsSection from "./PostsSection";
 
 
-const InfiniteFeed = ({isGuest}) => {
+const InfiniteFeed = ({ isGuest }) => {
     const [posts, setPosts] = useState([]);
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);

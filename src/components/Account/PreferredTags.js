@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { createTags, getAllTags } from "../../api/TagAPI";
-import NotFound from "../NotFound";
+import NotFound from "../Statuses/NotFound";
 import { addPreferredTags, getUserAccount } from "../../api/AccountAPI";
 
 

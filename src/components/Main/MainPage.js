@@ -2,8 +2,8 @@ import SearchInput from "../Search/SearchInput";
 import InfiniteFeed from "./InfiniteFeed";
 import Authorisation from "../Authorisation";
 import Logo from "../ImageViews/Logo";
-import {useState} from "react";
-import Loading from "../Loading";
+import { useState } from "react";
+import Loading from "../Statuses/Loading";
 
 
 const MainPage = () => {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserAccount } from "../../api/AccountAPI";
-import NotFound from "../NotFound";
+import NotFound from "../Statuses/NotFound";
 import { getUserFolders } from "../../api/FolderAPI";
-import Loading from "../Loading";
+import Loading from "../Statuses/Loading";
 import SearchInput from "../Search/SearchInput";
 import Authorisation from "../Authorisation";
 import Logo from "../ImageViews/Logo";
