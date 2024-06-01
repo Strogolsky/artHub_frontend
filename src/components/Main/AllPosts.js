@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {getAllPosts} from "../../api/PostAPI";
-import NotFound from "../NotFound";
-import Loading from "../Loading";
+import { useEffect, useState } from "react";
+import { getAllPosts } from "../../api/PostAPI";
+import NotFound from "../Statuses/NotFound";
+import Loading from "../Statuses/Loading";
 import PostsSection from "./PostsSection";
 
 const AllPosts = () => {

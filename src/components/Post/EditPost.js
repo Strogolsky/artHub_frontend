@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import ChooseTags from './ChooseTags';
-import {deletePostById, getPostById, updatePostById} from "../../api/PostAPI";
-import NotFound from "../NotFound";
-import {getUserAccount} from "../../api/AccountAPI";
-import Loading from "../Loading";
+import { deletePostById, getPostById, updatePostById } from "../../api/PostAPI";
+import NotFound from "../Statuses/NotFound";
+import { getUserAccount } from "../../api/AccountAPI";
+import Loading from "../Statuses/Loading";
 
 function EditPost() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function EditPost() {
         file: '',
         patronId: -1
     });
-    
+
     const [isError, setIsError] = useState(false);
     const [userId, setUserId] = useState(-1);
 
@@ -115,8 +115,8 @@ function EditPost() {
 
                 <div className="flex">
                     <button className="my-1 mx-4 bg-red-500 hover:bg-red-400 active:bg-red-700 font-regular py-3 px-5 rounded-large text-base"
-                            style={{ fontSize: '24px' }}
-                            onClick={handleDelete}>
+                        style={{ fontSize: '24px' }}
+                        onClick={handleDelete}>
                         Delete
                     </button>
                     <button

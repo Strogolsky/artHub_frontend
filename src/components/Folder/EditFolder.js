@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteFolderById, getFolderById, updateFolderById } from "../../api/FolderAPI";
-import Loading from "../Loading";
-import NotFound from "../NotFound";
+import Loading from "../Statuses/Loading";
+import NotFound from "../Statuses/NotFound";
 import { getUserAccount } from "../../api/AccountAPI";
 
 function EditFolder() {

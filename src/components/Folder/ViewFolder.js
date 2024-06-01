@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../Loading";
-import NotFound from "../NotFound";
+import Loading from "../Statuses/Loading";
+import NotFound from "../Statuses/NotFound";
 import { getFolderById, updateFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
-import Authorisation from "../Authorisation";
+import Authorisation from "../NavigationBar/Authorisation";
 import Logo from "../ImageViews/Logo";
 import ImageWithCross from "./ImageWithCross";
 import { getUserAccount } from "../../api/AccountAPI";

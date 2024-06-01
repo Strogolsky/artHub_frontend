@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import AddToFolder from "../Folder/AddToFolder";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPostById } from "../../api/PostAPI";
-import NotFound from '../NotFound';
-import Loading from '../Loading';
+import NotFound from '../Statuses/NotFound';
+import Loading from '../Statuses/Loading';
 import SearchInput from "../Search/SearchInput";
-import Authorisation from "../Authorisation";
-import {getUserAccount} from "../../api/AccountAPI";
+import Authorisation from "../NavigationBar/Authorisation";
+import { getUserAccount } from "../../api/AccountAPI";
 import AnotherUserIcon from '../ImageViews/AnotherUserIcon';
 import Logo from "../ImageViews/Logo";
 import UserIcon from "../ImageViews/UserIcon";
@@ -85,7 +85,7 @@ const ViewPost = () => {
 
                             <div className={`${userId === post.patron.id ? "hover:bg-my-purple-light active:bg-my-purple-dark cursor-pointer" : ""} px-2 bg-my-light-grey rounded-large flex items-center`}
                                 style={{ width: '380px', height: '60px' }}
-                                onClick={() => {if (userId === post.patron.id) navigate(`/account`)}}>
+                                onClick={() => { if (userId === post.patron.id) navigate(`/account`) }}>
                                 <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden relative">
                                     {userId === post.patron.id ? <UserIcon /> : <AnotherUserIcon />}
                                 </div>
