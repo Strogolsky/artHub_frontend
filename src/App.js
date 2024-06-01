@@ -9,7 +9,7 @@ import NotFound from "./components/Statuses/NotFound";
 import ViewFolder from "./components/Folder/ViewFolder";
 import ViewPost from "./components/Post/ViewPost";
 import ViewAccount from "./components/Account/ViewAccount";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/Helpers/ScrollToTop";
 import SearchPage from "./components/Search/SearchPage";
 import PreferredTags from "./components/Account/PreferredTags";
 import ViewCreatedPosts from './components/Folder/ViewCreatedPosts';
