@@ -30,15 +30,13 @@ function EditFolder() {
                     patronId: data.patron.id
                 })
             })
-            .catch((error) => {
+            .catch(() => {
                 setIsError(true);
-                console.log("Error getting folder: ", error);
             })
 
         getUserAccount()
             .then(data => setUserId(data.id))
-            .catch(error => {
-                console.error("Error getting user data: ", error);
+            .catch(() => {
                 setIsError(true);
             })
     }, [folderId]);
@@ -56,21 +54,19 @@ function EditFolder() {
 
     const handleEdit = async () => {
         try {
-            const updatedFolder = await updateFolderById(folderId, folderData);
-            console.log("Successfully updated folder");
+            await updateFolderById(folderId, folderData);
             navigate(`/folder/${folderId}`);
         } catch (error) {
-            console.log("Failed to update folder: ", error);
+            setIsError(true);
         }
     }
 
     const handleDelete = async () => {
         try {
             await deleteFolderById(folderId);
-            console.log("Folder deleted");
             navigate('/account');
         } catch (error) {
-            console.log("Failed to delete folder: ", error);
+            setIsError(true);
         }
     }
 

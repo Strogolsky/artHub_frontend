@@ -50,26 +50,22 @@ function EditPost() {
             ...postData,
             [e.target.name]: e.target.value
         });
-        console.log("Changed");
     };
 
     const handleEdit = async () => {
         try {
-            const updatedPost = await updatePostById(postId, postData);
-            console.log('Post updated successfully:', updatedPost);
+            await updatePostById(postId, postData);
             navigate(`/post/${postId}`);
         } catch (error) {
-            console.error('Failed to update post:', error);
+            setIsError(true);
         }
     };
 
     const handleDelete = async () => {
         try {
             await deletePostById(postId);
-            console.log("Post deleted");
             navigate('/');
         } catch (error) {
-            console.log("Cannot delete post: ", error);
             setIsError(true);
         }
     }

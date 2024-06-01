@@ -49,7 +49,6 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                 navigate('/account/edit/tags');
             }).catch((error) => {
                 setErrorMessage(error.message);
-                console.log("Failed to sign up: ", error);
                 setIsError(true);
             })
     }

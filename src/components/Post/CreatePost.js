@@ -41,7 +41,6 @@ function CreatePost() {
 
         try {
             const createdPost = await createPost({ postTitle, postDescription, selectedTags, selectedFile });
-            console.log("Post successfully created", createdPost);
             navigate(`/post/${createdPost.id}`);
 
             if (folderId) {
@@ -49,11 +48,9 @@ function CreatePost() {
             }
 
         } catch (error) {
-            console.log("Error creating post: ", error);
             errorMessages.push(error);
             setModalMessages(errorMessages);
             setModalIsOpen(true);
-            return;
         }
     }
 
