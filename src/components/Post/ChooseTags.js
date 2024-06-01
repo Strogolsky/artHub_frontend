@@ -21,8 +21,7 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
     useEffect(() => {
         getAllTags()
             .then((data) => setAllTags(data))
-            .catch((error) => {
-                console.log("Error fetching tags: ", error);
+            .catch(() => {
                 setIsError(true);
             });
 

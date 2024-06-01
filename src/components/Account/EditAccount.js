@@ -43,10 +43,9 @@ function EditAccount() {
     const handleDelete = async () => {
         try {
             await deleteUserAccount();
-            console.log("Successfully deleted account");
             navigate('/');
         } catch (error) {
-            console.error("Error deleting account: ", error);
+            setIsError(true);
         }
     }
 

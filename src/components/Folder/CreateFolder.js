@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {createFolder} from "../../api/FolderAPI";
+import NotFound from "../Statuses/NotFound";
 
 function CreateFolder() {
     const navigate = useNavigate();
@@ -9,18 +10,20 @@ function CreateFolder() {
     const [folderTitle, setFolderTitle] = useState("");
     const [folderDescription, setFolderDescription] = useState("");
 
+    const [isError, setIsError] = useState(false);
+
     const { postId } = location.state || "";
 
     const handleCreate = async () => {
         try {
             const createdFolder = await createFolder({folderTitle, folderDescription});
-            console.log("Successfully created folder");
-            console.log(postId);
             postId ? navigate(`/post/${postId}`, {state: {addToFolder: true}}) : navigate(`/folder/${createdFolder.id}`);
         } catch (error) {
-            console.log("Failed to create folder: ", error);
+            setIsError(true);
         }
     }
+
+    if (isError) return <NotFound />
 
     return (
         <div>

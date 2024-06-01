@@ -35,7 +35,6 @@ const SignIn = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                 window.location.reload();
             }).catch((error) => {
                 setErrorMessage(error.message);
-                console.log("Error signing in: ", error);
                 setIsError(true);
             })
     }
