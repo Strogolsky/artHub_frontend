@@ -38,7 +38,9 @@ const InfiniteFeed = ({ isGuest }) => {
             isFetchingRef.current = true;
             fetchPosts(0);
         }
-    });
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const fetchMoreData = () => {
         if (hasMore && !isFetchingRef.current) {
