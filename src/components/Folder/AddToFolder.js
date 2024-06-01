@@ -4,8 +4,8 @@ import CrossIcon from "../Icons/CrossIcon";
 import { getFolderById, getUserFolders, updateFolderById } from "../../api/FolderAPI";
 import {useNavigate} from "react-router-dom";
 
-const AddToFolder = ({ postId, isOpenDefault }) => {
-    const [isOpen, setIsOpen] = useState(isOpenDefault);
+const AddToFolder = ({ postId }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const [selectedFolders, setSelectedFolders] = useState([]);
     const [folders, setFolders] = useState([]);
     const navigate = useNavigate();

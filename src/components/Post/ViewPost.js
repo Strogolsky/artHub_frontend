@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddToFolder from "../Folder/AddToFolder";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPostById } from "../../api/PostAPI";
 import NotFound from '../Statuses/NotFound';
 import Loading from '../Statuses/Loading';
@@ -13,12 +13,10 @@ import UserIcon from "../ImageViews/UserIcon";
 
 const ViewPost = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const { postId } = useParams();
     const [post, setPost] = useState(null);
     const [isError, setIsError] = useState(false);
     const [userId, setUserId] = useState(-1);
-    const [isOpenAddToFolder, ] = useState(location.state?.addToFolder || false);
 
     useEffect(() => {
         getPostById(postId)
@@ -37,12 +35,6 @@ const ViewPost = () => {
                 setUserId(-2);
             })
     }, [postId]);
-
-    useEffect(() => {
-        if (location.state) {
-          navigate(location.pathname, { replace: true, state: {} });
-        }
-    }, [navigate, location]);
 
     if (isError) return <NotFound />;
     if (!post) return <Loading />;
@@ -74,7 +66,7 @@ const ViewPost = () => {
                     <div className="mx-12">
                         <div className="flex items-center space-x-4">
 
-                            {userId !== -2 && <AddToFolder postId={postId} isOpenDefault={isOpenAddToFolder} />}
+                            {userId !== -2 && <AddToFolder postId={postId} />}
 
                             {userId === post.patron.id &&
                                 <button
