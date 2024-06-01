@@ -25,7 +25,7 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
     }
 
     const handleAddToFolders = () => {
-        selectedFolders.map(folderId => {
+        selectedFolders.forEach(folderId => {
             addPostToFolder(folderId)
         })
 

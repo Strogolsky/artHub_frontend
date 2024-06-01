@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../Statuses/Loading";
 import NotFound from "../Statuses/NotFound";
 import { deleteUserAccount, getUserAccount, updateUserAccount } from "../../api/AccountAPI";
-import outlined from "@material-tailwind/react/theme/components/timeline/timelineIconColors/outlined";
-import { signIn } from "../../api/AuthAPI";
 import Cookies from "js-cookie";
 
 function EditAccount() {
@@ -15,7 +13,7 @@ function EditAccount() {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [userTags, setUserTags] = useState([]);
+    const [, setUserTags] = useState([]);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const [isUsernameError, setIsUsernameError] = useState(false);
