@@ -18,7 +18,7 @@ const ViewPost = () => {
     const [post, setPost] = useState(null);
     const [isError, setIsError] = useState(false);
     const [userId, setUserId] = useState(-1);
-    const [isOpenAddToFolder, _] = useState(location.state?.addToFolder || false);
+    const [isOpenAddToFolder, ] = useState(location.state?.addToFolder || false);
 
     useEffect(() => {
         getPostById(postId)

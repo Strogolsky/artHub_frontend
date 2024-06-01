@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Dialog, DialogBody, DialogFooter, DialogHeader, select, Typography} from "@material-tailwind/react";
+import {Dialog, DialogBody, DialogFooter, DialogHeader, Typography} from "@material-tailwind/react";
 import CrossIcon from "../Icons/CrossIcon";
 import {createTags, getAllTags} from "../../api/TagAPI";
 
@@ -31,6 +31,7 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
                 !selectedTags.includes(tag.name) &&
                 setSelectedTags(curr => [...curr, tag.name]));
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen]);
 
     const removeSelectedTag = (tagToRemove) => {
@@ -101,36 +102,34 @@ const ChooseTags = ({tags, setTags, buttonText, buttonClasses, buttonSize}) => {
                         </button>
                     </div>
 
+
+
                     <div className="bg-my-light-grey rounded-large ml-6 mr-6" style={{height: '380px'}}>
-                        <div className="rounded-large flex flex-wrap overflow-auto pb-3" style={{maxHeight: '380px'}}>
+                        {isError ?
+                            <h1 className="text-center text-black" style={{fontWeight: 700, fontSize: '32px'}}>Error loading tags</h1>
+                            :
+                            <div className="rounded-large flex flex-wrap overflow-auto pb-3" style={{maxHeight: '380px'}}>
 
-                            {selectedTags.map((tag, idx) =>
-                                <div key={idx}
-                                     className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto"
-                                     style={{height: 'fit-content'}}
-                                     onClick={() => removeSelectedTag(tag)}>
-                                    {tag}
-                                </div>
-                            )}
-
-                            {allTags.map((tag) =>
-                                (!selectedTags.includes(tag.name) &&
-                                    <div key={tag.id}
-                                         className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-purple-light text-center w-auto"
-                                         style={{height: 'fit-content'}}
-                                         onClick={() => addSelectedTag(tag.name)}>
-                                        {tag.name}
+                                {selectedTags.map((tag, idx) =>
+                                    <div key={idx} className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-pink text-center w-auto" style={{height: 'fit-content'}} onClick={() => removeSelectedTag(tag)}>
+                                        {tag}
                                     </div>
-                                )
-                            )}
+                                )}
 
-                        </div>
+                                {allTags.map((tag) =>
+                                    (!selectedTags.includes(tag.name) &&
+                                        <div key={tag.id} className="hover:cursor-pointer kanit-regular text-black p-3 rounded-large ml-3 mt-3 bg-my-purple-light text-center w-auto" style={{height: 'fit-content'}} onClick={() => addSelectedTag(tag.name)}>
+                                            {tag.name}
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        }
                     </div>
                 </DialogBody>
 
                 <DialogFooter className="flex justify-center">
-                    <button className="kanit-regular bg-my-purple-light rounded-large p-3 w-20 text-black"
-                            onClick={handleSavingTags}>
+                    <button className="kanit-regular bg-my-purple-light rounded-large p-3 w-20 text-black" onClick={handleSavingTags}>
                         Save
                     </button>
                 </DialogFooter>
