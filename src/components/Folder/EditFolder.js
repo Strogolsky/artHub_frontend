@@ -68,7 +68,7 @@ function EditFolder() {
         try {
             await deleteFolderById(folderId);
             console.log("Folder deleted");
-            navigate('/');
+            navigate('/account');
         } catch (error) {
             console.log("Failed to delete folder: ", error);
         }
