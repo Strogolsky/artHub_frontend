@@ -80,22 +80,17 @@ const updatePostById = async (postId, postData) => {
     formData.append('tagsId', postData.tagsId.join(','));
     formData.append('file', b64toBlob(postData.file));
 
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-            },
-            body: formData,
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error updating post:', error);
-        throw error;
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+        },
+        body: formData,
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
     }
+    return await response.json();
 }
 
 const deletePostById = async (postId) => {
