@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../Statuses/Loading";
 import NotFound from "../Statuses/NotFound";
 import { getPostsByPatronId } from "../../api/PostAPI";
@@ -7,7 +7,6 @@ import SearchInput from "../Search/SearchInput";
 import Authorisation from "../NavigationBar/Authorisation";
 import Logo from "../ImageViews/Logo";
 import PostsSection from "../Main/PostsSection";
-import ImageWithCross from "./ImageWithCross";
 import { getUserAccount } from "../../api/AccountAPI";
 
 const ViewCreatedPosts = () => {
@@ -32,8 +31,7 @@ const ViewCreatedPosts = () => {
                     setPosts(data);
                     setIsFinished(true);
                 })
-                .catch(error => {
-                    console.error("Error fetching all posts: ", error);
+                .catch(() => {
                     setIsError(true);
                     setIsFinished(true);
                 });

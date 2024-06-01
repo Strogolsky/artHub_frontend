@@ -31,15 +31,13 @@ function EditPost() {
                     file: data.image.data || '',
                     patronId: data.patron.id
                 });
-            }).catch(error => {
-                console.error('Error fetching post data:', error);
+            }).catch(() => {
                 setIsError(true);
             });
 
             getUserAccount()
                 .then(data => setUserId(data.id))
-                .catch(error => {
-                    console.error("Error getting user account: ", error);
+                .catch(() => {
                     setIsError(true);
                 })
         }

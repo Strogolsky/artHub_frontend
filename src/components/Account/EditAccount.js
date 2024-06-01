@@ -29,8 +29,7 @@ function EditAccount() {
                 data.preferredTags.map((tagId) => setUserTags((prev) => [...prev, tagId]));
                 setIsResolved(true);
             })
-            .catch(error => {
-                console.error("Error getting user account: ", error);
+            .catch(() => {
                 setIsError(true);
             })
     }, []);
@@ -66,7 +65,6 @@ function EditAccount() {
             Cookies.set('jwt', jwt, { expires: new Date(Date.now() + expiresIn) });
             navigate('/account');
         } catch (error) {
-            console.error("Error updating account: ", error);
             setErrorMessage(error.message);
         }
     }

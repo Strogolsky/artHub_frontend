@@ -13,8 +13,6 @@ import FolderIcon from "../ImageViews/FolderIcon";
 const ViewAccount = () => {
     const navigate = useNavigate();
 
-    const [searchText, setSearchText] = useState("");
-
     const [accountData, setAccountData] = useState();
     const [userFolders, setUserFolders] = useState();
 

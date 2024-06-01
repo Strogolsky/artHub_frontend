@@ -1,9 +1,6 @@
 import Alien from "../../resources/Alien.svg"
-import { useNavigate } from "react-router-dom";
 
 const AnotherUserIcon = () => {
-    const navigate = useNavigate();
-
     return (
         <img className="object-cover absolute"
             src={Alien}

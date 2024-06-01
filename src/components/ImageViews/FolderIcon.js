@@ -1,9 +1,6 @@
 import Icon from "../../resources/FolderIcon.svg"
-import { useNavigate } from "react-router-dom";
 
 const FolderIcon = () => {
-    const navigate = useNavigate();
-
     return (
 
         <img className="object-cover absolute"

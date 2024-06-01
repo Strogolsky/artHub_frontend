@@ -40,15 +40,13 @@ const PreferredTags = () => {
     useEffect(() => {
         getAllTags()
             .then(data => setAllTags(data))
-            .catch(error => {
-                console.error("Error fetching tags: ", error);
+            .catch(() => {
                 setIsError(true);
             })
 
         getUserAccount()
             .then(data => setUserPreferredTags(data.preferredTags))
-            .catch(error => {
-                console.error("Error fetching account: ", error);
+            .catch(() => {
                 setIsError(true);
             })
     }, []);
@@ -73,7 +71,6 @@ const PreferredTags = () => {
             await addPreferredTags(JSON.stringify(tagIds));
             navigate('/');
         } catch (error) {
-            console.error("Error saving preferred tags: ", error);
             setIsError(true);
         }
     }

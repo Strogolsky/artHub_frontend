@@ -23,8 +23,7 @@ const ViewFolder = () => {
     useEffect(() => {
         getFolderById(folderId)
             .then(data => setFolderData(data))
-            .catch(error => {
-                console.error("Error fetching data:", error);
+            .catch(() => {
                 setIsError(true);
             })
 

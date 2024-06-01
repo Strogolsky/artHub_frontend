@@ -10,6 +10,8 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
     const [folders, setFolders] = useState([]);
     const navigate = useNavigate();
 
+    const [isError, setIsError] = useState(false);
+
     const handleIsOpen = () => setIsOpen(curr => !curr);
 
     const addPostToFolder = async (folderId) => {
@@ -27,6 +29,7 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
     const handleAddToFolders = () => {
         selectedFolders.forEach(folderId => {
             addPostToFolder(folderId)
+                .catch(() => setIsError(true));
         })
 
         handleIsOpen();
@@ -43,8 +46,8 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
     useEffect(() => {
         getUserFolders()
             .then(data => setFolders(data))
-            .catch(error => {
-                console.error("Error fetching folders ", error);
+            .catch(() => {
+                setIsError(false);
             })
 
         setSelectedFolders([]);
@@ -84,8 +87,12 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
                                 Create folder
                             </button>
 
-
-                                {folders.map(folder => (
+                            {isError ?
+                                <h1 className="text-center text-black" style={{fontWeight: 700, fontSize: '32px'}}>
+                                    Error loading folders
+                                </h1>
+                                :
+                                folders.map(folder => (
                                     <div key={folder.id} className="w-full md:w-3/4 lg:w-2/3 bg-gray-200 m-1 p-2 flex justify-between items-center rounded-lg">
                                         <Typography className="text-black kanit-regular">
                                             {folder.title}
@@ -97,9 +104,9 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
                                             {selectedFolders.includes(folder.id) ? 'Added' : 'Add'}
                                         </Button>
                                     </div>
-                                ))}
-
-                            </div>
+                                ))
+                            }
+                        </div>
                     </CardBody>
                     <div className="flex justify-center p-4">
                         <Button
