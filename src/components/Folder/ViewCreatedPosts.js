@@ -4,7 +4,7 @@ import Loading from "../Statuses/Loading";
 import NotFound from "../Statuses/NotFound";
 import { getPostsByPatronId } from "../../api/PostAPI";
 import SearchInput from "../Search/SearchInput";
-import Authorisation from "../Authorisation";
+import Authorisation from "../NavigationBar/Authorisation";
 import Logo from "../ImageViews/Logo";
 import PostsSection from "../Main/PostsSection";
 import ImageWithCross from "./ImageWithCross";

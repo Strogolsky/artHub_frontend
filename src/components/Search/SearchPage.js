@@ -3,7 +3,7 @@ import { searchPostsByPrompt } from "../../api/SearchAPI";
 import { useEffect, useState } from "react";
 import NotFound from "../Statuses/NotFound";
 import SearchInput from "./SearchInput";
-import Authorisation from "../Authorisation"
+import Authorisation from "../NavigationBar/Authorisation"
 import Logo from "../ImageViews/Logo";
 import Loading from "../Statuses/Loading";
 

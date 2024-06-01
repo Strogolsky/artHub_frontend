@@ -5,7 +5,7 @@ import NotFound from "../Statuses/NotFound";
 import { getUserFolders } from "../../api/FolderAPI";
 import Loading from "../Statuses/Loading";
 import SearchInput from "../Search/SearchInput";
-import Authorisation from "../Authorisation";
+import Authorisation from "../NavigationBar/Authorisation";
 import Logo from "../ImageViews/Logo";
 import UserIcon from "../ImageViews/UserIcon"
 import FolderIcon from "../ImageViews/FolderIcon";

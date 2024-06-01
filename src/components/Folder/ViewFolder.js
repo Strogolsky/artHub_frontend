@@ -4,7 +4,7 @@ import Loading from "../Statuses/Loading";
 import NotFound from "../Statuses/NotFound";
 import { getFolderById, updateFolderById } from "../../api/FolderAPI";
 import SearchInput from "../Search/SearchInput";
-import Authorisation from "../Authorisation";
+import Authorisation from "../NavigationBar/Authorisation";
 import Logo from "../ImageViews/Logo";
 import ImageWithCross from "./ImageWithCross";
 import { getUserAccount } from "../../api/AccountAPI";

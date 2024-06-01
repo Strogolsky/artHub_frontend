@@ -5,7 +5,7 @@ import { getPostById } from "../../api/PostAPI";
 import NotFound from '../Statuses/NotFound';
 import Loading from '../Statuses/Loading';
 import SearchInput from "../Search/SearchInput";
-import Authorisation from "../Authorisation";
+import Authorisation from "../NavigationBar/Authorisation";
 import { getUserAccount } from "../../api/AccountAPI";
 import AnotherUserIcon from '../ImageViews/AnotherUserIcon';
 import Logo from "../ImageViews/Logo";
