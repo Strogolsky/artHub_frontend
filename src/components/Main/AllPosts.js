@@ -15,8 +15,7 @@ const AllPosts = () => {
                 setPosts(data);
                 setIsFinished(true);
             })
-            .catch(error => {
-                console.error("Error fetching all posts: ", error);
+            .catch(() => {
                 setIsError(true);
                 setIsFinished(true);
             })

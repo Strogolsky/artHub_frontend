@@ -26,7 +26,6 @@ const InfiniteFeed = ({ isGuest }) => {
             if (data.last)
                 setHasMore(false);
         } catch (error) {
-            console.error("Error fetching posts: ", error);
             setHasMore(false);
             setIsError(true);
         } finally {
@@ -39,7 +38,7 @@ const InfiniteFeed = ({ isGuest }) => {
             isFetchingRef.current = true;
             fetchPosts(0);
         }
-    }, []);
+    });
 
     const fetchMoreData = () => {
         if (hasMore && !isFetchingRef.current) {

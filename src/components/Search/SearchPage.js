@@ -26,8 +26,7 @@ const SearchPage = () => {
                 setPosts(data);
                 setIsFinished(true);
             })
-            .catch(error => {
-                console.error("Error searching posts: ", error);
+            .catch(() => {
                 setIsError(true);
             })
     }, [searchParam]);

@@ -25,8 +25,7 @@ const ViewPost = () => {
             .then(data => {
                 setPost(data);
             })
-            .catch(error => {
-                console.error('Failed to load post:', error.message);
+            .catch(() => {
                 setIsError(true);
             });
 
