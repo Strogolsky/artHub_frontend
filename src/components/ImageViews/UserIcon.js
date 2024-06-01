@@ -1,9 +1,6 @@
 import Cosmonaut from "../../resources/Cosmonaut.svg"
-import { useNavigate } from "react-router-dom";
 
 const UserIcon = () => {
-    const navigate = useNavigate();
-
     return (
 
         <img className="object-cover absolute"
