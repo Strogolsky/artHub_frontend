@@ -11,6 +11,7 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
     const navigate = useNavigate();
 
     const [isError, setIsError] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const handleIsOpen = () => setIsOpen(curr => !curr);
 
@@ -46,9 +47,8 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
     useEffect(() => {
         getUserFolders()
             .then(data => setFolders(data))
-            .catch(() => {
-                setIsError(false);
-            })
+            .catch(() => setIsError(false))
+            .finally(() => setIsLoaded(true))
 
         setSelectedFolders([]);
     }, [isOpen]);
@@ -79,32 +79,39 @@ const AddToFolder = ({ postId, isOpenDefault }) => {
                             Add to Folder
                         </Typography>
 
-                        <div className="overflow-y-auto max-h-96 py-2 flex flex-col items-center">
-
-                            <button className={`kanit-regular py-2 px-4 mb-3 rounded-large bg-my-purple text-black hover:bg-my-purple-light active:bg-my-purple-dark`}
+                        <div className="flex justify-center">
+                            <button className="kanit-regular py-2 px-4 mb-3 rounded-large bg-my-purple text-black hover:bg-my-purple-light active:bg-my-purple-dark"
                                     onClick={handleCreateFolder}
                                     style={{textTransform: 'initial'}}>
                                 Create folder
                             </button>
+                        </div>
 
-                            {isError ?
+                        <div className="overflow-y-auto max-h-96 py-2 flex flex-col items-center">
+
+                            {!isLoaded ?
                                 <h1 className="text-center text-black" style={{fontWeight: 700, fontSize: '32px'}}>
-                                    Error loading folders
-                                </h1>
-                                :
-                                folders.map(folder => (
-                                    <div key={folder.id} className="w-full md:w-3/4 lg:w-2/3 bg-gray-200 m-1 p-2 flex justify-between items-center rounded-lg">
-                                        <Typography className="text-black kanit-regular">
-                                            {folder.title}
-                                        </Typography>
+                                    Loading folders...
+                                </h1> : (
+                                    isError ?
+                                        <h1 className="text-center text-black" style={{fontWeight: 700, fontSize: '32px'}}>
+                                            Error loading folders
+                                        </h1>
+                                        :
+                                        folders.map(folder => (
+                                            <div key={folder.id} className="w-full md:w-3/4 lg:w-2/3 bg-gray-200 m-1 p-2 flex justify-between items-center rounded-lg">
+                                                <Typography className="text-black kanit-regular">
+                                                    {folder.title}
+                                                </Typography>
 
-                                        <Button className={`kanit-regular py-2 px-4 rounded-lg ${selectedFolders.includes(folder.id) ? 'bg-my-purple-light' : 'bg-my-purple'}`} onClick={() => handleSelectFolder(folder.id)} style={{
-                                            textTransform: 'initial'
-                                        }}>
-                                            {selectedFolders.includes(folder.id) ? 'Added' : 'Add'}
-                                        </Button>
-                                    </div>
-                                ))
+                                                <Button className={`kanit-regular py-2 px-4 rounded-lg ${selectedFolders.includes(folder.id) ? 'bg-my-purple-light' : 'bg-my-purple'}`} onClick={() => handleSelectFolder(folder.id)} style={{
+                                                    textTransform: 'initial'
+                                                }}>
+                                                    {selectedFolders.includes(folder.id) ? 'Added' : 'Add'}
+                                                </Button>
+                                            </div>
+                                        ))
+                                )
                             }
                         </div>
                     </CardBody>
