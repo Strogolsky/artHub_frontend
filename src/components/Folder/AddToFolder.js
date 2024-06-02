@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, Card, CardBody, Dialog, Typography } from "@material-tailwind/react";
 import CrossIcon from "../Icons/CrossIcon";
 import { getFolderById, getUserFolders, updateFolderById } from "../../api/FolderAPI";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddToFolder = ({ postId }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +54,7 @@ const AddToFolder = ({ postId }) => {
     }, [isOpen]);
 
     const handleCreateFolder = () => {
-        navigate('/folder/create', {state: {postId}});
+        navigate('/folder/create', { state: { postId } });
     }
 
     return (
@@ -79,10 +79,10 @@ const AddToFolder = ({ postId }) => {
                             Add to Folder
                         </Typography>
 
-                        <div className="flex justify-center">
-                            <button className="kanit-regular py-2 px-4 mb-3 rounded-large bg-my-purple text-black hover:bg-my-purple-light active:bg-my-purple-dark"
-                                    onClick={handleCreateFolder}
-                                    style={{textTransform: 'initial'}}>
+                        <div className="flex mr-4 justify-center">
+                            <button className="kanit-regular text-center text-black w-full md:w-3/4 lg:w-2/3 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark m-1 p-2 rounded-large"
+                                onClick={handleCreateFolder}
+                                style={{ textTransform: 'initial' }}>
                                 Create folder
                             </button>
                         </div>
@@ -90,11 +90,11 @@ const AddToFolder = ({ postId }) => {
                         <div className="overflow-y-auto max-h-96 py-2 flex flex-col items-center">
 
                             {!isLoaded ?
-                                <h1 className="text-center text-black" style={{fontWeight: 700, fontSize: '32px'}}>
+                                <h1 className="text-center text-black" style={{ fontWeight: 700, fontSize: '32px' }}>
                                     Loading folders...
                                 </h1> : (
                                     isError ?
-                                        <h1 className="text-center text-black" style={{fontWeight: 700, fontSize: '32px'}}>
+                                        <h1 className="text-center text-black" style={{ fontWeight: 700, fontSize: '32px' }}>
                                             Error loading folders
                                         </h1>
                                         :
