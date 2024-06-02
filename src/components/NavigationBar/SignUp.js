@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { signUp } from "../../api/AuthAPI";
 import { signIn } from "../../api/AuthAPI";
 import { useNavigate } from "react-router-dom";
+import Logo from "../ImageViews/Logo";
 
 const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
     const [username, setUsername] = useState("");
@@ -113,6 +114,9 @@ const SignUp = ({ isOpen, setIsOpen, swapOpen, setIsAuthorised }) => {
                     <CardBody>
                         <div className="flex flex-col">
                             <CrossIcon className="mr-3 h-5 w-5" onClick={handleCloseDialog} />
+                            <div className="justify-center flex p-3">
+                                <Logo />
+                            </div>
                             <Typography className="kanit-bold flex justify-center mb-7" variant="h2" color="blue-gray">
                                 Create account
                             </Typography>
