@@ -79,8 +79,8 @@ const AddToFolder = ({ postId }) => {
                             Add to Folder
                         </Typography>
 
-                        <div className="flex justify-center">
-                            <button className="kanit-regular text-black w-full md:w-3/4 lg:w-2/3 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark m-1 p-2 flex justify-between items-center rounded-lg"
+                        <div className="flex mr-4 justify-center">
+                            <button className="kanit-regular text-center text-black w-full md:w-3/4 lg:w-2/3 bg-my-purple hover:bg-my-purple-light active:bg-my-purple-dark m-1 p-2 rounded-large"
                                 onClick={handleCreateFolder}
                                 style={{ textTransform: 'initial' }}>
                                 Create folder
